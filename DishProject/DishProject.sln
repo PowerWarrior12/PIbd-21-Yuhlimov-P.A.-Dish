@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProject", "WindowsFormsApp1\DishProject.csproj", "{9A9B23B7-B3BE-4475-9B91-602B66DC2D27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DishProjectBusinessLogic", "DishProjectBusinessLogic\DishProjectBusinessLogic.csproj", "{1F379B84-460F-459E-A15F-F3BB591B2C98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectView", "DishProjectView\DishProjectView.csproj", "{9406A923-BE39-40D4-8423-2F69CF5085B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectListImplement", "DishProjectListImplement\DishProjectListImplement.csproj", "{30877B8A-B05B-4648-AA7E-9B02172FD7B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9A9B23B7-B3BE-4475-9B91-602B66DC2D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A9B23B7-B3BE-4475-9B91-602B66DC2D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A9B23B7-B3BE-4475-9B91-602B66DC2D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A9B23B7-B3BE-4475-9B91-602B66DC2D27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F379B84-460F-459E-A15F-F3BB591B2C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F379B84-460F-459E-A15F-F3BB591B2C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F379B84-460F-459E-A15F-F3BB591B2C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F379B84-460F-459E-A15F-F3BB591B2C98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9406A923-BE39-40D4-8423-2F69CF5085B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9406A923-BE39-40D4-8423-2F69CF5085B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9406A923-BE39-40D4-8423-2F69CF5085B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9406A923-BE39-40D4-8423-2F69CF5085B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
