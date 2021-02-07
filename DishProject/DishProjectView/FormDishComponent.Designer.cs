@@ -101,7 +101,7 @@
             this.Controls.Add(this.labelText2);
             this.Controls.Add(this.labelText1);
             this.Name = "FormDishComponent";
-            this.Text = "FormDishComponent";
+            this.Text = "Компоненты блюда";
             this.ResumeLayout(false);
             this.PerformLayout();
 

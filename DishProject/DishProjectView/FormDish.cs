@@ -21,6 +21,25 @@ namespace DishProjectView
         {
             InitializeComponent();
             this.logic = service;
+            if (id.HasValue)
+            {
+                try
+                {
+                    DishViewModel view = logic.Read(new DishBindingModel
+                    {
+                        Id = id.Value
+                    })?[0];
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                productComponents = new Dictionary<int, (string, int)>();
+            }
         }
         private void FormDish_Load(object sender, EventArgs e)
         {

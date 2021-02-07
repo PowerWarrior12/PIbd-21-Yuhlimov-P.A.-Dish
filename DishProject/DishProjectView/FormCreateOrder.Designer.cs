@@ -124,7 +124,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormCreateOrder";
-            this.Text = "FormCreateOrder";
+            this.Text = "Создание заказа";
             this.ResumeLayout(false);
             this.PerformLayout();
 

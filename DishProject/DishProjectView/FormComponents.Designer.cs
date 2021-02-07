@@ -97,7 +97,7 @@
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormComponents";
-            this.Text = "FormComponents";
+            this.Text = "Компоненты";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

@@ -8,8 +8,8 @@ namespace DishProjectListImplement
     class Dish
     {
         public int Id { get; set; }
-        public string ProductName { get; set; }
+        public string DishName { get; set; }
         public decimal Price { get; set; }
-        public Dictionary<int, int> ProductComponents { get; set; }
+        public Dictionary<int, int> DishComponents { get; set; }
     }
 }

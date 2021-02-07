@@ -35,7 +35,7 @@ namespace DishProjectListImplement
             List<DishViewModel> result = new List<DishViewModel>();
             foreach (var product in source.Products)
             {
-                if (product.ProductName.Contains(model.DishName))
+                if (product.DishName.Contains(model.DishName))
                 {
                     result.Add(CreateModel(product));
                 }
@@ -50,7 +50,7 @@ namespace DishProjectListImplement
             }
             foreach (var product in source.Products)
             {
-                if (product.Id == model.Id || product.ProductName ==
+                if (product.Id == model.Id || product.DishName ==
                 model.DishName)
                 {
                     return CreateModel(product);
@@ -63,7 +63,7 @@ namespace DishProjectListImplement
             Dish tempProduct = new Dish
             {
                 Id = 1,
-                ProductComponents = new
+                DishComponents = new
             Dictionary<int, int>()
             };
             foreach (var product in source.Products)
@@ -105,27 +105,27 @@ namespace DishProjectListImplement
         }
         private Dish CreateModel(DishBindingModel model, Dish dish)
         {
-            dish.ProductName = model.DishName;
+            dish.DishName = model.DishName;
             dish.Price = model.Price;
             // удаляем убранные
-            foreach (var key in dish.ProductComponents.Keys.ToList())
+            foreach (var key in dish.DishComponents.Keys.ToList())
             {
                 if (!model.DishComponents.ContainsKey(key))
                 {
-                    dish.ProductComponents.Remove(key);
+                    dish.DishComponents.Remove(key);
                 }
             }
             // обновляем существуюущие и добавляем новые
             foreach (var component in model.DishComponents)
             {
-                if (dish.ProductComponents.ContainsKey(component.Key))
+                if (dish.DishComponents.ContainsKey(component.Key))
                 {
-                    dish.ProductComponents[component.Key] =
+                    dish.DishComponents[component.Key] =
                     model.DishComponents[component.Key].Item2;
                 }
                 else
                 {
-                    dish.ProductComponents.Add(component.Key,
+                    dish.DishComponents.Add(component.Key,
                     model.DishComponents[component.Key].Item2);
                 }
             }
@@ -136,7 +136,7 @@ namespace DishProjectListImplement
             // требуется дополнительно получить список компонентов для изделия с названиями и их количество
         Dictionary<int, (string, int)> productComponents = new
         Dictionary<int, (string, int)>();
-            foreach (var pc in dish.ProductComponents)
+            foreach (var pc in dish.DishComponents)
             {
                 string componentName = string.Empty;
                 foreach (var component in source.Components)
@@ -152,7 +152,7 @@ namespace DishProjectListImplement
             return new DishViewModel
             {
                 Id = dish.Id,
-                DishName = dish.ProductName,
+                DishName = dish.DishName,
                 Price = dish.Price,
                 ProductComponents = productComponents
             };
