@@ -57,6 +57,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
+                DishName = order.DishName,
                 DishId = order.DishId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -84,6 +85,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 DishId = order.DishId,
+                DishName = order.DishName,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -101,14 +103,15 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 throw new Exception("Не найден заказ");
             }
-            if (order.Status != OrderStatus.Выполняется)
+            if (order.Status != OrderStatus.Готов)
             {
-                throw new Exception("Заказ не в статусе \"Выполняется\"");
+                throw new Exception("Заказ не в статусе \"Готов\"");
             }
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
                 DishId = order.DishId,
+                DishName = order.DishName,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
