@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectView", "DishProj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectListImplement", "DishProjectListImplement\DishProjectListImplement.csproj", "{30877B8A-B05B-4648-AA7E-9B02172FD7B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishFileImplement", "DishFileImplement\DishFileImplement.csproj", "{82C182B0-7999-4E96-8AB7-167AB70FFA0C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82C182B0-7999-4E96-8AB7-167AB70FFA0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82C182B0-7999-4E96-8AB7-167AB70FFA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82C182B0-7999-4E96-8AB7-167AB70FFA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82C182B0-7999-4E96-8AB7-167AB70FFA0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
