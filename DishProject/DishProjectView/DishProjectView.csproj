@@ -151,6 +151,10 @@
       <Project>{1f379b84-460f-459e-a15f-f3bb591b2c98}</Project>
       <Name>DishProjectBusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DishProjectFileImplement\DishProjectFileImplement.csproj">
+      <Project>{5c695c45-0164-4acd-9e7c-0934e4c3545e}</Project>
+      <Name>DishProjectFileImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DishProjectListImplement\DishProjectListImplement.csproj">
       <Project>{30877b8a-b05b-4648-aa7e-9b02172fd7b9}</Project>
       <Name>DishProjectListImplement</Name>
