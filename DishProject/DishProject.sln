@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectView", "DishProj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectListImplement", "DishProjectListImplement\DishProjectListImplement.csproj", "{30877B8A-B05B-4648-AA7E-9B02172FD7B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishFileImplement", "DishFileImplement\DishFileImplement.csproj", "{9DD46F32-9874-4A05-909B-47161529EE72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectFileImplement", "DishProjectFileImplement\DishProjectFileImplement.csproj", "{5C695C45-0164-4ACD-9E7C-0934E4C3545E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30877B8A-B05B-4648-AA7E-9B02172FD7B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DD46F32-9874-4A05-909B-47161529EE72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DD46F32-9874-4A05-909B-47161529EE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DD46F32-9874-4A05-909B-47161529EE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DD46F32-9874-4A05-909B-47161529EE72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C695C45-0164-4ACD-9E7C-0934E4C3545E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C695C45-0164-4ACD-9E7C-0934E4C3545E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C695C45-0164-4ACD-9E7C-0934E4C3545E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C695C45-0164-4ACD-9E7C-0934E4C3545E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
