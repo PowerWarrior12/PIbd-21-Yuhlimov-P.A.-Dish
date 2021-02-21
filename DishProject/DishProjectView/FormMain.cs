@@ -133,5 +133,17 @@ namespace DishProjectView
         {
             LoadData();
         }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWareHouses>();
+            form.ShowDialog();
+        }
+
+        private void ButtonAddToWareHouse_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormAddToWareHouse>();
+            form.ShowDialog();
+        }
     }
 }

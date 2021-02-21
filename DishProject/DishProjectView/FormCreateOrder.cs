@@ -121,7 +121,6 @@ namespace DishProjectView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)

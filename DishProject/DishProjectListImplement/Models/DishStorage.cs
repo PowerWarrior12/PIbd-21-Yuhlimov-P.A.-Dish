@@ -63,8 +63,7 @@ namespace DishProjectListImplement
             Dish tempProduct = new Dish
             {
                 Id = 1,
-                DishComponents = new
-            Dictionary<int, int>()
+                DishComponents = new Dictionary<int, int>()
             };
             foreach (var product in source.Products)
             {

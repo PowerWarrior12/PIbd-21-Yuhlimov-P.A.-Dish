@@ -1,10 +1,8 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
-//using AbstractShopListImplement.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DishProjectListImplement
 {

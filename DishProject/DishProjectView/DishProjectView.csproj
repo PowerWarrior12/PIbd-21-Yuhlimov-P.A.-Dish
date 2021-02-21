@@ -58,6 +58,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAddToWareHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddToWareHouse.Designer.cs">
+      <DependentUpon>FormAddToWareHouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,8 +106,23 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormWareHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWareHouse.Designer.cs">
+      <DependentUpon>FormWareHouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormWareHouses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWareHouses.Designer.cs">
+      <DependentUpon>FormWareHouses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAddToWareHouse.resx">
+      <DependentUpon>FormAddToWareHouse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormComponent.resx">
       <DependentUpon>FormComponent.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +143,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWareHouse.resx">
+      <DependentUpon>FormWareHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWareHouses.resx">
+      <DependentUpon>FormWareHouses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
