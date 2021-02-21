@@ -45,7 +45,7 @@ namespace DishProjectFileImplement
         }
         public void Insert(DishBindingModel model)
         {
-            int maxId = source.Dishes.Count > 0 ? source.Components.Max(rec => rec.Id)
+            int maxId = source.Dishes.Count > 0 ? source.Dishes.Max(rec => rec.Id)
 : 0;
             var element = new Dish
             {

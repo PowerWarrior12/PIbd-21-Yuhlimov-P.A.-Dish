@@ -46,15 +46,13 @@ namespace DishProjectFileImplement
                 }
             }
             return null;
-            /*var component = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
-            return component != null ? CreateModel(component) : null;*/
         }
         public void Insert(OrderBindingModel model)
         {
-            int maxId = source.Orders.Count > 0 ? source.Components.Max(rec =>
-           rec.Id) : 0;
+            int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec => rec.Id) : 0;
             var element = new Order { Id = maxId + 1 };
-            source.Orders.Add(CreateModel(model, element));
+            Order order = CreateModel(model, element);
+            source.Orders.Add(order);
         }
         public void Update(OrderBindingModel model)
         {
@@ -79,7 +77,6 @@ namespace DishProjectFileImplement
         }
         private Order CreateModel(OrderBindingModel model, Order order)
         {
-            order.Id = Int32.Parse(model.Id.ToString());
             order.DishId = model.DishId;
             order.DishName = model.DishName;
             order.Count = model.Count;
