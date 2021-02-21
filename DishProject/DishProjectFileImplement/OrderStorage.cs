@@ -38,9 +38,16 @@ namespace DishProjectFileImplement
             {
                 return null;
             }
-            var component = source.Orders
-            .FirstOrDefault(rec => rec.Id == model.Id);
-            return component != null ? CreateModel(component) : null;
+            foreach (var order in source.Orders)
+            {
+                if (order.Id == model.Id)
+                {
+                    return CreateModel(order);
+                }
+            }
+            return null;
+            /*var component = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            return component != null ? CreateModel(component) : null;*/
         }
         public void Insert(OrderBindingModel model)
         {
@@ -72,6 +79,7 @@ namespace DishProjectFileImplement
         }
         private Order CreateModel(OrderBindingModel model, Order order)
         {
+            order.Id = Int32.Parse(model.Id.ToString());
             order.DishId = model.DishId;
             order.DishName = model.DishName;
             order.Count = model.Count;
@@ -85,6 +93,7 @@ namespace DishProjectFileImplement
         {
             return new OrderViewModel
             {
+                Id = order.Id,
                 DishId = order.DishId,
                 DishName = order.DishName,
                 Count = order.Count,
