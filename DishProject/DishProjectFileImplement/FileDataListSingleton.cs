@@ -73,10 +73,12 @@ namespace DishProjectFileImplement
                         DishName = elem.Element("DishName").Value,
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
-                        Status = (OrderStatus) Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
-                        DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
-                        DateImplement = Convert.ToDateTime(elem.Element("DateImplement").Value)
+                        Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
                     });
+                    if (elem.Element("DateCreate").Value != "")
+                        list.Last().DateCreate = DateTime.ParseExact(elem.Element("DateCreate").Value, "d.M.yyyy H:m:s", null);
+                    if (elem.Element("DateImplement").Value != "")
+                        list.Last().DateImplement = DateTime.ParseExact(elem.Element("DateImplement").Value, "d.M.yyyy H:m:s", null);
                 }
             }
             return list;
@@ -137,8 +139,8 @@ namespace DishProjectFileImplement
                     new XElement("Count", component.Count),
                     new XElement("Sum", component.Sum),
                     new XElement("Status", component.Status),
-                    new XElement("DateCreate", component.DateCreate),
-                    new XElement("DateImplement", component.DateImplement)));
+                    new XElement("DateCreate", component.DateCreate.ToString()),
+                    new XElement("DateImplement", component.DateImplement.ToString())));
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(OrderFileName);
