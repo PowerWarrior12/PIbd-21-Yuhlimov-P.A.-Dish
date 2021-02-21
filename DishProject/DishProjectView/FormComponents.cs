@@ -15,6 +15,7 @@ namespace DishProjectView
         {
             InitializeComponent();
             this.logic = logic;
+            LoadData();
         }
         private void FormComponents_Load(object sender, EventArgs e)
         {
