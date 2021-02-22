@@ -6,8 +6,8 @@ namespace DishProjectBusinessLogic.BindingModels
 {
     public class AddComponentBindingModel
     {
-        public int Id { get; set; }
-        public string ComponentName { get; set; }
+        public string WareHoseName { get; set; }
+        public int ComponentName { get; set; }
         public int Count { get; set; }
     }
 }

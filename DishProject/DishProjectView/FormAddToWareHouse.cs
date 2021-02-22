@@ -27,10 +27,10 @@ namespace DishProjectView
                 comboBoxComponent.DataSource = listC;
                 comboBoxComponent.SelectedItem = null;
             }
-            List<ComponentViewModel> listW = _logicC.Read(null);
+            List<WareHouseViewModel> listW = _logicW.Read(null);
             if (listW != null)
             {
-                comboBoxWareHouse.DisplayMember = "HouseWareName";
+                comboBoxWareHouse.DisplayMember = "Name";
                 comboBoxWareHouse.ValueMember = "Id";
                 comboBoxWareHouse.DataSource = listW;
                 comboBoxWareHouse.SelectedItem = null;
@@ -39,7 +39,46 @@ namespace DishProjectView
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrEmpty(textBoxCount.Text))
+            {
+                MessageBox.Show("Заполните поле Количество", "Ошибка",
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (comboBoxComponent.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите компонент", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
+            if (comboBoxWareHouse.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите склад", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                string component = comboBoxComponent.Text;
+                string wareHouse = comboBoxWareHouse.Text;
+                List<ComponentViewModel> listC = _logicC.Read(null);
+                
+                _logicW.AddNewComponent(
+                    new AddComponentBindingModel {
+                        WareHoseName = comboBoxWareHouse.Text,
+                        ComponentName = listC[comboBoxComponent.SelectedIndex].Id,
+                        Count = Int32.Parse(textBoxCount.Text)
+                    });
+                MessageBox.Show("Сохранение прошло успешно", "Сообщение",
+               MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+            }
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)

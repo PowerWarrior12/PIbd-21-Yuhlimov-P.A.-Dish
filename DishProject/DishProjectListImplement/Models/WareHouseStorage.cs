@@ -16,7 +16,19 @@ namespace DishProjectListImplement.Models
         }
         public void Add(AddComponentBindingModel model)
         {
-            throw new NotImplementedException();
+            WareHouse tempWareHouse = null;
+            foreach (var wareHouse in source.WareHouses)
+            {
+                if (wareHouse.Name == model.WareHoseName)
+                {
+                    tempWareHouse = wareHouse;
+                }
+            }
+            if (tempWareHouse == null)
+            {
+                throw new Exception("Элемент не найден");
+            }
+            tempWareHouse.StoreComponents.Add()
         }
 
         public void Delete(WareHouseBindingModel model)
