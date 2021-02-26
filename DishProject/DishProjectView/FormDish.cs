@@ -40,6 +40,7 @@ namespace DishProjectView
             {
                 productComponents = new Dictionary<int, (string, int)>();
             }
+            LoadData();
         }
         private void FormDish_Load(object sender, EventArgs e)
         {
@@ -51,6 +52,7 @@ namespace DishProjectView
                     {
                         Id = id.Value
                     })?[0];
+                    productComponents = view.ProductComponents;
                 }
                 catch (Exception ex)
                 {
@@ -62,6 +64,7 @@ namespace DishProjectView
             {
                 productComponents = new Dictionary<int, (string, int)>();
             }
+            LoadData();
         }
         private void LoadData()
         {

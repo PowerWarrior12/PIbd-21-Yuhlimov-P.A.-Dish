@@ -28,7 +28,14 @@ namespace DishProjectListImplement.Models
             {
                 throw new Exception("Элемент не найден");
             }
-            tempWareHouse.StoreComponents.Add()
+            if (tempWareHouse.StoreComponents.ContainsKey(model.ComponentName))
+            {
+                tempWareHouse.StoreComponents[model.ComponentName] += model.Count;
+            }
+            else
+            {
+                tempWareHouse.StoreComponents.Add(model.ComponentName, model.Count);
+            }
         }
 
         public void Delete(WareHouseBindingModel model)
@@ -122,20 +129,36 @@ namespace DishProjectListImplement.Models
         }
         private WareHouse CreateModel(WareHouseBindingModel model, WareHouse wareHouse)
         {
-            wareHouse.Id = model.Id;
             wareHouse.Name = model.Name;
             wareHouse.FIO = model.FIO;
             wareHouse.DateCreate = model.DateCreate;
+            wareHouse.StoreComponents = wareHouse.StoreComponents;
             return wareHouse;
         }
         private WareHouseViewModel CreateModel(WareHouse wareHouse)
         {
+            // требуется дополнительно получить список компонентов для изделия с названиями и их количество
+            Dictionary<int, (string, int)> wareHouseComponents = new Dictionary<int, (string, int)>();
+            foreach (var pc in wareHouse.StoreComponents)
+            {
+                string componentName = string.Empty;
+                foreach (var component in source.Components)
+                {
+                    if (pc.Key == component.Id)
+                    {
+                        componentName = component.ComponentName;
+                        break;
+                    }
+                }
+                wareHouseComponents.Add(pc.Key, (componentName, pc.Value));
+            }
             return new WareHouseViewModel
             {
                 Id = wareHouse.Id,
                 Name = wareHouse.Name,
                 FIO = wareHouse.FIO,
-                DateCreate = wareHouse.DateCreate
+                DateCreate = wareHouse.DateCreate,
+                StoreComponents = wareHouseComponents
             };
         }
     }

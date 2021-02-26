@@ -31,7 +31,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 Name = model.Name
             });
-            if (element != null && element.Name != model.Name)
+            if (element != null && element.Name == model.Name)
             {
                 throw new Exception("Уже есть склад с таким названием");
             }
@@ -48,7 +48,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
         {
             var wareHouse = _wareHouseStorage.GetElement(new WareHouseBindingModel
             {
-                Id = model.Id
+                Name = model.WareHoseName
             });
             if (wareHouse == null)
             {

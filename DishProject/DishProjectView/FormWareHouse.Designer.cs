@@ -33,10 +33,11 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxResponsible = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Responsible = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.I_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Responsible = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,24 +78,13 @@
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.I_D,
             this.Name,
             this.Responsible});
             this.dataGridView.Location = new System.Drawing.Point(13, 89);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(313, 257);
             this.dataGridView.TabIndex = 4;
-            // 
-            // Name
-            // 
-            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Name.HeaderText = "Название";
-            this.Name.Name = "Name";
-            // 
-            // Responsible
-            // 
-            this.Responsible.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Responsible.HeaderText = "Ответственный";
-            this.Responsible.Name = "Responsible";
             // 
             // AddButton
             // 
@@ -116,6 +106,24 @@
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // I_D
+            // 
+            this.I_D.HeaderText = "ID";
+            this.I_D.Name = "I_D";
+            this.I_D.Visible = false;
+            // 
+            // Name
+            // 
+            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Name.HeaderText = "Название";
+            this.Name.Name = "Name";
+            // 
+            // Responsible
+            // 
+            this.Responsible.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Responsible.HeaderText = "Количество";
+            this.Responsible.Name = "Responsible";
+            // 
             // FormWareHouse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,6 +138,7 @@
             this.Controls.Add(this.label1);
             //this.Name = "FormWareHouse";
             this.Text = "Склад";
+            this.Load += new System.EventHandler(this.FormWareHouse_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,9 +152,10 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxResponsible;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Responsible;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn I_D;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Responsible;
     }
 }

@@ -26,7 +26,7 @@ namespace DishProjectView
                 {
                     WareHouseViewModel view = logic.Read(new WareHouseBindingModel
                     {
-                        Id = id.Value
+                        Id = id.Value 
                     })?[0];
                 }
                 catch (Exception ex)
@@ -39,6 +39,32 @@ namespace DishProjectView
             {
                 wareHouseComponents = new Dictionary<int, (string, int)>();
             }
+        }
+        private void FormWareHouse_Load(object sender, EventArgs e)
+        {
+            if (id.HasValue)
+            {
+                try
+                {
+                    WareHouseViewModel view = logic.Read(new WareHouseBindingModel
+                    {
+                        Id = id.Value
+                    })?[0];
+                    wareHouseComponents = view.StoreComponents;
+                    textBoxResponsible.Text = view.FIO;
+                    textBoxName.Text = view.Name;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                wareHouseComponents = new Dictionary<int, (string, int)>();
+            }
+            LoadData();
         }
         private void LoadData()
         {

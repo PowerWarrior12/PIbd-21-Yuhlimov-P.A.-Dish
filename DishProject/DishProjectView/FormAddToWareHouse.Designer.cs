@@ -122,7 +122,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormAddToWareHouse";
-            this.Text = "FormAddToWareHouse";
+            this.Text = "Добавление компонентов на склад";
             this.ResumeLayout(false);
             this.PerformLayout();
 
