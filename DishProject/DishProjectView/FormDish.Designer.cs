@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelPrice = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -45,23 +45,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Название:";
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(13, 13);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(60, 13);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "Название:";
             // 
-            // label2
+            // labelPrice
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Цена:";
+            this.labelPrice.AutoSize = true;
+            this.labelPrice.Location = new System.Drawing.Point(13, 45);
+            this.labelPrice.Name = "labelPrice";
+            this.labelPrice.Size = new System.Drawing.Size(36, 13);
+            this.labelPrice.TabIndex = 1;
+            this.labelPrice.Text = "Цена:";
             // 
             // textBoxName
             // 
@@ -182,8 +182,8 @@
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.textBoxName);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelPrice);
+            this.Controls.Add(this.labelName);
             this.Name = "FormDish";
             this.Text = "Блюдо";
             this.Load += new System.EventHandler(this.FormDish_Load);
@@ -195,8 +195,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.DataGridView dataGridView;

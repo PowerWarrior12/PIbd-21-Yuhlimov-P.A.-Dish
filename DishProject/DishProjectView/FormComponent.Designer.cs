@@ -31,7 +31,7 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.labelText = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxName
@@ -64,22 +64,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click_1);
             // 
-            // labelText
+            // labelName
             // 
-            this.labelText.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelText.AutoSize = true;
-            this.labelText.Location = new System.Drawing.Point(4, 15);
-            this.labelText.Name = "labelText";
-            this.labelText.Size = new System.Drawing.Size(60, 13);
-            this.labelText.TabIndex = 3;
-            this.labelText.Text = "Название:";
+            this.labelName.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(4, 15);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(60, 13);
+            this.labelName.TabIndex = 3;
+            this.labelName.Text = "Название:";
             // 
             // FormComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(310, 65);
-            this.Controls.Add(this.labelText);
+            this.Controls.Add(this.labelName);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxName);
@@ -95,7 +95,7 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Label labelText;
+        private System.Windows.Forms.Label labelName;
     }
 }
 

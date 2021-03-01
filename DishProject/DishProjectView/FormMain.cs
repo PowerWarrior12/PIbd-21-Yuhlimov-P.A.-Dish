@@ -140,7 +140,7 @@ namespace DishProjectView
             form.ShowDialog();
         }
 
-        private void ButtonAddToWareHouse_Click(object sender, EventArgs e)
+        private void пополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormAddToWareHouse>();
             form.ShowDialog();

@@ -23,10 +23,10 @@ namespace DishProjectView
             List<DishViewModel> list = _logicP.Read(null);
             if (list != null)
             {
-                comboBoxProduct.DisplayMember = "DishName";
-                comboBoxProduct.ValueMember = "Id";
-                comboBoxProduct.DataSource = list;
-                comboBoxProduct.SelectedItem = null;
+                comboBoxDish.DisplayMember = "DishName";
+                comboBoxDish.ValueMember = "Id";
+                comboBoxDish.DataSource = list;
+                comboBoxDish.SelectedItem = null;
             }
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
@@ -36,10 +36,10 @@ namespace DishProjectView
                 List<DishViewModel> list = _logicP.Read(null);
                 if (list != null)
                 {
-                    comboBoxProduct.DisplayMember = "DishName";
-                    comboBoxProduct.ValueMember = "Id";
-                    comboBoxProduct.DataSource = list;
-                    comboBoxProduct.SelectedItem = null;
+                    comboBoxDish.DisplayMember = "DishName";
+                    comboBoxDish.ValueMember = "Id";
+                    comboBoxDish.DataSource = list;
+                    comboBoxDish.SelectedItem = null;
                 }
             }
             catch (Exception ex)
@@ -50,19 +50,19 @@ namespace DishProjectView
         }
         private void CalcSum()
         {
-            if (comboBoxProduct.SelectedValue != null &&
+            if (comboBoxDish.SelectedValue != null &&
            !string.IsNullOrEmpty(textBoxCount.Text))
             {
                 try
                 {
-                    int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
-                    DishViewModel product = _logicP.Read(new DishBindingModel
+                    int id = Convert.ToInt32(comboBoxDish.SelectedValue);
+                    DishViewModel dish = _logicP.Read(new DishBindingModel
                     {
                         Id
                     = id
                     })?[0];
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxSum.Text = (count * product?.Price ?? 0).ToString();
+                    textBoxSum.Text = (count * dish?.Price ?? 0).ToString();
                 }
                 catch (Exception ex)
                 {
@@ -77,12 +77,7 @@ namespace DishProjectView
             CalcSum();
         }
 
-        private void textBoxSum_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBoxProduct_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxDish_SelectedIndexChanged(object sender, EventArgs e)
         {
             CalcSum();
         }
@@ -95,7 +90,7 @@ namespace DishProjectView
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (comboBoxProduct.SelectedValue == null)
+            if (comboBoxDish.SelectedValue == null)
             {
                 MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
@@ -103,11 +98,11 @@ namespace DishProjectView
             }
             try
             {
-                string value = comboBoxProduct.Text;
+                string value = comboBoxDish.Text;
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
-                    DishId = Convert.ToInt32(comboBoxProduct.SelectedValue),
-                    DishName = comboBoxProduct.Text,
+                    DishId = Convert.ToInt32(comboBoxDish.SelectedValue),
+                    DishName = comboBoxDish.Text,
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });

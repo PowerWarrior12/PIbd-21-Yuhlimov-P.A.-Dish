@@ -83,7 +83,8 @@ namespace DishProjectView
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
-
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }
