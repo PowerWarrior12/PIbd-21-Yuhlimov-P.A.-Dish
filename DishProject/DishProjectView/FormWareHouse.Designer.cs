@@ -136,7 +136,7 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.labelFIO);
             this.Controls.Add(this.labelName);
-            this.Name = "FormWareHouse";
+            //this.Name = "FormWareHouse";
             this.Text = "Склад";
             this.Load += new System.EventHandler(this.FormWareHouse_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

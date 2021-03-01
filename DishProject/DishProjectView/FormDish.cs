@@ -52,7 +52,7 @@ namespace DishProjectView
                     {
                         Id = id.Value
                     })?[0];
-                    dishComponents = view.ProductComponents;
+                    dishComponents = view.DishComponents;
                 }
                 catch (Exception ex)
                 {
