@@ -77,11 +77,6 @@ namespace DishProjectView
             CalcSum();
         }
 
-        private void textBoxSum_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBoxProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
             CalcSum();
