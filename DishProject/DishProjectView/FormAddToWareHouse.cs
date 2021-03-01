@@ -65,8 +65,8 @@ namespace DishProjectView
                 
                 _logicW.AddNewComponent(
                     new AddComponentBindingModel {
-                        WareHoseName = comboBoxWareHouse.Text,
-                        ComponentName = listC[comboBoxComponent.SelectedIndex].Id,
+                        WareHouseId = Convert.ToInt32(comboBoxWareHouse.SelectedValue),
+                        ComponentId = listC[comboBoxComponent.SelectedIndex].Id,
                         Count = Int32.Parse(textBoxCount.Text)
                     });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",

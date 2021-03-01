@@ -16,26 +16,22 @@ namespace DishProjectListImplement.Models
         }
         public void Add(AddComponentBindingModel model)
         {
-            WareHouse tempWareHouse = null;
             foreach (var wareHouse in source.WareHouses)
             {
-                if (wareHouse.Name == model.WareHoseName)
+                if (wareHouse.Id == model.WareHouseId)
                 {
-                    tempWareHouse = wareHouse;
+                    if (wareHouse.StoreComponents.ContainsKey(model.ComponentId))
+                    {
+                        wareHouse.StoreComponents[model.ComponentId] += model.Count;
+                    }
+                    else
+                    {
+                        wareHouse.StoreComponents.Add(model.ComponentId, model.Count);
+                    }
+                    return;
                 }
             }
-            if (tempWareHouse == null)
-            {
-                throw new Exception("Элемент не найден");
-            }
-            if (tempWareHouse.StoreComponents.ContainsKey(model.ComponentName))
-            {
-                tempWareHouse.StoreComponents[model.ComponentName] += model.Count;
-            }
-            else
-            {
-                tempWareHouse.StoreComponents.Add(model.ComponentName, model.Count);
-            }
+            throw new Exception("Элемент не найден");
         }
 
         public void Delete(WareHouseBindingModel model)

@@ -48,7 +48,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
         {
             var wareHouse = _wareHouseStorage.GetElement(new WareHouseBindingModel
             {
-                Name = model.WareHoseName
+                Id = model.WareHouseId
             });
             if (wareHouse == null)
             {
