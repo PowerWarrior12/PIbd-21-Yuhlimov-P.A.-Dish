@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelText1 = new System.Windows.Forms.Label();
-            this.labelText2 = new System.Windows.Forms.Label();
+            this.labelTextComponent = new System.Windows.Forms.Label();
+            this.labelTextCount = new System.Windows.Forms.Label();
             this.comboBoxComponent = new System.Windows.Forms.ComboBox();
             this.textBoxCount = new System.Windows.Forms.TextBox();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // labelText1
+            // labelTextComponent
             // 
-            this.labelText1.AutoSize = true;
-            this.labelText1.Location = new System.Drawing.Point(13, 13);
-            this.labelText1.Name = "labelText1";
-            this.labelText1.Size = new System.Drawing.Size(66, 13);
-            this.labelText1.TabIndex = 0;
-            this.labelText1.Text = "Компонент:";
+            this.labelTextComponent.AutoSize = true;
+            this.labelTextComponent.Location = new System.Drawing.Point(13, 13);
+            this.labelTextComponent.Name = "labelTextComponent";
+            this.labelTextComponent.Size = new System.Drawing.Size(66, 13);
+            this.labelTextComponent.TabIndex = 0;
+            this.labelTextComponent.Text = "Компонент:";
             // 
-            // labelText2
+            // labelTextCount
             // 
-            this.labelText2.AutoSize = true;
-            this.labelText2.Location = new System.Drawing.Point(13, 42);
-            this.labelText2.Name = "labelText2";
-            this.labelText2.Size = new System.Drawing.Size(69, 13);
-            this.labelText2.TabIndex = 1;
-            this.labelText2.Text = "Количество:";
+            this.labelTextCount.AutoSize = true;
+            this.labelTextCount.Location = new System.Drawing.Point(13, 42);
+            this.labelTextCount.Name = "labelTextCount";
+            this.labelTextCount.Size = new System.Drawing.Size(69, 13);
+            this.labelTextCount.TabIndex = 1;
+            this.labelTextCount.Text = "Количество:";
             // 
             // comboBoxComponent
             // 
@@ -98,8 +98,8 @@
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.textBoxCount);
             this.Controls.Add(this.comboBoxComponent);
-            this.Controls.Add(this.labelText2);
-            this.Controls.Add(this.labelText1);
+            this.Controls.Add(this.labelTextCount);
+            this.Controls.Add(this.labelTextComponent);
             this.Name = "FormDishComponent";
             this.Text = "Компоненты блюда";
             this.ResumeLayout(false);
@@ -109,8 +109,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelText1;
-        private System.Windows.Forms.Label labelText2;
+        private System.Windows.Forms.Label labelTextComponent;
+        private System.Windows.Forms.Label labelTextCount;
         private System.Windows.Forms.ComboBox comboBoxComponent;
         private System.Windows.Forms.TextBox textBoxCount;
         private System.Windows.Forms.Button ButtonSave;

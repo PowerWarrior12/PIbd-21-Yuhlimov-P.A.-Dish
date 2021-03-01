@@ -13,9 +13,9 @@ namespace DishProjectFileImplement
     class FileDataListSingleton
     {
         private static FileDataListSingleton instance;
-        private readonly string ComponentFileName = "F:\\Users\\PowerWarrior\\Desktop\\Component.xml";
-        private readonly string OrderFileName = "F:\\Users\\PowerWarrior\\Desktop\\Order.xml";
-        private readonly string DishFileName = "F:\\Users\\PowerWarrior\\Desktop\\Product.xml";
+        private readonly string ComponentFileName = "Component.xml";
+        private readonly string OrderFileName = "Order.xml";
+        private readonly string DishFileName = "Dish.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Dish> Dishes { get; set; }
@@ -70,7 +70,6 @@ namespace DishProjectFileImplement
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         DishId = Convert.ToInt32(elem.Element("DishId").Value),
-                        DishName = elem.Element("DishName").Value,
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
@@ -89,22 +88,22 @@ namespace DishProjectFileImplement
             if (File.Exists(DishFileName))
             {
                 XDocument xDocument = XDocument.Load(DishFileName);
-                var xElements = xDocument.Root.Elements("Product").ToList();
+                var xElements = xDocument.Root.Elements("Dish").ToList();
                 foreach (var elem in xElements)
                 {
-                    var prodComp = new Dictionary<int, int>();
+                    var dishComp = new Dictionary<int, int>();
                     foreach (var component in
-                   elem.Element("ProductComponents").Elements("ProductComponent").ToList())
+                   elem.Element("DishComponents").Elements("DishComponent").ToList())
                     {
-                        prodComp.Add(Convert.ToInt32(component.Element("Key").Value),
+                        dishComp.Add(Convert.ToInt32(component.Element("Key").Value),
                        Convert.ToInt32(component.Element("Value").Value));
                     }
                     list.Add(new Dish
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                        DishName = elem.Element("ProductName").Value,
+                        DishName = elem.Element("DishName").Value,
                         Price = Convert.ToDecimal(elem.Element("Price").Value),
-                        DishComponents = prodComp
+                        DishComponents = dishComp
                     });
                 }
             }
@@ -135,7 +134,6 @@ namespace DishProjectFileImplement
                     xElement.Add(new XElement("Order",
                     new XAttribute("Id", component.Id),
                     new XElement("DishId", component.DishId),
-                    new XElement("DishName", component.DishName),
                     new XElement("Count", component.Count),
                     new XElement("Sum", component.Sum),
                     new XElement("Status", component.Status),
@@ -150,19 +148,19 @@ namespace DishProjectFileImplement
         {
             if (Dishes != null)
             {
-                var xElement = new XElement("Products");
+                var xElement = new XElement("Dishes");
                 foreach (var dish in Dishes)
                 {
-                    var compElement = new XElement("ProductComponents");
+                    var compElement = new XElement("DishComponents");
                     foreach (var component in dish.DishComponents)
                     {
-                        compElement.Add(new XElement("ProductComponent",
+                        compElement.Add(new XElement("DishComponent",
                         new XElement("Key", component.Key),
                         new XElement("Value", component.Value)));
                     }
-                    xElement.Add(new XElement("Product",
+                    xElement.Add(new XElement("Dish",
                      new XAttribute("Id", dish.Id),
-                     new XElement("ProductName", dish.DishName),
+                     new XElement("DishName", dish.DishName),
                      new XElement("Price", dish.Price),
                      compElement));
                 }

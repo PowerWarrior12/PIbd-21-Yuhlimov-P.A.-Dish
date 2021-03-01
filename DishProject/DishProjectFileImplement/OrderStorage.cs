@@ -78,7 +78,6 @@ namespace DishProjectFileImplement
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.DishId = model.DishId;
-            order.DishName = model.DishName;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -88,11 +87,20 @@ namespace DishProjectFileImplement
         }
         private OrderViewModel CreateModel(Order order)
         {
+            string dishName = "";
+            foreach (Dish dish in source.Dishes)
+            {
+                if (order.DishId == dish.Id)
+                {
+                    dishName = dish.DishName;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 DishId = order.DishId,
-                DishName = order.DishName,
+                DishName = dishName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

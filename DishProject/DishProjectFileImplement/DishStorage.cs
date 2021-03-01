@@ -111,7 +111,7 @@ namespace DishProjectFileImplement
                 Id = product.Id,
                 DishName = product.DishName,
                 Price = product.Price,
-                ProductComponents = product.DishComponents
+                DishComponents = product.DishComponents
  .ToDictionary(recPC => recPC.Key, recPC =>
  (source.Components.FirstOrDefault(recC => recC.Id ==
 recPC.Key)?.ComponentName, recPC.Value))

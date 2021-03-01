@@ -1,7 +1,6 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
-//using AbstractShopListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +18,7 @@ namespace DishProjectListImplement
         public List<DishViewModel> GetFullList()
         {
             List<DishViewModel> result = new List<DishViewModel>();
-            foreach (var component in source.Products)
+            foreach (var component in source.Dishes)
             {
                 result.Add(CreateModel(component));
             }
@@ -33,11 +32,11 @@ namespace DishProjectListImplement
                 return null;
             }
             List<DishViewModel> result = new List<DishViewModel>();
-            foreach (var product in source.Products)
+            foreach (var dish in source.Dishes)
             {
-                if (product.DishName.Contains(model.DishName))
+                if (dish.DishName.Contains(model.DishName))
                 {
-                    result.Add(CreateModel(product));
+                    result.Add(CreateModel(dish));
                 }
             }
             return result;
@@ -48,56 +47,56 @@ namespace DishProjectListImplement
             {
                 return null;
             }
-            foreach (var product in source.Products)
+            foreach (var dish in source.Dishes)
             {
-                if (product.Id == model.Id || product.DishName ==
+                if (dish.Id == model.Id || dish.DishName ==
                 model.DishName)
                 {
-                    return CreateModel(product);
+                    return CreateModel(dish);
                 }
             }
             return null;
         }
         public void Insert(DishBindingModel model)
         {
-            Dish tempProduct = new Dish
+            Dish tempDish = new Dish
             {
                 Id = 1,
                 DishComponents = new
             Dictionary<int, int>()
             };
-            foreach (var product in source.Products)
+            foreach (var dish in source.Dishes)
             {
-                if (product.Id >= tempProduct.Id)
+                if (dish.Id >= tempDish.Id)
                 {
-                    tempProduct.Id = product.Id + 1;
+                    tempDish.Id = dish.Id + 1;
                 }
             }
-            source.Products.Add(CreateModel(model, tempProduct));
+            source.Dishes.Add(CreateModel(model, tempDish));
         }
         public void Update(DishBindingModel model)
         {
-            Dish tempProduct = null;
-            foreach (var product in source.Products)
+            Dish tempDish = null;
+            foreach (var dish in source.Dishes)
             {
-                if (product.Id == model.Id)
+                if (dish.Id == model.Id)
                 {
-                    tempProduct = product;
+                    tempDish = dish;
                 }
             }
-            if (tempProduct == null)
+            if (tempDish == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            CreateModel(model, tempProduct);
+            CreateModel(model, tempDish);
         }
         public void Delete(DishBindingModel model)
         {
-            for (int i = 0; i < source.Products.Count; ++i)
+            for (int i = 0; i < source.Dishes.Count; ++i)
             {
-                if (source.Products[i].Id == model.Id)
+                if (source.Dishes[i].Id == model.Id)
                 {
-                    source.Products.RemoveAt(i);
+                    source.Dishes.RemoveAt(i);
                     return;
                 }
             }
@@ -134,8 +133,8 @@ namespace DishProjectListImplement
         private DishViewModel CreateModel(Dish dish)
         {
             // требуется дополнительно получить список компонентов для изделия с названиями и их количество
-        Dictionary<int, (string, int)> productComponents = new
-        Dictionary<int, (string, int)>();
+            Dictionary<int, (string, int)> dishComponents = new
+            Dictionary<int, (string, int)>();
             foreach (var pc in dish.DishComponents)
             {
                 string componentName = string.Empty;
@@ -147,14 +146,14 @@ namespace DishProjectListImplement
                         break;
                     }
                 }
-                productComponents.Add(pc.Key, (componentName, pc.Value));
+                dishComponents.Add(pc.Key, (componentName, pc.Value));
             }
             return new DishViewModel
             {
                 Id = dish.Id,
                 DishName = dish.DishName,
                 Price = dish.Price,
-                ProductComponents = productComponents
+                DishComponents = dishComponents
             };
         }
     }
