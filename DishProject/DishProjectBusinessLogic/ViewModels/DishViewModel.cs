@@ -14,6 +14,6 @@ namespace DishProjectBusinessLogic.ViewModels
         public string DishName { get; set; }
         [DisplayName("Цена")]
         public decimal Price { get; set; }
-        public Dictionary<int, (string, int)> ProductComponents { get; set; }
+        public Dictionary<int, (string, int)> DishComponents { get; set; }
     }
 }

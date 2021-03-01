@@ -107,7 +107,6 @@ namespace DishProjectView
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
                     DishId = Convert.ToInt32(comboBoxProduct.SelectedValue),
-                    DishName = comboBoxProduct.Text,
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });
