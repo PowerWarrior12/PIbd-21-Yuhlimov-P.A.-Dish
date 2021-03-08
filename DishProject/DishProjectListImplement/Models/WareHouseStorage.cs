@@ -14,23 +14,8 @@ namespace DishProjectListImplement.Models
         {
             source = DataListSingleton.GetInstance();
         }
-        public void Add(AddComponentBindingModel model)
+        public void ChangeComponents(ChangeComponentBindingModel model)
         {
-            foreach (var wareHouse in source.WareHouses)
-            {
-                if (wareHouse.Id == model.WareHouseId)
-                {
-                    if (wareHouse.StoreComponents.ContainsKey(model.ComponentId))
-                    {
-                        wareHouse.StoreComponents[model.ComponentId] += model.Count;
-                    }
-                    else
-                    {
-                        wareHouse.StoreComponents.Add(model.ComponentId, model.Count);
-                    }
-                    return;
-                }
-            }
             throw new Exception("Элемент не найден");
         }
 

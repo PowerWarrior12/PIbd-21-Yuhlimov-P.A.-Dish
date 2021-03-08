@@ -12,10 +12,12 @@ namespace DishProjectView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly OrderLogic _orderLogic;
-        public FormMain(OrderLogic orderLogic)
+        private readonly DishLogic _dishLogic;
+        public FormMain(OrderLogic orderLogic, DishLogic dishLogic)
         {
             InitializeComponent();
             this._orderLogic = orderLogic;
+            this._dishLogic = dishLogic;
         }
 
         public FormMain()
@@ -71,13 +73,19 @@ namespace DishProjectView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                //int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[1].Value);
                 int id = dataGridView.CurrentCell.RowIndex + 1;
+                int dishId = _orderLogic.Read(new OrderBindingModel
+                {
+                    Id = id
+                }).Find(rec => rec.Id == id).DishId;
+                
                 try
                 {
                     _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
                     {
-                        OrderId = id
+                        OrderId = id,
+                        Components = _dishLogic.Read(null).Find(rec => rec.Id == dishId).DishComponents,
+                        DishCount = _orderLogic.Read(null).Find(rec => rec.Id == id).Count
                     });
                     LoadData();
                 }
@@ -93,7 +101,6 @@ namespace DishProjectView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                //int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 int id = dataGridView.CurrentCell.RowIndex + 1;
                 try
                 {

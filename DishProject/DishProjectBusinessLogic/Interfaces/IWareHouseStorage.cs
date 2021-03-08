@@ -12,6 +12,6 @@ namespace DishProjectBusinessLogic.Interfaces
         void Insert(WareHouseBindingModel model);
         void Update(WareHouseBindingModel model);
         void Delete(WareHouseBindingModel model);
-        void Add(AddComponentBindingModel model);
+        void ChangeComponents(ChangeComponentBindingModel model);
     }
 }

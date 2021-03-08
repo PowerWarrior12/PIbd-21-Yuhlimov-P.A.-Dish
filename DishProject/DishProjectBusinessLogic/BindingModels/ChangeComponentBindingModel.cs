@@ -4,12 +4,8 @@ using System.Text;
 
 namespace DishProjectBusinessLogic.BindingModels
 {
-    /// <summary>
-    /// Данные для смены статуса заказа
-    /// </summary>
-    public class ChangeStatusBindingModel
+    public class ChangeComponentBindingModel
     {
-        public int OrderId { get; set; }
         public Dictionary<int, (string, int)> Components { get; set; }
         public int DishCount { get; set; }
     }
