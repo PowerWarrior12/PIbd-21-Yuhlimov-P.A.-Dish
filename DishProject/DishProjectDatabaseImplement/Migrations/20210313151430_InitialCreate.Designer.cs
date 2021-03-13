@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DishProjectDatabaseImplement.Migrations
 {
     [DbContext(typeof(DishProjectDatabase))]
-    [Migration("20210313134949_InitialCreate")]
+    [Migration("20210313151430_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

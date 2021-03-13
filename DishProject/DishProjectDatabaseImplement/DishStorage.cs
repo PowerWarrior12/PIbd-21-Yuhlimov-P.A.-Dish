@@ -91,7 +91,14 @@ namespace DishProjectDatabaseImplement
                 {
                     try
                     {
-                        context.Dishes.Add(CreateModel(model, new Dish(), context));
+                        Dish p = new Dish
+                        {
+                            DishName = model.DishName,
+                            Price = model.Price
+                        };
+                        context.Dishes.Add(p);
+                        context.SaveChanges();
+                        CreateModel(model, p, context);
                         context.SaveChanges();
                         transaction.Commit();
                     }
