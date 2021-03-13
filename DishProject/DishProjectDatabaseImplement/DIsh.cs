@@ -14,6 +14,7 @@ namespace DishProjectDatabaseImplement
         public decimal Price { get; set; }
         [ForeignKey("DishId")]
         public virtual List<DishComponent> DishComponents { get; set; }
+        [ForeignKey("DishId")]
         public virtual List<Order> Orders { get; set; }
     }
 }

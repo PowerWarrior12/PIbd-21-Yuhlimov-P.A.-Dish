@@ -27,7 +27,7 @@ namespace DishProjectDatabaseImplement.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DishName = table.Column<string>(nullable: false),
-                    Price = table.Column<string>(nullable: false)
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,21 +68,21 @@ namespace DishProjectDatabaseImplement.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Count = table.Column<int>(nullable: false),
-                    Summ = table.Column<int>(nullable: false),
+                    Summ = table.Column<decimal>(nullable: false),
+                    DishId = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     DateCreate = table.Column<DateTime>(nullable: false),
-                    DateImplement = table.Column<DateTime>(nullable: true),
-                    ComponentId = table.Column<int>(nullable: true)
+                    DateImplement = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Dishes_ComponentId",
-                        column: x => x.ComponentId,
+                        name: "FK_Orders_Dishes_DishId",
+                        column: x => x.DishId,
                         principalTable: "Dishes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -96,9 +96,9 @@ namespace DishProjectDatabaseImplement.Migrations
                 column: "DishId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ComponentId",
+                name: "IX_Orders_DishId",
                 table: "Orders",
-                column: "ComponentId");
+                column: "DishId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

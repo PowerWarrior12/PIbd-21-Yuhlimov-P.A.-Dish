@@ -12,14 +12,14 @@ namespace DishProjectDatabaseImplement
         [Required]
         public int Count { get; set; }
         [Required]
-        public int Summ { get; set; }
+        public decimal Summ { get; set; }
+        public int DishId { get; set; }
         [Required]
         public OrderStatus Status { get; set; }
         [Required]
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
-        [ForeignKey("ComponentId")]
-        public virtual Dish Dish{ get; set; }
+        //public virtual Dish Dish{ get; set; }
 
     }
 }

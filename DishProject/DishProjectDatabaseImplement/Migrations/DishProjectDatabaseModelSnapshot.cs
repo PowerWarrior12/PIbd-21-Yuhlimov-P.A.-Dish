@@ -46,9 +46,8 @@ namespace DishProjectDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -87,9 +86,6 @@ namespace DishProjectDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ComponentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -99,15 +95,18 @@ namespace DishProjectDatabaseImplement.Migrations
                     b.Property<DateTime?>("DateImplement")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DishId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("Summ")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Summ")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ComponentId");
+                    b.HasIndex("DishId");
 
                     b.ToTable("Orders");
                 });
@@ -129,9 +128,11 @@ namespace DishProjectDatabaseImplement.Migrations
 
             modelBuilder.Entity("DishProjectDatabaseImplement.Order", b =>
                 {
-                    b.HasOne("DishProjectDatabaseImplement.Dish", "Dish")
+                    b.HasOne("DishProjectDatabaseImplement.Dish", null)
                         .WithMany("Orders")
-                        .HasForeignKey("ComponentId");
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
