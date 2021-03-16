@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DishProjectDatabaseImplement.Migrations
 {
     [DbContext(typeof(DishProjectDatabase))]
-    [Migration("20210313151430_InitialCreate")]
+    [Migration("20210315121126_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,7 +130,7 @@ namespace DishProjectDatabaseImplement.Migrations
 
             modelBuilder.Entity("DishProjectDatabaseImplement.Order", b =>
                 {
-                    b.HasOne("DishProjectDatabaseImplement.Dish", null)
+                    b.HasOne("DishProjectDatabaseImplement.Dish", "Dish")
                         .WithMany("Orders")
                         .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)

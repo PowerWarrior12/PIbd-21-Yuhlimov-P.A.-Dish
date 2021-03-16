@@ -65,11 +65,7 @@ namespace DishProjectDatabaseImplement
             }
             using (var context = new DishProjectDatabase())
             {
-                var product = context.Dishes
-                .Include(rec => rec.DishComponents)
-               .ThenInclude(rec => rec.Component)
-               .FirstOrDefault(rec => rec.DishName == model.DishName || rec.Id
-               == model.Id);
+                var product = context.Dishes.Include(rec => rec.DishComponents).ThenInclude(rec => rec.Component).FirstOrDefault(rec => rec.DishName == model.DishName || rec.Id == model.Id);
                 return product != null ?
                 new DishViewModel
                 {

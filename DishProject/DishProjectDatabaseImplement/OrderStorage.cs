@@ -2,6 +2,7 @@
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,13 +41,13 @@ namespace DishProjectDatabaseImplement
                 new OrderViewModel
                 {
                     Id = order.Id,
-                    DishId = order.Id,
-                    DishName = context.Dishes.FirstOrDefault(t => t.Id == order.Id)?.DishName,
+                    DishId = order.DishId,
+                    DishName = context.Dishes.Include(rec => rec.Orders).FirstOrDefault(rec => rec.Id == order.DishId)?.DishName,
                     Count = order.Count,
                     Sum = order.Summ,
                     Status = order.Status,
                     DateCreate = order.DateCreate,
-                    DateImplement = order.DateImplement
+                    DateImplement = order.DateImplement,
                 } :
                 null;
             }
@@ -61,17 +62,17 @@ namespace DishProjectDatabaseImplement
             using (var context = new DishProjectDatabase())
             {
                 return context.Orders
-                .Where(rec => rec.DateCreate == model.DateCreate)
+                .Where(rec => rec.DishId == model.DishId)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    DishId = rec.Id,
-                    DishName = context.Dishes.FirstOrDefault(t => t.Id == rec.Id).DishName,
+                    DishId = rec.DishId,
+                    DishName = context.Dishes.Include(recD => recD.Orders).FirstOrDefault(pr => pr.Id == rec.DishId).DishName,
                     Count = rec.Count,
                     Sum = rec.Summ,
                     Status = rec.Status,
                     DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement
+                    DateImplement = rec.DateImplement,
                 })
                 .ToList();
             }
@@ -85,13 +86,13 @@ namespace DishProjectDatabaseImplement
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    DishId = rec.Id,
-                    DishName = context.Dishes.FirstOrDefault(t => t.Id == rec.Id).DishName,
+                    DishId = rec.DishId,
+                    DishName = context.Dishes.Include(recD => recD.Orders).FirstOrDefault(pr => pr.Id == rec.DishId).DishName,
                     Count = rec.Count,
                     Sum = rec.Summ,
                     Status = rec.Status,
                     DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement
+                    DateImplement = rec.DateImplement,
                 })
                 .ToList();
             }
@@ -101,7 +102,18 @@ namespace DishProjectDatabaseImplement
         {
             using (var context = new DishProjectDatabase())
             {
-                context.Orders.Add(CreateModel(model, new Order(),context));
+                Order order = new Order
+                {
+                    DishId = model.DishId,
+                    Count = model.Count,
+                    Summ = model.Sum,
+                    Status = model.Status,
+                    DateCreate = model.DateCreate,
+                    DateImplement = model.DateImplement,
+                };
+                context.Orders.Add(order);
+                context.SaveChanges();
+                CreateModel(model, order,context);
                 context.SaveChanges();
             }
         }
@@ -115,6 +127,12 @@ namespace DishProjectDatabaseImplement
                 {
                     throw new Exception("Элемент не найден");
                 }
+                element.DishId = model.DishId;
+                element.Count = model.Count;
+                element.Summ = model.Sum;
+                element.Status = model.Status;
+                element.DateCreate = model.DateCreate;
+                element.DateImplement = model.DateImplement;
                 CreateModel(model, element,context);
                 context.SaveChanges();
             }
@@ -126,7 +144,7 @@ namespace DishProjectDatabaseImplement
             {
                 return null;
             }
-            Dish element = context.Dishes.FirstOrDefault(rec => rec.Id == model.DishId);
+            Dish element = context.Dishes.Include(rec => rec.Orders).FirstOrDefault(rec => rec.Id == model.DishId);
             if (element != null)
             {
                 if (element.Orders == null)
