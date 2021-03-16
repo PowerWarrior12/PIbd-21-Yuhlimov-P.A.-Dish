@@ -19,11 +19,11 @@ namespace DishProjectFileImplement
         {
             foreach (var c in model.Components)
             {
-                int count = c.Value.Item2;
+                int count = c.Value.Item2 * model.DishCount;
                 foreach (WareHouse w in source.WareHouses)
                 {
                     if (w.StoreComponents.ContainsKey(c.Key))
-                        count -= w.StoreComponents[c.Key] * model.DishCount;
+                        count -= w.StoreComponents[c.Key];
                 }
                 if (count > 0)
                 {
