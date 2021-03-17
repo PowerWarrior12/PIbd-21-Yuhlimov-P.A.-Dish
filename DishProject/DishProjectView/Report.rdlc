@@ -10,53 +10,6 @@
       <rd:DataSourceID>37be936d-7156-4dce-a563-fd3b479560fd</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSetOrders">
-      <Query>
-        <DataSourceName>DishProjectBusinessLogicViewModels</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="Count">
-          <DataField>Count</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DateCreate">
-          <DataField>DateCreate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DateImplement">
-          <DataField>DateImplement</DataField>
-          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="DishId">
-          <DataField>DishId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DishName">
-          <DataField>DishName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Id">
-          <DataField>Id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-          <rd:TypeName>DishProjectBusinessLogic.Enums.OrderStatus</rd:TypeName>
-        </Field>
-        <Field Name="Sum">
-          <DataField>Sum</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>DishProjectBusinessLogic.ViewModels</rd:DataSetName>
-        <rd:TableName>OrderViewModel</rd:TableName>
-        <rd:ObjectDataSourceType>DishProjectBusinessLogic.ViewModels.OrderViewModel, DishProjectBusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
