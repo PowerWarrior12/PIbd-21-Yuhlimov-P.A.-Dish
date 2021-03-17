@@ -133,5 +133,10 @@ namespace DishProjectView
         {
             LoadData();
         }
+
+        private void списокИзделийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
