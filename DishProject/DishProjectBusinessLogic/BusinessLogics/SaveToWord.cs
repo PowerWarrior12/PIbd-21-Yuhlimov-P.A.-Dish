@@ -14,36 +14,66 @@ namespace DishProjectBusinessLogic.BusinessLogics
         /// <param name="info"></param>
         public static void CreateDoc(WordInfo info)
         {
-            using (WordprocessingDocument wordDocument =
-           WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document))
+            using (WordprocessingDocument wordDocument = WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document))
             {
                 MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
                 mainPart.Document = new Document();
                 Body docBody = mainPart.Document.AppendChild(new Body());
                 docBody.AppendChild(CreateParagraph(new WordParagraph
                 {
-                    Texts = new List<(string, WordTextProperties)> { (info.Title, new
-WordTextProperties {Bold = true, Size = "24", } ) },
+                    Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { Bold = true, Size = "24", }) },
                     TextProperties = new WordTextProperties
                     {
                         Size = "24",
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-                foreach (var component in info.Components)
+
+                if (info.Components != null)
                 {
-                    docBody.AppendChild(CreateParagraph(new WordParagraph
+                    foreach (var component in info.Components)
                     {
-                        Texts = new List<(string, WordTextProperties)> {
-(component.ComponentName, new WordTextProperties { Size = "24", }) },
-                        TextProperties = new WordTextProperties
+                        docBody.AppendChild(CreateParagraph(new WordParagraph
                         {
-                            Size = "24",
-                            JustificationValues = JustificationValues.Both
-                        }
-                    }));
+                            Texts = new List<(string, WordTextProperties)> { (component.ComponentName, new WordTextProperties { Size = "24", }) },
+                            TextProperties = new WordTextProperties
+                            {
+                                Size = "24",
+                                JustificationValues = JustificationValues.Both
+                            }
+                        }));
+                    }
+                    docBody.AppendChild(CreateSectionProperties());
                 }
-                docBody.AppendChild(CreateSectionProperties());
+
+                if (info.Dishes != null)
+                {
+                    foreach (var dish in info.Dishes)
+                    {
+                        docBody.AppendChild(CreateParagraph(new WordParagraph
+                        {
+                            Texts = new List<(string, WordTextProperties)> {
+                                (dish.DishName, new WordTextProperties {Bold = true, Size = "24", }) },
+                            TextProperties = new WordTextProperties
+                            {
+                                Size = "24",
+                                JustificationValues = JustificationValues.Both
+                            }
+                        })); ;
+                        docBody.AppendChild(CreateParagraph(new WordParagraph
+                        {
+                            Texts = new List<(string, WordTextProperties)> {
+                                ("Цена: " + dish.Price.ToString(), new WordTextProperties {Bold = false, Size = "24", }) },
+                            TextProperties = new WordTextProperties
+                            {
+                                Size = "24",
+                                JustificationValues = JustificationValues.Both
+                            }
+                        })); ;
+                    }
+                    docBody.AppendChild(CreateSectionProperties());
+                }
+
                 wordDocument.MainDocumentPart.Document.Save();
             }
         }

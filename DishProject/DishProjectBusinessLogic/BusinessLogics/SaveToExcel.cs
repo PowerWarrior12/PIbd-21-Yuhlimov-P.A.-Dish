@@ -12,20 +12,16 @@ namespace DishProjectBusinessLogic.BusinessLogics
     {
         public static void CreateDoc(ExcelInfo info)
         {
-            using (SpreadsheetDocument spreadsheetDocument =
-           SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
+            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
             {
                 // Создаем книгу (в ней хранятся листы)
                 WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
                 workbookpart.Workbook = new Workbook();
                 CreateStyles(workbookpart);
                 // Получаем/создаем хранилище текстов для книги
-                SharedStringTablePart shareStringPart =
-               spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0
-                ?
-               spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().First()
-                :
-               spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
+                SharedStringTablePart shareStringPart = spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0
+                ? spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().First()
+                : spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
                 // Создаем SharedStringTable, если его нет
                 if (shareStringPart.SharedStringTable == null)
                 {
@@ -33,10 +29,8 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 }
                 // Создаем лист в книгу
                 WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
-                worksheetPart.Worksheet = new Worksheet(new SheetData());
-                // Добавляем лист в книгу
-                Sheets sheets =
-               spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+                worksheetPart.Worksheet = new Worksheet(new SheetData());// Добавляем лист в книгу
+                Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
                 Sheet sheet = new Sheet()
                 {
                     Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
@@ -60,52 +54,108 @@ namespace DishProjectBusinessLogic.BusinessLogics
                     CellToName = "C1"
                 });
                 uint rowIndex = 2;
-                foreach (var pc in info.DishComponents)
+                if (info.DishComponents != null)
                 {
-                    InsertCellInWorksheet(new ExcelCellParameters
-                    {
-                        Worksheet = worksheetPart.Worksheet,
-                        ShareStringPart = shareStringPart,
-                        ColumnName = "A",
-                        RowIndex = rowIndex,
-                        Text = pc.ComponentName,
-                        StyleIndex = 0U
-                    });
-                    rowIndex++;
-                    foreach (var dish in pc.Dishes)
+                    foreach (var pc in info.DishComponents)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
                             Worksheet = worksheetPart.Worksheet,
                             ShareStringPart = shareStringPart,
-                            ColumnName = "B",
+                            ColumnName = "A",
                             RowIndex = rowIndex,
-                            Text = dish.Item1,
-                            StyleIndex = 1U
+                            Text = pc.ComponentName,
+                            StyleIndex = 0U
                         });
+                        rowIndex++;
+                        foreach (var dish in pc.Dishes)
+                        {
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "B",
+                                RowIndex = rowIndex,
+                                Text = dish.Item1,
+                                StyleIndex = 1U
+                            });
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "C",
+                                RowIndex = rowIndex,
+                                Text = dish.Item2.ToString(),
+                                StyleIndex = 1U
+                            }); rowIndex++;
+                        }
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
                             Worksheet = worksheetPart.Worksheet,
                             ShareStringPart = shareStringPart,
                             ColumnName = "C",
                             RowIndex = rowIndex,
-                            Text = dish.Item2.ToString(),
-                            StyleIndex = 1U
+                            Text = pc.TotalCount.ToString(),
+                            StyleIndex = 0U
                         });
                         rowIndex++;
                     }
-                    InsertCellInWorksheet(new ExcelCellParameters
-                    {
-                        Worksheet = worksheetPart.Worksheet,
-                        ShareStringPart = shareStringPart,
-                        ColumnName = "C",
-                        RowIndex = rowIndex,
-                        Text = pc.TotalCount.ToString(),
-                        StyleIndex = 0U
-                    });
-                    rowIndex++;
+                    workbookpart.Workbook.Save();
                 }
-                workbookpart.Workbook.Save();
+                if (info.ComponentsDish != null)
+                {
+                    foreach (var pc in info.ComponentsDish)
+                    {
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "A",
+                            RowIndex = rowIndex,
+                            Text = pc.DishName,
+                            StyleIndex = 0U
+                        });
+                        rowIndex++;
+
+                        foreach (var component in pc.Components)
+                        {
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "B",
+                                RowIndex = rowIndex,
+                                Text = component.Item1,
+                                StyleIndex = 1U
+                            });
+
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "C",
+                                RowIndex = rowIndex,
+                                Text = component.Item2.ToString(),
+                                StyleIndex = 1U
+                            });
+
+                            rowIndex++;
+                        }
+
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "C",
+                            RowIndex = rowIndex,
+                            Text = pc.TotalCount.ToString(),
+                            StyleIndex = 0U
+                        });
+                        rowIndex++;
+                    }
+                    workbookpart.Workbook.Save();
+                }
+
             }
         }
         /// <summary>

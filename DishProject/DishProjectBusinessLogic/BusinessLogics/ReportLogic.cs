@@ -53,6 +53,36 @@ namespace DishProjectBusinessLogic.BusinessLogics
             return list;
         }
         /// <summary>
+        /// Получение списка изделий с указанием, какие компоненты используются
+        /// </summary>
+        /// <returns></returns>
+        public List<ReportDishComponentViewModel> GetComponentsDish()
+        {
+            var components = _componentStorage.GetFullList();
+            var dishes = _dishStorage.GetFullList();
+            var list = new List<ReportDishComponentViewModel>();
+            foreach (var dish in dishes)
+            {
+                var record = new ReportDishComponentViewModel
+                {
+                    DishName = dish.DishName,
+                    Components = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+
+                foreach (var component in components)
+                {
+                    if (dish.DishComponents.ContainsKey(component.Id))
+                    {
+                        record.Components.Add(new Tuple<string, int>(component.ComponentName, dish.DishComponents[component.Id].Item2));
+                        record.TotalCount += dish.DishComponents[component.Id].Item2;
+                    }
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+        /// <summary>
         /// Получение списка заказов за определенный период
         /// </summary>
         /// <param name="model"></param>
@@ -89,6 +119,19 @@ namespace DishProjectBusinessLogic.BusinessLogics
             });
         }
         /// <summary>
+        /// Сохранение изделий в файл-Word
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveDishesToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateDoc(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Список изделий",
+                Dishes = _dishStorage.GetFullList()
+            });
+        }
+        /// <summary>
         /// Сохранение компонент с указаеним продуктов в файл-Excel
         /// </summary>
         /// <param name="model"></param>
@@ -99,6 +142,19 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 FileName = model.FileName,
                 Title = "Список компонент",
                 DishComponents = GetDishComponent()
+            });
+        }
+        /// <summary>
+        /// Сохранение изделий с указанием компонент в файл-Excel
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveComponentDishToExcelFile(ReportBindingModel model)
+        {
+            SaveToExcel.CreateDoc(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список компонент",
+                ComponentsDish = GetComponentsDish()
             });
         }
         /// <summary>

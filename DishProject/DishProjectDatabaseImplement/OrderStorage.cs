@@ -62,12 +62,11 @@ namespace DishProjectDatabaseImplement
             using (var context = new DishProjectDatabase())
             {
                 return context.Orders
-                .Where(rec => rec.DishId == model.DishId)
-                .Select(rec => new OrderViewModel
+                .Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo).Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
-                    DishName = context.Dishes.Include(recD => recD.Orders).FirstOrDefault(pr => pr.Id == rec.DishId).DishName,
+                    DishName = context.Dishes.FirstOrDefault(x => x.Id == rec.DishId).DishName,
                     Count = rec.Count,
                     Sum = rec.Summ,
                     Status = rec.Status,

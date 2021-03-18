@@ -254,11 +254,23 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportComponentDish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportComponentDish.Designer.cs">
+      <DependentUpon>FormReportComponentDish.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportDishComponents.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormReportDishComponents.Designer.cs">
       <DependentUpon>FormReportDishComponents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportOrders.Designer.cs">
+      <DependentUpon>FormReportOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -284,8 +296,14 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportComponentDish.resx">
+      <DependentUpon>FormReportComponentDish.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormReportDishComponents.resx">
       <DependentUpon>FormReportDishComponents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportOrders.resx">
+      <DependentUpon>FormReportOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -317,9 +335,22 @@
     <None Include="Content\bold-reports\office-365\icons\ejicons.ttf" />
     <None Include="Content\bold-reports\office-365\icons\ejicons.woff" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.BindingModels.ChangeStatusBindingModel.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.BindingModels.ComponentBindingModel.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.BindingModels.CreateOrderBindingModel.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.BindingModels.DishBindingModel.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.BindingModels.OrderBindingModel.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.BusinessLogics.ComponentLogic.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.BusinessLogics.DishLogic.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.BusinessLogics.OrderLogic.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.Interfaces.IComponentStorage.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.Interfaces.IDishStorage.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.Interfaces.IOrderStorage.datasource" />
     <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.ComponentViewModel.datasource" />
     <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.DishViewModel.datasource" />
     <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.OrderViewModel.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.ReportDishComponentViewModel.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
