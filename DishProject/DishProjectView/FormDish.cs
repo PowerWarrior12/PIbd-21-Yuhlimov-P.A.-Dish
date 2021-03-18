@@ -40,6 +40,7 @@ namespace DishProjectView
             {
                 dishComponents = new Dictionary<int, (string, int)>();
             }
+            LoadData();
         }
         private void FormDish_Load(object sender, EventArgs e)
         {
@@ -51,6 +52,9 @@ namespace DishProjectView
                     {
                         Id = id.Value
                     })?[0];
+                    dishComponents = view.DishComponents;
+                    textBoxPrice.Text = view.Price.ToString();
+                    textBoxName.Text = view.DishName;
                 }
                 catch (Exception ex)
                 {
@@ -62,6 +66,7 @@ namespace DishProjectView
             {
                 dishComponents = new Dictionary<int, (string, int)>();
             }
+            LoadData();
         }
         private void LoadData()
         {
@@ -185,14 +190,12 @@ namespace DishProjectView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
-
         }
     }
 }

@@ -11,9 +11,11 @@ namespace DishProjectBusinessLogic.BusinessLogics
     public class OrderLogic
     {
         private readonly IOrderStorage _orderStorage;
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly IWareHouseStorage _wareHouseStorage;
+        public OrderLogic(IOrderStorage orderStorage, IWareHouseStorage wareHouseStorage)
         {
             _orderStorage = orderStorage;
+            _wareHouseStorage = wareHouseStorage;
         }
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
@@ -40,10 +42,14 @@ namespace DishProjectBusinessLogic.BusinessLogics
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
+            _wareHouseStorage.ChangeComponents(new ChangeComponentBindingModel
+            {
+                Components = model.Components,
+                DishCount = model.DishCount
+            });
             var order = _orderStorage.GetElement(new OrderBindingModel
             {
-                Id =
-           model.OrderId
+                Id = model.OrderId
             });
             if (order == null)
             {
@@ -68,8 +74,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
         {
             var order = _orderStorage.GetElement(new OrderBindingModel
             {
-                Id =
-           model.OrderId
+                Id = model.OrderId
             });
             if (order == null)
             {

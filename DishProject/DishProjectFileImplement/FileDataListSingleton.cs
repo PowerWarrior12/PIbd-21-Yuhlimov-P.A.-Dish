@@ -13,17 +13,20 @@ namespace DishProjectFileImplement
     class FileDataListSingleton
     {
         private static FileDataListSingleton instance;
-        private readonly string ComponentFileName = "Component.xml";
-        private readonly string OrderFileName = "Order.xml";
-        private readonly string DishFileName = "Dish.xml";
+        private readonly string ComponentFileName = "F://Users//PowerWarrior//Desktop//Component.xml";
+        private readonly string OrderFileName = "F://Users//PowerWarrior//Desktop//Order.xml";
+        private readonly string DishFileName = "F://Users//PowerWarrior//Desktop//Dish.xml";
+        private readonly string WareHouseFileName = "F://Users//PowerWarrior//Desktop//WareHouse.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Dish> Dishes { get; set; }
+        public List<WareHouse> WareHouses { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Dishes = LoadDishes();
+            WareHouses = LoadDWareHouses();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -38,6 +41,7 @@ namespace DishProjectFileImplement
             SaveComponents();
             SaveOrders();
             SaveDishes();
+            SaveWareHouses();
         }
         private List<Component> LoadComponents()
         {
@@ -108,6 +112,60 @@ namespace DishProjectFileImplement
                 }
             }
             return list;
+        }
+        private List<WareHouse> LoadDWareHouses()
+        {
+            var list = new List<WareHouse>();
+            if (File.Exists(WareHouseFileName))
+            {
+                XDocument xDocument = XDocument.Load(WareHouseFileName);
+                var xElements = xDocument.Root.Elements("WareHouse").ToList();
+                foreach (var elem in xElements)
+                {
+                    var warehouseComp = new Dictionary<int, int>();
+                    foreach (var component in
+                   elem.Element("StoreComponents").Elements("StoreComponent").ToList())
+                    {
+                        warehouseComp.Add(Convert.ToInt32(component.Element("Key").Value),
+                       Convert.ToInt32(component.Element("Value").Value));
+                    }
+                    list.Add(new WareHouse
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        Name = elem.Element("Name").Value,
+                        FIO = elem.Element("FIO").Value,
+                        StoreComponents = warehouseComp
+                    });
+                    if (elem.Element("DateCreate").Value != "")
+                        list.Last().DateCreate = DateTime.ParseExact(elem.Element("DateCreate").Value, "d.M.yyyy H:m:s", null);
+                }
+            }
+            return list;
+        }
+        private void SaveWareHouses()
+        {
+            if (WareHouses != null)
+            {
+                var xElement = new XElement("WareHouses");
+                foreach (var wareHouse in WareHouses)
+                {
+                    var compElement = new XElement("StoreComponents");
+                    foreach (var component in wareHouse.StoreComponents)
+                    {
+                        compElement.Add(new XElement("StoreComponent",
+                        new XElement("Key", component.Key),
+                        new XElement("Value", component.Value)));
+                    }
+                    xElement.Add(new XElement("WareHouse",
+                     new XAttribute("Id", wareHouse.Id),
+                     new XElement("Name", wareHouse.Name),
+                     new XElement("FIO", wareHouse.FIO),
+                     new XElement("DateCreate", wareHouse.DateCreate.ToString()),
+                     compElement));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(WareHouseFileName);
+            }
         }
         private void SaveComponents()
         {
