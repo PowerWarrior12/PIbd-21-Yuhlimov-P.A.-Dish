@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DishProjectDatabaseImplement.Migrations
 {
     [DbContext(typeof(DishProjectDatabase))]
-    [Migration("20210315121126_InitialCreate")]
+    [Migration("20210318114755_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -113,6 +113,54 @@ namespace DishProjectDatabaseImplement.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("DishProjectDatabaseImplement.WareHouse", b =>
+                {
+                    b.Property<int>("WareHouseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WareHouseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WareHouseId");
+
+                    b.ToTable("WareHouses");
+                });
+
+            modelBuilder.Entity("DishProjectDatabaseImplement.WareHouseComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WareHouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentId");
+
+                    b.HasIndex("WareHouseId");
+
+                    b.ToTable("WareHouseComponents");
+                });
+
             modelBuilder.Entity("DishProjectDatabaseImplement.DishComponent", b =>
                 {
                     b.HasOne("DishProjectDatabaseImplement.Component", "Component")
@@ -133,6 +181,21 @@ namespace DishProjectDatabaseImplement.Migrations
                     b.HasOne("DishProjectDatabaseImplement.Dish", "Dish")
                         .WithMany("Orders")
                         .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DishProjectDatabaseImplement.WareHouseComponent", b =>
+                {
+                    b.HasOne("DishProjectDatabaseImplement.Component", "Component")
+                        .WithMany("WareHouseComponents")
+                        .HasForeignKey("ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DishProjectDatabaseImplement.WareHouse", "WareHouse")
+                        .WithMany("WareHouseComponents")
+                        .HasForeignKey("WareHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

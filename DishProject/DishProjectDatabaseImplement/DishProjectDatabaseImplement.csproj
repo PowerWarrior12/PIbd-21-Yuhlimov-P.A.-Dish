@@ -171,15 +171,18 @@
     <Compile Include="DishComponent.cs" />
     <Compile Include="DishProjectDatabase.cs" />
     <Compile Include="DishStorage.cs" />
-    <Compile Include="Migrations\20210315121126_InitialCreate.cs" />
-    <Compile Include="Migrations\20210315121126_InitialCreate.designer.cs">
-      <DependentUpon>20210315121126_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20210318114755_InitialCreate.cs" />
+    <Compile Include="Migrations\20210318114755_InitialCreate.designer.cs">
+      <DependentUpon>20210318114755_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DishProjectDatabaseModelSnapshot.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderStorage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WareHouse.cs" />
+    <Compile Include="WareHouseComponent.cs" />
+    <Compile Include="WareHouseStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

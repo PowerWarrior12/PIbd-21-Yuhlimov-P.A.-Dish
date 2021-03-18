@@ -9,7 +9,7 @@ namespace DishProjectDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=POWERWARRIOR-ПК\SQLEXPRESS01;Initial Catalog=DishProjectDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=POWERWARRIOR-ПК\SQLEXPRESS01;Initial Catalog=DishProjectDatabaseComp;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -17,5 +17,7 @@ namespace DishProjectDatabaseImplement
         public virtual DbSet<Dish> Dishes { set; get; }
         public virtual DbSet<DishComponent> DishComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<WareHouse> WareHouses { set; get; }
+        public virtual DbSet<WareHouseComponent> WareHouseComponents { set; get; }
     }
 }

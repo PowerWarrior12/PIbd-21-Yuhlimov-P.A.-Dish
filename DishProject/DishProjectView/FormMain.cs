@@ -74,11 +74,11 @@ namespace DishProjectView
             if (dataGridView.SelectedRows.Count == 1)
             {
                 int id = dataGridView.CurrentCell.RowIndex + 1;
-                int dishId = _orderLogic.Read(new OrderBindingModel
+                var orders = _orderLogic.Read(new OrderBindingModel
                 {
                     Id = id
-                }).Find(rec => rec.Id == id).DishId;
-                
+                });
+                int dishId = orders.Find(rec => rec.Id == id).DishId;
                 try
                 {
                     _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
