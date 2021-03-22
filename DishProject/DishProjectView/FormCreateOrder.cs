@@ -79,16 +79,6 @@ namespace DishProjectView
 
         private void comboBoxDish_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void comboBoxProduct_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBoxProduct_SelectedIndexChanged(object sender, EventArgs e)
-        {
             CalcSum();
         }
 
@@ -100,9 +90,9 @@ namespace DishProjectView
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (comboBoxDish.SelectedValue == null)
-                    DishId = Convert.ToInt32(comboBoxDish.SelectedValue),
-               MessageBoxIcon.Error);
+            if (comboBoxDish.SelectedValue == null) {
+                MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK,
+           MessageBoxIcon.Error);
                 return;
             }
             try
@@ -110,8 +100,7 @@ namespace DishProjectView
                 string value = comboBoxDish.Text;
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
-                    DishId = Convert.ToInt32(comboBoxProduct.SelectedValue),
-                    DishName = comboBoxProduct.Text,
+                    DishId = Convert.ToInt32(comboBoxDish.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });
