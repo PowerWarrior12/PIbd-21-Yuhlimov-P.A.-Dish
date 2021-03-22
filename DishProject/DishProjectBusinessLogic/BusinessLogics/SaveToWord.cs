@@ -28,24 +28,6 @@ namespace DishProjectBusinessLogic.BusinessLogics
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-
-                if (info.Components != null)
-                {
-                    foreach (var component in info.Components)
-                    {
-                        docBody.AppendChild(CreateParagraph(new WordParagraph
-                        {
-                            Texts = new List<(string, WordTextProperties)> { (component.ComponentName, new WordTextProperties { Size = "24", }) },
-                            TextProperties = new WordTextProperties
-                            {
-                                Size = "24",
-                                JustificationValues = JustificationValues.Both
-                            }
-                        }));
-                    }
-                    docBody.AppendChild(CreateSectionProperties());
-                }
-
                 if (info.Dishes != null)
                 {
                     foreach (var dish in info.Dishes)
@@ -53,17 +35,8 @@ namespace DishProjectBusinessLogic.BusinessLogics
                         docBody.AppendChild(CreateParagraph(new WordParagraph
                         {
                             Texts = new List<(string, WordTextProperties)> {
-                                (dish.DishName, new WordTextProperties {Bold = true, Size = "24", }) },
-                            TextProperties = new WordTextProperties
-                            {
-                                Size = "24",
-                                JustificationValues = JustificationValues.Both
-                            }
-                        })); ;
-                        docBody.AppendChild(CreateParagraph(new WordParagraph
-                        {
-                            Texts = new List<(string, WordTextProperties)> {
-                                ("Цена: " + dish.Price.ToString(), new WordTextProperties {Bold = false, Size = "24", }) },
+                                (dish.DishName, new WordTextProperties {Bold = true, Size = "24", }) ,
+                                (" : " + dish.Price.ToString(), new WordTextProperties {Bold = false, Size = "24", })},
                             TextProperties = new WordTextProperties
                             {
                                 Size = "24",
@@ -73,7 +46,6 @@ namespace DishProjectBusinessLogic.BusinessLogics
                     }
                     docBody.AppendChild(CreateSectionProperties());
                 }
-
                 wordDocument.MainDocumentPart.Document.Save();
             }
         }

@@ -101,7 +101,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 DishName = x.DishName,
                 Count = x.Count,
                 Sum = x.Sum,
-                Status = x.Status
+                Status = x.Status.ToString()
             })
            .ToList();
         }
@@ -153,7 +153,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
+                Title = "Список изделий",
                 ComponentsDish = GetComponentsDish()
             });
         }
