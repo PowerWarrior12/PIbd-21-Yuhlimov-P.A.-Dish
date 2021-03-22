@@ -1,6 +1,7 @@
 ﻿using DishProjectBusinessLogic.BusinessLogics;
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectListImplement;
+using DishProjectListImplement.Models;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -31,10 +32,14 @@ namespace DishProjectView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IDishStorage, DishStorage>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWareHouseStorage, WareHouseStorage>(new
+            HierarchicalLifetimeManager());
             currentContainer.RegisterType<ComponentLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<DishLogic>(new
+           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<WareHouseLogic>(new
            HierarchicalLifetimeManager());
             return currentContainer;
         }

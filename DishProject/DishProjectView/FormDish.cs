@@ -16,7 +16,7 @@ namespace DishProjectView
         public int Id { set { id = value; } }
         private readonly DishLogic logic;
         private int? id;
-        private Dictionary<int, (string, int)> productComponents;
+        private Dictionary<int, (string, int)> dishComponents;
         public FormDish(DishLogic service)
         {
             InitializeComponent();
@@ -38,8 +38,9 @@ namespace DishProjectView
             }
             else
             {
-                productComponents = new Dictionary<int, (string, int)>();
+                dishComponents = new Dictionary<int, (string, int)>();
             }
+            LoadData();
         }
         private void FormDish_Load(object sender, EventArgs e)
         {
@@ -51,6 +52,7 @@ namespace DishProjectView
                     {
                         Id = id.Value
                     })?[0];
+                    dishComponents = view.DishComponents;
                 }
                 catch (Exception ex)
                 {
@@ -60,18 +62,19 @@ namespace DishProjectView
             }
             else
             {
-                productComponents = new Dictionary<int, (string, int)>();
+                dishComponents = new Dictionary<int, (string, int)>();
             }
+            LoadData();
         }
         private void LoadData()
         {
             try
             {
-                if (productComponents != null)
+                if (dishComponents != null)
                 {
                     dataGridView.Rows.Clear();
                     dataGridView.Columns[0].Visible = false;
-                    foreach (var pc in productComponents)
+                    foreach (var pc in dishComponents)
                     {
                         dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
                     }
@@ -89,13 +92,13 @@ namespace DishProjectView
             var form = Container.Resolve<FormDishComponent>();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                if (productComponents.ContainsKey(form.Id))
+                if (dishComponents.ContainsKey(form.Id))
                 {
-                    productComponents[form.Id] = (form.ComponentName, form.Count);
+                    dishComponents[form.Id] = (form.ComponentName, form.Count);
                 }
                 else
                 {
-                    productComponents.Add(form.Id, (form.ComponentName, form.Count));
+                    dishComponents.Add(form.Id, (form.ComponentName, form.Count));
                 }
                 LoadData();
             }
@@ -109,10 +112,10 @@ namespace DishProjectView
                 var form = Container.Resolve<FormDishComponent>();
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 form.Id = id;
-                form.Count = productComponents[id].Item2;
+                form.Count = dishComponents[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    productComponents[form.Id] = (form.ComponentName, form.Count);
+                    dishComponents[form.Id] = (form.ComponentName, form.Count);
                     LoadData();
                 }
             }
@@ -128,7 +131,7 @@ namespace DishProjectView
                     try
                     {
 
-                        productComponents.Remove(Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value));
+                        dishComponents.Remove(Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value));
                     }
                     catch (Exception ex)
                     {
@@ -160,7 +163,7 @@ namespace DishProjectView
                MessageBoxIcon.Error);
                 return;
             }
-            if (productComponents == null || productComponents.Count == 0)
+            if (dishComponents == null || dishComponents.Count == 0)
             {
                 MessageBox.Show("Заполните компоненты", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
@@ -173,7 +176,7 @@ namespace DishProjectView
                     Id = id,
                     DishName = textBoxName.Text,
                     Price = Convert.ToDecimal(textBoxPrice.Text),
-                    DishComponents = productComponents
+                    DishComponents = dishComponents
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -185,14 +188,12 @@ namespace DishProjectView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
-
         }
     }
 }
