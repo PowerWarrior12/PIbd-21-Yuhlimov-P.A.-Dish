@@ -79,6 +79,16 @@ namespace DishProjectView
 
         private void comboBoxDish_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void comboBoxProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
             CalcSum();
         }
 
@@ -91,8 +101,7 @@ namespace DishProjectView
                 return;
             }
             if (comboBoxDish.SelectedValue == null)
-            {
-                MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK,
+                    DishId = Convert.ToInt32(comboBoxDish.SelectedValue),
                MessageBoxIcon.Error);
                 return;
             }
@@ -101,10 +110,12 @@ namespace DishProjectView
                 string value = comboBoxDish.Text;
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
-                    DishId = Convert.ToInt32(comboBoxDish.SelectedValue),
+                    DishId = Convert.ToInt32(comboBoxProduct.SelectedValue),
+                    DishName = comboBoxProduct.Text,
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });
+
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
