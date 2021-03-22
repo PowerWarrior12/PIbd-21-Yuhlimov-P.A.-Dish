@@ -1,7 +1,6 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
-//using AbstractShopListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -134,8 +133,8 @@ namespace DishProjectListImplement
         private DishViewModel CreateModel(Dish dish)
         {
             // требуется дополнительно получить список компонентов для изделия с названиями и их количество
-        Dictionary<int, (string, int)> dishComponents = new
-        Dictionary<int, (string, int)>();
+            Dictionary<int, (string, int)> dishComponents = new
+            Dictionary<int, (string, int)>();
             foreach (var pc in dish.DishComponents)
             {
                 string componentName = string.Empty;
