@@ -190,20 +190,6 @@ namespace DishProjectDatabaseImplement
                     {
                         foreach (var c in model.Components)
                         {
-                            int count = c.Value.Item2 * model.DishCount;
-                            foreach (WareHouse w in context.WareHouses)
-                            {
-                                WareHouseComponent comp = context.WareHouseComponents.FirstOrDefault(wc => (wc.Component == (context.Components.FirstOrDefault(rec => rec.Id == c.Key)) && w.WareHouseId == wc.WareHouseId));
-                                if (comp != null)
-                                    count -= comp.Count;
-                            }
-                            if (count > 0)
-                            {
-                                throw new Exception("На складе нет необходимых компонентов");
-                            }
-                        }
-                        foreach (var c in model.Components)
-                        {
                             int needCount = c.Value.Item2 * model.DishCount;
                             foreach (var warehouse in context.WareHouses)
                             {
@@ -214,6 +200,7 @@ namespace DishProjectDatabaseImplement
                                     if (warecount > needCount)
                                     {
                                         warec.Count -= needCount;
+                                        needCount = 0;
                                         break;
                                     }
                                     else
@@ -223,6 +210,8 @@ namespace DishProjectDatabaseImplement
                                     }
                                 }
                             }
+                            if (needCount > 0)
+                                throw new Exception("На складе нет необходимых компонентов");
                         }
                         context.SaveChanges();
                         transaction.Commit();
