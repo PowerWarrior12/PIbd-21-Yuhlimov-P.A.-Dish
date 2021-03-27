@@ -192,7 +192,6 @@ namespace DishProjectView
         {
             DialogResult = DialogResult.Cancel;
             Close();
-
         }
     }
 }

@@ -260,12 +260,6 @@
     <Compile Include="FormReportComponentDish.Designer.cs">
       <DependentUpon>FormReportComponentDish.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormReportDishComponents.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormReportDishComponents.Designer.cs">
-      <DependentUpon>FormReportDishComponents.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormReportOrders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,9 +292,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportComponentDish.resx">
       <DependentUpon>FormReportComponentDish.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormReportDishComponents.resx">
-      <DependentUpon>FormReportDishComponents.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportOrders.resx">
       <DependentUpon>FormReportOrders.cs</DependentUpon>

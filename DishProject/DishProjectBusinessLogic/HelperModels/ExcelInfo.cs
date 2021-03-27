@@ -7,7 +7,6 @@ namespace DishProjectBusinessLogic.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-        public List<ReportDishComponentViewModel> DishComponents { get; set; }
         public List<ReportDishComponentViewModel> ComponentsDish { get; set; }
     }
 }
