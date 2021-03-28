@@ -54,7 +54,22 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 throw new Exception("Не найден склад");
             }
-            _wareHouseStorage.Add(model);
+            else 
+            {
+                if (wareHouse.StoreComponents.ContainsKey(model.ComponentId))
+                    wareHouse.StoreComponents[model.ComponentId] =
+                        ("", wareHouse.StoreComponents[model.ComponentId].Item2 + model.Count);
+                else
+                    wareHouse.StoreComponents.Add(model.ComponentId, ("", model.Count));
+            }
+            _wareHouseStorage.Update(new WareHouseBindingModel
+            {
+                Id = model.WareHouseId,
+                Name = wareHouse.Name,
+                FIO = wareHouse.FIO,
+                DateCreate = wareHouse.DateCreate,
+                StoreComponents = wareHouse.StoreComponents
+            });
         }
         public void Delete(WareHouseBindingModel model)
         {

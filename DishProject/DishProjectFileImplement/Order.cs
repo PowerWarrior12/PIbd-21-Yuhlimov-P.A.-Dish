@@ -1,12 +1,9 @@
 ﻿using DishProjectBusinessLogic.Enums;
 using System;
 
-namespace DishProjectListImplement
+namespace DishProjectFileImplement
 {
-    /// <summary>
-    /// Заказ
-    /// </summary>
-    public class Order
+    class Order
     {
         public int Id { get; set; }
         public int DishId { get; set; }
