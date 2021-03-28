@@ -48,6 +48,7 @@ namespace DishProjectDatabaseImplement
                     Status = order.Status,
                     DateCreate = order.DateCreate,
                     DateImplement = order.DateImplement,
+                    ClientId = order.ClientId
                 } :
                 null;
             }
@@ -62,7 +63,12 @@ namespace DishProjectDatabaseImplement
             using (var context = new DishProjectDatabase())
             {
                 return context.Orders
-                .Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo).Select(rec => new OrderViewModel
+                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue &&
+                rec.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
+                >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
@@ -92,6 +98,7 @@ namespace DishProjectDatabaseImplement
                     Status = rec.Status,
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement,
+                    ClientId = rec.ClientId
                 })
                 .ToList();
             }
@@ -109,6 +116,7 @@ namespace DishProjectDatabaseImplement
                     Status = model.Status,
                     DateCreate = model.DateCreate,
                     DateImplement = model.DateImplement,
+                    ClientId = (int)model.ClientId
                 };
                 context.Orders.Add(order);
                 context.SaveChanges();
@@ -132,6 +140,7 @@ namespace DishProjectDatabaseImplement
                 element.Status = model.Status;
                 element.DateCreate = model.DateCreate;
                 element.DateImplement = model.DateImplement;
+                element.ClientId = (int)model.ClientId;
                 CreateModel(model, element,context);
                 context.SaveChanges();
             }
