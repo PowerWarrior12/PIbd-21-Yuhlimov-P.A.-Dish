@@ -30,11 +30,7 @@ namespace DishProjectView
         private void InitializeComponent()
         {
             this.ButtonSave = new System.Windows.Forms.Button();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Компонент = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Изделие = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
             // ButtonSave
@@ -47,48 +43,24 @@ namespace DishProjectView
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
-            // dataGridView
+            // reportViewer1
             // 
-            this.dataGridView.BackgroundColor = System.Drawing.Color.Honeydew;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Компонент,
-            this.Изделие,
-            this.Количество});
-            this.dataGridView.Location = new System.Drawing.Point(12, 41);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(515, 396);
-            this.dataGridView.TabIndex = 2;
-            // 
-            // Компонент
-            // 
-            this.Компонент.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Компонент.HeaderText = "Изделие";
-            this.Компонент.Name = "Компонент";
-            // 
-            // Изделие
-            // 
-            this.Изделие.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Изделие.HeaderText = "Компонент";
-            this.Изделие.Name = "Изделие";
-            // 
-            // Количество
-            // 
-            this.Количество.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Количество.HeaderText = "Количество";
-            this.Количество.Name = "Количество";
+            this.reportViewer1.Location = new System.Drawing.Point(12, 41);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.Size = new System.Drawing.Size(525, 397);
+            this.reportViewer1.TabIndex = 4;
             // 
             // FormReportComponentDish
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 450);
+            this.ClientSize = new System.Drawing.Size(549, 450);
+            this.Controls.Add(this.reportViewer1);
             this.Controls.Add(this.ButtonSave);
-            this.Controls.Add(this.dataGridView);
             this.Name = "FormReportComponentDish";
             this.Text = "FormReportComponentDish";
             this.Load += new System.EventHandler(this.FormReportComponentDish_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -96,9 +68,6 @@ namespace DishProjectView
         #endregion
 
         private System.Windows.Forms.Button ButtonSave;
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Компонент;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Изделие;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Количество;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

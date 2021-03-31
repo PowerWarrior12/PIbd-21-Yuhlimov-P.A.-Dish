@@ -41,8 +41,8 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(),
-order.DishName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString()
+                    Texts = new List<string> { order.DateCreate.ToShortDateString(), 
+                        order.Count.ToString(), order.Sum.ToString()
 },
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left

@@ -71,6 +71,7 @@ namespace DishProjectView
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            this.reportViewer1.RefreshReport();
         }
     }
 }

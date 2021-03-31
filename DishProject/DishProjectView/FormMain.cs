@@ -12,12 +12,14 @@ namespace DishProjectView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly OrderLogic _orderLogic;
+        private readonly DishLogic _dishLogic;
         private readonly ReportLogic report;
-        public FormMain(OrderLogic orderLogic, ReportLogic report)
+        public FormMain(OrderLogic orderLogic, ReportLogic report, DishLogic dishLogic)
         {
             InitializeComponent();
             this._orderLogic = orderLogic;
             this.report = report;
+            this._dishLogic = dishLogic;
         }
 
         public FormMain()
@@ -173,6 +175,24 @@ namespace DishProjectView
         private void изделияСКомпонентамиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportComponentDish>();
+            form.ShowDialog();
+        }
+
+        private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    report.SaveWareHousesToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void складыСКомпонентамиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportWareHouseComponents>();
             form.ShowDialog();
         }
     }

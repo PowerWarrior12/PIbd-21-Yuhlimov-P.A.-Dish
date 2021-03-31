@@ -272,6 +272,12 @@
     <Compile Include="FormReportOrders.Designer.cs">
       <DependentUpon>FormReportOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportWareHouseComponents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportWareHouseComponents.Designer.cs">
+      <DependentUpon>FormReportWareHouseComponents.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormWareHouse.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,6 +323,9 @@
     <EmbeddedResource Include="FormReportOrders.resx">
       <DependentUpon>FormReportOrders.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportWareHouseComponents.resx">
+      <DependentUpon>FormReportWareHouseComponents.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormWareHouse.resx">
       <DependentUpon>FormWareHouse.cs</DependentUpon>
     </EmbeddedResource>
@@ -334,6 +343,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report.rdlc" />
+    <EmbeddedResource Include="ReportWareHouse.rdlc" />
     <None Include="Content\bold-reports\bootstrap4\icons\ejicons.eot" />
     <None Include="Content\bold-reports\bootstrap4\icons\ejicons.ttf" />
     <None Include="Content\bold-reports\bootstrap4\icons\ejicons.woff" />
@@ -369,6 +379,7 @@
     <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.OrderViewModel.datasource" />
     <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.ReportDishComponentViewModel.datasource" />
     <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\DishProjectBusinessLogic.ViewModels.ReportWareHouseViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

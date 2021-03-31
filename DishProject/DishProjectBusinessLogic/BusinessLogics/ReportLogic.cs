@@ -14,12 +14,14 @@ namespace DishProjectBusinessLogic.BusinessLogics
         private readonly IComponentStorage _componentStorage;
         private readonly IDishStorage _dishStorage;
         private readonly IOrderStorage _orderStorage;
+        private readonly IWareHouseStorage _wareHouseStorage;
         public ReportLogic(IDishStorage dishStorage, IComponentStorage
-       componentStorage, IOrderStorage orderStorage)
+       componentStorage, IOrderStorage orderStorage, IWareHouseStorage wareHouseStorage)
         {
             _dishStorage = dishStorage;
             _componentStorage = componentStorage;
             _orderStorage = orderStorage;
+            _wareHouseStorage = wareHouseStorage;
         }
         /// <summary>
         /// Получение списка изделий с указанием, какие компоненты используются
@@ -58,21 +60,24 @@ namespace DishProjectBusinessLogic.BusinessLogics
         /// <returns></returns>
         public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
         {
-            return _orderStorage.GetFilteredList(new OrderBindingModel
+            /*return _orderStorage.GetFilteredList(new OrderBindingModel
             {
-                DateFrom =
-           model.DateFrom,
+                DateFrom = model.DateFrom,
                 DateTo = model.DateTo
             })
             .Select(x => new ReportOrdersViewModel
             {
                 DateCreate = x.DateCreate,
-                DishName = x.DishName,
                 Count = x.Count,
                 Sum = x.Sum,
-                Status = x.Status.ToString()
             })
-           .ToList();
+           .ToList();*/
+            return _orderStorage.GetFullList().GroupBy(x => x.DateCreate).Select(g => new ReportOrdersViewModel
+            {
+                DateCreate = g.FirstOrDefault().DateCreate,
+                Count = g.Count(),
+                Sum = g.Sum(e => e.Sum)
+            }).ToList();
         }
         /// <summary>
         /// Сохранение изделий в файл-Word
@@ -86,6 +91,19 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 Title = "Список изделий",
                 Dishes = _dishStorage.GetFullList()
             });
+        }
+        /// <summary>
+        /// Сохранение складов в файл Word
+        /// </summary>
+        /// <param name="model"></param>
+        public void SaveWareHousesToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateDoc(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Список изделий",
+                WareHouses = _wareHouseStorage.GetFullList()
+            }); ;
         }
         /// <summary>
         /// Сохранение изделий с указанием компонент в файл-Excel
