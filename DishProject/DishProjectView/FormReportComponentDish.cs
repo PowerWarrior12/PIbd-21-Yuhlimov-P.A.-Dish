@@ -54,7 +54,7 @@ namespace DishProjectView
                 var dict = logic.GetComponentsDish();
                 if (dict != null)
                 {
-                    dataGridView.Rows.Clear();
+                    /*dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
                         dataGridView.Rows.Add(new object[] { elem.DishName, "", "" });
@@ -64,7 +64,7 @@ namespace DishProjectView
                         }
                         dataGridView.Rows.Add(new object[] { "Итого", "", elem.TotalCount });
                         dataGridView.Rows.Add(new object[] { });
-                    }
+                    }*/
                 }
             }
             catch (Exception ex)

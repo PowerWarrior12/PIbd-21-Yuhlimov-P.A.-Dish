@@ -60,21 +60,9 @@ namespace DishProjectBusinessLogic.BusinessLogics
         /// <returns></returns>
         public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
         {
-            /*return _orderStorage.GetFilteredList(new OrderBindingModel
+            return _orderStorage.GetFullList().GroupBy(x => x.DateCreate.Date).Select(g => new ReportOrdersViewModel
             {
-                DateFrom = model.DateFrom,
-                DateTo = model.DateTo
-            })
-            .Select(x => new ReportOrdersViewModel
-            {
-                DateCreate = x.DateCreate,
-                Count = x.Count,
-                Sum = x.Sum,
-            })
-           .ToList();*/
-            return _orderStorage.GetFullList().GroupBy(x => x.DateCreate).Select(g => new ReportOrdersViewModel
-            {
-                DateCreate = g.FirstOrDefault().DateCreate,
+                DateCreate = g.FirstOrDefault().DateCreate.Date,
                 Count = g.Count(),
                 Sum = g.Sum(e => e.Sum)
             }).ToList();
