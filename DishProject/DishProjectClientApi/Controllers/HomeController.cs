@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using DishProjectBusinessLogic.ViewModels;
 using DishProjectBusinessLogic.BindingModels;
 using DishProjectClientApi.Models;
+using DishProjectClientApi;
 
 namespace SoftwareInstallingClientApp.Controllers
 {
@@ -114,7 +115,7 @@ namespace SoftwareInstallingClientApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Packages = APIClient.GetRequest<List<PackageViewModel>>("api/main/getpackagelist");
+            ViewBag.Packages = APIClient.GetRequest<List<DishViewModel>>("api/main/getpackagelist");
             return View();
         }
         [HttpPost]
@@ -127,7 +128,7 @@ namespace SoftwareInstallingClientApp.Controllers
             APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {
                 ClientId = (int)Program.Client.Id,
-                PackageId = package,
+                DishId = package,
                 Count = count,
                 Sum = sum
             });
@@ -137,7 +138,7 @@ namespace SoftwareInstallingClientApp.Controllers
         [HttpPost]
         public decimal Calc(decimal count, int package)
         {
-            PackageViewModel prod = APIClient.GetRequest<PackageViewModel>($"api/main/getpackage?packageId={package}");
+            DishViewModel prod = APIClient.GetRequest<DishViewModel>($"api/main/getpackage?packageId={package}");
             return count * prod.Price;
         }
     }
