@@ -61,16 +61,19 @@ namespace DishProjectView
             // 
             // Склад
             // 
+            this.Склад.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Склад.HeaderText = "Склад";
             this.Склад.Name = "Склад";
             // 
             // Компонент
             // 
+            this.Компонент.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Компонент.HeaderText = "Компонент";
             this.Компонент.Name = "Компонент";
             // 
             // Количество
             // 
+            this.Количество.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Количество.HeaderText = "Количество";
             this.Количество.Name = "Количество";
             // 
