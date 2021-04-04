@@ -31,6 +31,9 @@ namespace DishProjectView
         {
             this.ButtonSave = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.Склад = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Компонент = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,10 +50,29 @@ namespace DishProjectView
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Склад,
+            this.Компонент,
+            this.Количество});
             this.dataGridView.Location = new System.Drawing.Point(13, 42);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(524, 396);
             this.dataGridView.TabIndex = 4;
+            // 
+            // Склад
+            // 
+            this.Склад.HeaderText = "Склад";
+            this.Склад.Name = "Склад";
+            // 
+            // Компонент
+            // 
+            this.Компонент.HeaderText = "Компонент";
+            this.Компонент.Name = "Компонент";
+            // 
+            // Количество
+            // 
+            this.Количество.HeaderText = "Количество";
+            this.Количество.Name = "Количество";
             // 
             // FormReportComponentDish
             // 
@@ -71,5 +93,8 @@ namespace DishProjectView
 
         private System.Windows.Forms.Button ButtonSave;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Склад;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Компонент;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Количество;
     }
 }
