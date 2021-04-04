@@ -30,7 +30,8 @@ namespace DishProjectView
         private void InitializeComponent()
         {
             this.ButtonSave = new System.Windows.Forms.Button();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // ButtonSave
@@ -43,24 +44,25 @@ namespace DishProjectView
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
-            // reportViewer1
+            // dataGridView
             // 
-            this.reportViewer1.Location = new System.Drawing.Point(12, 41);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(525, 397);
-            this.reportViewer1.TabIndex = 4;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(13, 42);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(524, 396);
+            this.dataGridView.TabIndex = 4;
             // 
             // FormReportComponentDish
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 450);
-            this.Controls.Add(this.reportViewer1);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ButtonSave);
             this.Name = "FormReportComponentDish";
             this.Text = "FormReportComponentDish";
             this.Load += new System.EventHandler(this.FormReportComponentDish_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -68,6 +70,6 @@ namespace DishProjectView
         #endregion
 
         private System.Windows.Forms.Button ButtonSave;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }

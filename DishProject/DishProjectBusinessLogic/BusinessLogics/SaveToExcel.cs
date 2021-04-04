@@ -64,7 +64,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
                             ShareStringPart = shareStringPart,
                             ColumnName = "A",
                             RowIndex = rowIndex,
-                            Text = pc.DishName,
+                            Text = pc.WareHouseName,
                             StyleIndex = 0U
                         });
                         rowIndex++;

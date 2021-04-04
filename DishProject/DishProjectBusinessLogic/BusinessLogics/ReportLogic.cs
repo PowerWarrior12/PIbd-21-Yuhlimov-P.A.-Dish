@@ -54,6 +54,36 @@ namespace DishProjectBusinessLogic.BusinessLogics
             return list;
         }
         /// <summary>
+        /// Получение списка складов с указанием, какие компоненты используются
+        /// </summary>
+        /// <returns></returns>
+        public List<ReportWareHouseComponentViewModel> GetComponentsWareHouse()
+        {
+            var components = _componentStorage.GetFullList();
+            var wareHouses = _wareHouseStorage.GetFullList();
+            var list = new List<ReportWareHouseComponentViewModel>();
+            foreach (var wareHouse in wareHouses)
+            {
+                var record = new ReportWareHouseComponentViewModel
+                {
+                    WareHouseName = wareHouse.Name,
+                    Components = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+
+                foreach (var component in components)
+                {
+                    if (wareHouse.StoreComponents.ContainsKey(component.Id))
+                    {
+                        record.Components.Add(new Tuple<string, int>(component.ComponentName, wareHouse.StoreComponents[component.Id].Item2));
+                        record.TotalCount += wareHouse.StoreComponents[component.Id].Item2;
+                    }
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+        /// <summary>
         /// Получение списка заказов за определенный период
         /// </summary>
         /// <param name="model"></param>
@@ -93,17 +123,18 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 WareHouses = _wareHouseStorage.GetFullList()
             }); ;
         }
+
         /// <summary>
         /// Сохранение изделий с указанием компонент в файл-Excel
         /// </summary>
         /// <param name="model"></param>
-        public void SaveComponentDishToExcelFile(ReportBindingModel model)
+        public void SaveComponentWareHouseToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
                 Title = "Список изделий",
-                ComponentsDish = GetComponentsDish()
+                ComponentsDish = GetComponentsWareHouse()
             });
         }
         /// <summary>

@@ -33,7 +33,7 @@ namespace DishProjectView
                 {
                     try
                     {
-                        logic.SaveComponentDishToExcelFile(new ReportBindingModel
+                        logic.SaveComponentWareHouseToExcelFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName
                         });
@@ -51,27 +51,26 @@ namespace DishProjectView
         {
             try
             {
-                var dict = logic.GetComponentsDish();
+                var dict = logic.GetComponentsWareHouse();
                 if (dict != null)
                 {
-                    /*dataGridView.Rows.Clear();
+                    dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.DishName, "", "" });
+                        dataGridView.Rows.Add(new object[] { elem.WareHouseName, "", "" });
                         foreach (var listElem in elem.Components)
                         {
                             dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });
                         }
                         dataGridView.Rows.Add(new object[] { "Итого", "", elem.TotalCount });
                         dataGridView.Rows.Add(new object[] { });
-                    }*/
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.reportViewer1.RefreshReport();
         }
     }
 }
