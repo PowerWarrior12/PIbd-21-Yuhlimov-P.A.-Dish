@@ -111,7 +111,6 @@ namespace DishProjectView
             }
 
         }
-
         private void ButtonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -130,7 +129,6 @@ namespace DishProjectView
                 }
             }
         }
-
         private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadData();
