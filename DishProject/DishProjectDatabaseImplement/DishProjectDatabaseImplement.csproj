@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9406A923-BE39-40D4-8423-2F69CF5085B3}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>DishProjectView</RootNamespace>
-    <AssemblyName>DishProjectView</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <ProjectGuid>{F4DCBF84-2631-409A-AE49-72CF8AFA0979}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DishProjectDatabaseImplement</RootNamespace>
+    <AssemblyName>DishProjectDatabaseImplement</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DishProjectView.Program</StartupObject>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -138,6 +138,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.5.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
@@ -155,128 +156,38 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormComponent.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Component.cs" />
+    <Compile Include="ComponentStorage.cs" />
+    <Compile Include="DIsh.cs" />
+    <Compile Include="DishComponent.cs" />
+    <Compile Include="DishProjectDatabase.cs" />
+    <Compile Include="DishStorage.cs" />
+    <Compile Include="Migrations\20210315121126_InitialCreate.cs" />
+    <Compile Include="Migrations\20210315121126_InitialCreate.designer.cs">
+      <DependentUpon>20210315121126_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormComponent.Designer.cs">
-      <DependentUpon>FormComponent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormComponents.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormComponents.Designer.cs">
-      <DependentUpon>FormComponents.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormCreateOrder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormCreateOrder.Designer.cs">
-      <DependentUpon>FormCreateOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormDish.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormDish.Designer.cs">
-      <DependentUpon>FormDish.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormDishComponent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormDishComponent.Designer.cs">
-      <DependentUpon>FormDishComponent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormDishes.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormDishes.Designer.cs">
-      <DependentUpon>FormDishes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Migrations\DishProjectDatabaseModelSnapshot.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormComponent.resx">
-      <DependentUpon>FormComponent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormComponents.resx">
-      <DependentUpon>FormComponents.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormCreateOrder.resx">
-      <DependentUpon>FormCreateOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormDish.resx">
-      <DependentUpon>FormDish.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormDishComponent.resx">
-      <DependentUpon>FormDishComponent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormDishes.resx">
-      <DependentUpon>FormDishes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DishProjectBusinessLogic\DishProjectBusinessLogic.csproj">
       <Project>{1f379b84-460f-459e-a15f-f3bb591b2c98}</Project>
       <Name>DishProjectBusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DishProjectDatabaseImplement\DishProjectDatabaseImplement.csproj">
-      <Project>{f4dcbf84-2631-409a-ae49-72cf8afa0979}</Project>
-      <Name>DishProjectDatabaseImplement</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DishProjectFileImplement\DishProjectFileImplement.csproj">
-      <Project>{5c695c45-0164-4acd-9e7c-0934e4c3545e}</Project>
-      <Name>DishProjectFileImplement</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DishProjectListImplement\DishProjectListImplement.csproj">
-      <Project>{30877b8a-b05b-4648-aa7e-9b02172fd7b9}</Project>
-      <Name>DishProjectListImplement</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
