@@ -35,14 +35,14 @@ namespace DishProjectDatabaseImplement
             }
             using (var context = new DishProjectDatabase())
             {
-                var order = context.Orders
+                var order = context.Orders.Include(rec => rec.Dish)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
                 new OrderViewModel
                 {
                     Id = order.Id,
                     DishId = order.DishId,
-                    DishName = context.Dishes.Include(rec => rec.Orders).FirstOrDefault(rec => rec.Id == order.DishId)?.DishName,
+                    DishName = order.Dish.DishName,
                     Count = order.Count,
                     Sum = order.Summ,
                     Status = order.Status,
@@ -61,12 +61,12 @@ namespace DishProjectDatabaseImplement
             }
             using (var context = new DishProjectDatabase())
             {
-                return context.Orders
+                return context.Orders.Include(rec => rec.Dish)
                 .Where(rec => rec.DishId == model.DishId && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo).Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
-                    DishName = context.Dishes.FirstOrDefault(x => x.Id == rec.DishId).DishName,
+                    DishName = rec.Dish.DishName,
                     Count = rec.Count,
                     Sum = rec.Summ,
                     Status = rec.Status,
@@ -81,12 +81,12 @@ namespace DishProjectDatabaseImplement
         {
             using (var context = new DishProjectDatabase())
             {
-                return context.Orders
+                return context.Orders.Include(rec => rec.Dish)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
-                    DishName = context.Dishes.Include(recD => recD.Orders).FirstOrDefault(pr => pr.Id == rec.DishId).DishName,
+                    DishName = rec.Dish.DishName,
                     Count = rec.Count,
                     Sum = rec.Summ,
                     Status = rec.Status,
