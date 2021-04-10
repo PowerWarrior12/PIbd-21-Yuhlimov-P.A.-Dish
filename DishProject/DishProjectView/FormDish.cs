@@ -51,6 +51,10 @@ namespace DishProjectView
                     {
                         Id = id.Value
                     })?[0];
+                    textBoxName.Text = view.DishName;
+                    textBoxPrice.Text = view.Price.ToString();
+                    textBoxName.Text = view.DishName;
+
                 }
                 catch (Exception ex)
                 {
