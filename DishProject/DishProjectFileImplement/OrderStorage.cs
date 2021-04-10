@@ -87,20 +87,11 @@ namespace DishProjectFileImplement
         }
         private OrderViewModel CreateModel(Order order)
         {
-            string dishName = "";
-            foreach (Dish dish in source.Dishes)
-            {
-                if (order.DishId == dish.Id)
-                {
-                    dishName = dish.DishName;
-                    break;
-                }
-            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 DishId = order.DishId,
-                DishName = dishName,
+                DishName = source.Dishes.FirstOrDefault(rec => rec.Id == order.DishId).DishName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

@@ -42,7 +42,7 @@ namespace DishProjectDatabaseImplement
                 {
                     Id = order.Id,
                     DishId = order.DishId,
-                    DishName = order.Dish.DishName,
+                    DishName = order.Dish?.DishName,
                     Count = order.Count,
                     Sum = order.Summ,
                     Status = order.Status,
