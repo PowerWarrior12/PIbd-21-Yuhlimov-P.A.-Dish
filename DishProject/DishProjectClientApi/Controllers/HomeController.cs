@@ -115,11 +115,11 @@ namespace SoftwareInstallingClientApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Packages = APIClient.GetRequest<List<DishViewModel>>("api/main/getpackagelist");
+            ViewBag.Dishes = APIClient.GetRequest<List<DishViewModel>>("api/main/getdishlist");
             return View();
         }
         [HttpPost]
-        public void Create(int package, int count, decimal sum)
+        public void Create(int dish, int count, decimal sum)
         {
             if (count == 0 || sum == 0)
             {
@@ -128,7 +128,7 @@ namespace SoftwareInstallingClientApp.Controllers
             APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {
                 ClientId = (int)Program.Client.Id,
-                DishId = package,
+                DishId = dish,
                 Count = count,
                 Sum = sum
             });
@@ -136,10 +136,10 @@ namespace SoftwareInstallingClientApp.Controllers
         }
 
         [HttpPost]
-        public decimal Calc(decimal count, int package)
+        public decimal Calc(decimal count, int dish)
         {
-            DishViewModel prod = APIClient.GetRequest<DishViewModel>($"api/main/getpackage?packageId={package}");
-            return count * prod.Price;
+            DishViewModel cdish = APIClient.GetRequest<DishViewModel>($"api/main/getdish?dishId={dish}");
+            return count * cdish.Price;
         }
     }
 }

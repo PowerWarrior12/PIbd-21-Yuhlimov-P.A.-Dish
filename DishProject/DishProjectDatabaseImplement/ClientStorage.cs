@@ -5,6 +5,7 @@ using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
 using DishProjectBusinessLogic.BindingModels;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DishProjectDatabaseImplement
 {
@@ -33,8 +34,8 @@ namespace DishProjectDatabaseImplement
             }
             using (var context = new DishProjectDatabase())
             {
-                return context.Clients
-                .Where(rec => rec.Id == model.Id)
+                return context.Clients.Include(rec => rec.Order)
+                .Where(rec => rec.Email == model.Email && rec.Password == model.Password)
                 .Select(rec => new ClientViewModel
                 {
                     Id = rec.Id,

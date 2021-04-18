@@ -20,7 +20,8 @@ namespace DishProjectDatabaseImplement
         [Required]
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
-        public virtual Dish Dish{ get; set; }
+        public virtual Dish Dish { get; set; }
+        public virtual Client Client { get; set; }
 
     }
 }

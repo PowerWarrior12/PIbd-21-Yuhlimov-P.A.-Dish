@@ -23,9 +23,9 @@ namespace DishProjectRestApi.Controllers
         [HttpGet]
         public List<DishViewModel> GetDishList() => _dish.Read(null)?.ToList();
         [HttpGet]
-        public DishViewModel GetDish(int productId) => _dish.Read(new
+        public DishViewModel GetDish(int dishId) => _dish.Read(new
        DishBindingModel
-        { Id = productId })?[0];
+        { Id = dishId })?[0];
         [HttpGet]
         public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new
        OrderBindingModel
