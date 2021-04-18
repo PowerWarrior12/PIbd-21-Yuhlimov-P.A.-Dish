@@ -35,14 +35,15 @@ namespace DishProjectDatabaseImplement
             }
             using (var context = new DishProjectDatabase())
             {
-                var order = context.Orders
+                var order = context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
                 new OrderViewModel
                 {
                     Id = order.Id,
                     DishId = order.DishId,
-                    DishName = context.Dishes.Include(rec => rec.Orders).FirstOrDefault(rec => rec.Id == order.DishId)?.DishName,
+                    ClientFIO = order.Client.ClientFIO,
+                    DishName = order.Dish.DishName,
                     Count = order.Count,
                     Sum = order.Summ,
                     Status = order.Status,
@@ -62,7 +63,7 @@ namespace DishProjectDatabaseImplement
             }
             using (var context = new DishProjectDatabase())
             {
-                return context.Orders
+                return context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client)
                 .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue &&
                 rec.DateCreate.Date == model.DateCreate.Date) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
@@ -72,7 +73,8 @@ namespace DishProjectDatabaseImplement
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
-                    DishName = context.Dishes.FirstOrDefault(x => x.Id == rec.DishId).DishName,
+                    ClientFIO = rec.Client.ClientFIO,
+                    DishName = rec.Dish.DishName,
                     Count = rec.Count,
                     Sum = rec.Summ,
                     Status = rec.Status,
@@ -87,12 +89,13 @@ namespace DishProjectDatabaseImplement
         {
             using (var context = new DishProjectDatabase())
             {
-                return context.Orders
+                return context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
-                    DishName = context.Dishes.Include(recD => recD.Orders).FirstOrDefault(pr => pr.Id == rec.DishId).DishName,
+                    ClientFIO = rec.Client.ClientFIO,
+                    DishName = rec.Dish.DishName,
                     Count = rec.Count,
                     Sum = rec.Summ,
                     Status = rec.Status,
@@ -120,7 +123,7 @@ namespace DishProjectDatabaseImplement
                 };
                 context.Orders.Add(order);
                 context.SaveChanges();
-                CreateModel(model, order,context);
+                CreateModel(model, order, context);
                 context.SaveChanges();
             }
         }
@@ -141,7 +144,7 @@ namespace DishProjectDatabaseImplement
                 element.DateCreate = model.DateCreate;
                 element.DateImplement = model.DateImplement;
                 element.ClientId = (int)model.ClientId;
-                CreateModel(model, element,context);
+                CreateModel(model, element, context);
                 context.SaveChanges();
             }
         }
