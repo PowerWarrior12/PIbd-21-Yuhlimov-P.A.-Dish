@@ -117,7 +117,6 @@ namespace DishProjectView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                //int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 int id = dataGridView.CurrentCell.RowIndex + 1;
                 try
                 {
@@ -156,6 +155,19 @@ namespace DishProjectView
         {
             var form = Container.Resolve<FormReportComponentDish>();
             form.ShowDialog();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<ImplementersForm>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var workModeling = Container.Resolve<WorkModeling>();
+            workModeling.DoWork();
+            MessageBox.Show("Работы запущены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

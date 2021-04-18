@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DishProjectDatabaseImplement.Migrations
 {
     [DbContext(typeof(DishProjectDatabase))]
-    [Migration("20210327082634_InitialCreate")]
+    [Migration("20210418152209_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,6 +105,27 @@ namespace DishProjectDatabaseImplement.Migrations
                     b.ToTable("DishComponents");
                 });
 
+            modelBuilder.Entity("DishProjectDatabaseImplement.Implementer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImplementerFIO")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PauseTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkingTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Implementers");
+                });
+
             modelBuilder.Entity("DishProjectDatabaseImplement.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -127,6 +148,9 @@ namespace DishProjectDatabaseImplement.Migrations
                     b.Property<int>("DishId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ImplementerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -138,6 +162,8 @@ namespace DishProjectDatabaseImplement.Migrations
                     b.HasIndex("ClientId");
 
                     b.HasIndex("DishId");
+
+                    b.HasIndex("ImplementerId");
 
                     b.ToTable("Orders");
                 });
@@ -159,7 +185,7 @@ namespace DishProjectDatabaseImplement.Migrations
 
             modelBuilder.Entity("DishProjectDatabaseImplement.Order", b =>
                 {
-                    b.HasOne("DishProjectDatabaseImplement.Client", null)
+                    b.HasOne("DishProjectDatabaseImplement.Client", "Client")
                         .WithMany("Order")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -170,6 +196,10 @@ namespace DishProjectDatabaseImplement.Migrations
                         .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("DishProjectDatabaseImplement.Implementer", "Implementer")
+                        .WithMany("Order")
+                        .HasForeignKey("ImplementerId");
                 });
 #pragma warning restore 612, 618
         }

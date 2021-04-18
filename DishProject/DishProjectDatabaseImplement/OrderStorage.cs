@@ -35,7 +35,7 @@ namespace DishProjectDatabaseImplement
             }
             using (var context = new DishProjectDatabase())
             {
-                var order = context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client)
+                var order = context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client).Include(rec => rec.Implementer)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
                 new OrderViewModel
@@ -43,7 +43,9 @@ namespace DishProjectDatabaseImplement
                     Id = order.Id,
                     DishId = order.DishId,
                     ClientFIO = order.Client.ClientFIO,
+                    ImplementerId = order.ImplementerId,
                     DishName = order.Dish.DishName,
+                    ImplementerFIO = order.ImplementerId.HasValue ? order.Implementer.ImplementerFIO : string.Empty,
                     Count = order.Count,
                     Sum = order.Summ,
                     Status = order.Status,
@@ -63,7 +65,7 @@ namespace DishProjectDatabaseImplement
             }
             using (var context = new DishProjectDatabase())
             {
-                return context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client)
+                return context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client).Include(rec => rec.Implementer)
                 .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue &&
                 rec.DateCreate.Date == model.DateCreate.Date) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
@@ -73,7 +75,9 @@ namespace DishProjectDatabaseImplement
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
+                    ImplementerId = rec.ImplementerId,
                     ClientFIO = rec.Client.ClientFIO,
+                    ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
                     DishName = rec.Dish.DishName,
                     Count = rec.Count,
                     Sum = rec.Summ,
@@ -89,13 +93,15 @@ namespace DishProjectDatabaseImplement
         {
             using (var context = new DishProjectDatabase())
             {
-                return context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client)
+                return context.Orders.Include(rec => rec.Dish).Include(rec => rec.Client).Include(rec => rec.Implementer)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
+                    ImplementerId = rec.ImplementerId,
                     ClientFIO = rec.Client.ClientFIO,
                     DishName = rec.Dish.DishName,
+                    ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
                     Count = rec.Count,
                     Sum = rec.Summ,
                     Status = rec.Status,
@@ -119,7 +125,8 @@ namespace DishProjectDatabaseImplement
                     Status = model.Status,
                     DateCreate = model.DateCreate,
                     DateImplement = model.DateImplement,
-                    ClientId = (int)model.ClientId
+                    ClientId = (int)model.ClientId,
+                    ImplementerId = model.ImplementerId
                 };
                 context.Orders.Add(order);
                 context.SaveChanges();
@@ -144,6 +151,7 @@ namespace DishProjectDatabaseImplement
                 element.DateCreate = model.DateCreate;
                 element.DateImplement = model.DateImplement;
                 element.ClientId = (int)model.ClientId;
+                element.ImplementerId = (int)model.ImplementerId;
                 CreateModel(model, element, context);
                 context.SaveChanges();
             }
