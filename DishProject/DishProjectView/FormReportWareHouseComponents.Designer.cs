@@ -31,45 +31,45 @@ namespace DishProjectView
         {
             this.ButtonSave = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.Склад = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Компонент = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Изделие = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // ButtonSave
             // 
-            this.ButtonSave.Location = new System.Drawing.Point(12, 3);
+            this.ButtonSave.Location = new System.Drawing.Point(12, 12);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(141, 23);
-            this.ButtonSave.TabIndex = 5;
+            this.ButtonSave.TabIndex = 3;
             this.ButtonSave.Text = "Сохранить в Excel";
             this.ButtonSave.UseVisualStyleBackColor = true;
+            this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // dataGridView
             // 
-            this.dataGridView.BackgroundColor = System.Drawing.Color.Honeydew;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Склад,
             this.Компонент,
-            this.Изделие,
             this.Количество});
-            this.dataGridView.Location = new System.Drawing.Point(12, 32);
+            this.dataGridView.Location = new System.Drawing.Point(13, 42);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(515, 396);
+            this.dataGridView.Size = new System.Drawing.Size(524, 396);
             this.dataGridView.TabIndex = 4;
+            // 
+            // Склад
+            // 
+            this.Склад.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Склад.HeaderText = "Склад";
+            this.Склад.Name = "Склад";
             // 
             // Компонент
             // 
             this.Компонент.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Компонент.HeaderText = "Изделие";
+            this.Компонент.HeaderText = "Компонент";
             this.Компонент.Name = "Компонент";
-            // 
-            // Изделие
-            // 
-            this.Изделие.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Изделие.HeaderText = "Компонент";
-            this.Изделие.Name = "Изделие";
             // 
             // Количество
             // 
@@ -77,15 +77,16 @@ namespace DishProjectView
             this.Количество.HeaderText = "Количество";
             this.Количество.Name = "Количество";
             // 
-            // FormReportWareHouseComponents
+            // FormReportComponentDish
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 450);
-            this.Controls.Add(this.ButtonSave);
+            this.ClientSize = new System.Drawing.Size(549, 450);
             this.Controls.Add(this.dataGridView);
-            this.Name = "FormReportWareHouseComponents";
-            this.Text = "FormReportWareHouseComponents";
+            this.Controls.Add(this.ButtonSave);
+            this.Name = "FormReportComponentDish";
+            this.Text = "FormReportComponentDish";
+            this.Load += new System.EventHandler(this.FormReportComponentDish_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -95,8 +96,8 @@ namespace DishProjectView
 
         private System.Windows.Forms.Button ButtonSave;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Склад;
         private System.Windows.Forms.DataGridViewTextBoxColumn Компонент;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Изделие;
         private System.Windows.Forms.DataGridViewTextBoxColumn Количество;
     }
 }

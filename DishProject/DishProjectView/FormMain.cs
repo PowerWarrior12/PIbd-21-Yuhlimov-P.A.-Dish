@@ -174,10 +174,9 @@ namespace DishProjectView
         }
         private void изделияСКомпонентамиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormReportComponentDish>();
+            var form = Container.Resolve<FormReportWareHouseComponents>();
             form.ShowDialog();
         }
-
         private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
@@ -188,12 +187,6 @@ namespace DishProjectView
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-        }
-
-        private void складыСКомпонентамиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormReportWareHouseComponents>();
-            form.ShowDialog();
         }
     }
 }

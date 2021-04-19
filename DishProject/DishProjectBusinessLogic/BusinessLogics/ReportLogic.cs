@@ -24,36 +24,6 @@ namespace DishProjectBusinessLogic.BusinessLogics
             _wareHouseStorage = wareHouseStorage;
         }
         /// <summary>
-        /// Получение списка изделий с указанием, какие компоненты используются
-        /// </summary>
-        /// <returns></returns>
-        public List<ReportDishComponentViewModel> GetComponentsDish()
-        {
-            var components = _componentStorage.GetFullList();
-            var dishes = _dishStorage.GetFullList();
-            var list = new List<ReportDishComponentViewModel>();
-            foreach (var dish in dishes)
-            {
-                var record = new ReportDishComponentViewModel
-                {
-                    DishName = dish.DishName,
-                    Components = new List<Tuple<string, int>>(),
-                    TotalCount = 0
-                };
-
-                foreach (var component in components)
-                {
-                    if (dish.DishComponents.ContainsKey(component.Id))
-                    {
-                        record.Components.Add(new Tuple<string, int>(component.ComponentName, dish.DishComponents[component.Id].Item2));
-                        record.TotalCount += dish.DishComponents[component.Id].Item2;
-                    }
-                }
-                list.Add(record);
-            }
-            return list;
-        }
-        /// <summary>
         /// Получение списка складов с указанием, какие компоненты используются
         /// </summary>
         /// <returns></returns>

@@ -260,23 +260,17 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormReportComponentDish.cs">
+    <Compile Include="FormReportWareHouseComponents.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormReportComponentDish.Designer.cs">
-      <DependentUpon>FormReportComponentDish.cs</DependentUpon>
+    <Compile Include="FormReportWareHouseComponents.Designer.cs">
+      <DependentUpon>FormReportWareHouseComponents.cs</DependentUpon>
     </Compile>
     <Compile Include="FormReportOrders.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormReportOrders.Designer.cs">
       <DependentUpon>FormReportOrders.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormReportWareHouseComponents.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormReportWareHouseComponents.Designer.cs">
-      <DependentUpon>FormReportWareHouseComponents.cs</DependentUpon>
     </Compile>
     <Compile Include="FormWareHouse.cs">
       <SubType>Form</SubType>
@@ -317,14 +311,11 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormReportComponentDish.resx">
-      <DependentUpon>FormReportComponentDish.cs</DependentUpon>
+    <EmbeddedResource Include="FormReportWareHouseComponents.resx">
+      <DependentUpon>FormReportWareHouseComponents.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportOrders.resx">
       <DependentUpon>FormReportOrders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormReportWareHouseComponents.resx">
-      <DependentUpon>FormReportWareHouseComponents.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormWareHouse.resx">
       <DependentUpon>FormWareHouse.cs</DependentUpon>

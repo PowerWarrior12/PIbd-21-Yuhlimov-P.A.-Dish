@@ -301,7 +301,7 @@
             <Top>2.48391cm</Top>
             <Left>1.16417cm</Left>
             <Height>1.2cm</Height>
-            <Width>15.93293cm</Width>
+            <Width>15.93292cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -309,39 +309,6 @@
               </Border>
             </Style>
           </Tablix>
-          <Textbox Name="Textbox26">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Parameters!ReportParameterPeriod.Value</Value>
-                    <Style>
-                      <FontSize>20pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox26</rd:DefaultName>
-            <Top>0.9937cm</Top>
-            <Height>1.03187cm</Height>
-            <Width>18.31533cm</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox27">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -361,7 +328,7 @@
             <Left>13.64933cm</Left>
             <Height>0.62646cm</Height>
             <Width>1.28292cm</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -391,7 +358,7 @@
             <Left>14.96752cm</Left>
             <Height>0.62646cm</Height>
             <Width>2.12958cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
