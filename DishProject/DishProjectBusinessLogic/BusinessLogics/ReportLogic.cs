@@ -27,7 +27,6 @@ namespace DishProjectBusinessLogic.BusinessLogics
         /// <returns></returns>
         public List<ReportDishComponentViewModel> GetComponentsDish()
         {
-            var components = _componentStorage.GetFullList();
             var dishes = _dishStorage.GetFullList();
             var list = new List<ReportDishComponentViewModel>();
             foreach (var dish in dishes)
@@ -38,14 +37,10 @@ namespace DishProjectBusinessLogic.BusinessLogics
                     Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-
-                foreach (var component in components)
+                foreach (var component in dish.DishComponents)
                 {
-                    if (dish.DishComponents.ContainsKey(component.Id))
-                    {
-                        record.Components.Add(new Tuple<string, int>(component.ComponentName, dish.DishComponents[component.Id].Item2));
-                        record.TotalCount += dish.DishComponents[component.Id].Item2;
-                    }
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
                 }
                 list.Add(record);
             }
@@ -60,8 +55,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
         {
             return _orderStorage.GetFilteredList(new OrderBindingModel
             {
-                DateFrom =
-           model.DateFrom,
+                DateFrom = model.DateFrom,
                 DateTo = model.DateTo
             })
             .Select(x => new ReportOrdersViewModel

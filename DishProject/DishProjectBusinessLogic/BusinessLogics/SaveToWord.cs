@@ -28,24 +28,21 @@ namespace DishProjectBusinessLogic.BusinessLogics
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-                if (info.Dishes != null)
+                foreach (var dish in info.Dishes)
                 {
-                    foreach (var dish in info.Dishes)
+                    docBody.AppendChild(CreateParagraph(new WordParagraph
                     {
-                        docBody.AppendChild(CreateParagraph(new WordParagraph
+                        Texts = new List<(string, WordTextProperties)> {
+                            (dish.DishName, new WordTextProperties {Bold = true, Size = "24", }) ,
+                            (" : " + dish.Price.ToString(), new WordTextProperties {Bold = false, Size = "24", })},
+                        TextProperties = new WordTextProperties
                         {
-                            Texts = new List<(string, WordTextProperties)> {
-                                (dish.DishName, new WordTextProperties {Bold = true, Size = "24", }) ,
-                                (" : " + dish.Price.ToString(), new WordTextProperties {Bold = false, Size = "24", })},
-                            TextProperties = new WordTextProperties
-                            {
-                                Size = "24",
-                                JustificationValues = JustificationValues.Both
-                            }
-                        })); ;
-                    }
-                    docBody.AppendChild(CreateSectionProperties());
+                            Size = "24",
+                            JustificationValues = JustificationValues.Both
+                        }
+                    })); ;
                 }
+                docBody.AppendChild(CreateSectionProperties());
                 wordDocument.MainDocumentPart.Document.Save();
             }
         }
