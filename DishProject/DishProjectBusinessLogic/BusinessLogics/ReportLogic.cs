@@ -40,12 +40,12 @@ namespace DishProjectBusinessLogic.BusinessLogics
                     Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var component in dish.DishComponents)
+                foreach (var component in wareHouse.StoreComponents)
                 {
-                    if (wareHouse.StoreComponents.ContainsKey(component.Id))
+                    if (wareHouse.StoreComponents.ContainsKey(component.Key))
                     {
-                        record.Components.Add(new Tuple<string, int>(component.ComponentName, wareHouse.StoreComponents[component.Id].Item2));
-                        record.TotalCount += wareHouse.StoreComponents[component.Id].Item2;
+                        record.Components.Add(new Tuple<string, int>(component.Value.Item1, wareHouse.StoreComponents[component.Key].Item2));
+                        record.TotalCount += wareHouse.StoreComponents[component.Key].Item2;
                     }
                 }
                 list.Add(record);
