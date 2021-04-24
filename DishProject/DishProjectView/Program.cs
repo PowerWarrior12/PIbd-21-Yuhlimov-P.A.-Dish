@@ -38,6 +38,9 @@ namespace DishProjectView
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<DishLogic>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ReportLogic>(new
+           HierarchicalLifetimeManager());
+
             currentContainer.RegisterType<WareHouseLogic>(new
            HierarchicalLifetimeManager());
             return currentContainer;

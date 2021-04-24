@@ -13,10 +13,12 @@ namespace DishProjectView
         public new IUnityContainer Container { get; set; }
         private readonly OrderLogic _orderLogic;
         private readonly DishLogic _dishLogic;
-        public FormMain(OrderLogic orderLogic, DishLogic dishLogic)
+        private readonly ReportLogic report;
+        public FormMain(OrderLogic orderLogic, ReportLogic report, DishLogic dishLogic)
         {
             InitializeComponent();
             this._orderLogic = orderLogic;
+            this.report = report;
             this._dishLogic = dishLogic;
         }
 
@@ -118,7 +120,6 @@ namespace DishProjectView
             }
 
         }
-
         private void ButtonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -137,7 +138,6 @@ namespace DishProjectView
                 }
             }
         }
-
         private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadData();
@@ -152,6 +152,27 @@ namespace DishProjectView
         private void пополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormAddToWareHouse>();
+            form.ShowDialog();
+        }
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }   
+        private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    report.SaveWareHousesToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+        private void складыСКомпонентамиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportWareHouseComponents>();
             form.ShowDialog();
         }
     }
