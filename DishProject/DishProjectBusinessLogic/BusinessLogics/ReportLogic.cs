@@ -40,8 +40,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
                     Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-
-                foreach (var component in components)
+                foreach (var component in dish.DishComponents)
                 {
                     if (wareHouse.StoreComponents.ContainsKey(component.Id))
                     {

@@ -62,8 +62,7 @@ namespace DishProjectDatabaseImplement
             using (var context = new DishProjectDatabase())
             {
                 return context.Orders.Include(rec => rec.Dish)
-                .Where(rec => rec.DishId == model.DishId || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-                .Select(rec => new OrderViewModel
+                .Where(rec => rec.DishId == model.DishId && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo).Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     DishId = rec.DishId,
