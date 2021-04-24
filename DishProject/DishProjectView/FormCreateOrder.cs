@@ -15,19 +15,13 @@ namespace DishProjectView
         public new IUnityContainer Container { get; set; }
         private readonly DishLogic _logicP;
         private readonly OrderLogic _logicO;
-        public FormCreateOrder(DishLogic logicP, OrderLogic logicO)
+        private readonly ClientLogic _logicC;
+        public FormCreateOrder(DishLogic logicP, OrderLogic logicO, ClientLogic logicC)
         {
             InitializeComponent();
             _logicP = logicP;
             _logicO = logicO;
-            List<DishViewModel> list = _logicP.Read(null);
-            if (list != null)
-            {
-                comboBoxDish.DisplayMember = "DishName";
-                comboBoxDish.ValueMember = "Id";
-                comboBoxDish.DataSource = list;
-                comboBoxDish.SelectedItem = null;
-            }
+            _logicC = logicC;
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
@@ -40,6 +34,18 @@ namespace DishProjectView
                     comboBoxDish.ValueMember = "Id";
                     comboBoxDish.DataSource = list;
                     comboBoxDish.SelectedItem = null;
+                }
+                List<ClientViewModel> listClients = _logicC.Read(null);
+                if (listClients != null)
+                {
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.DataSource = listClients;
+                    comboBoxClient.SelectedItem = null;
+                }
+                else
+                {
+                    throw new Exception("Не удалось загрузить список клиентов");
                 }
             }
             catch (Exception ex)
@@ -96,11 +102,17 @@ namespace DishProjectView
                MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 string value = comboBoxDish.Text;
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     DishId = Convert.ToInt32(comboBoxDish.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
@@ -117,7 +129,6 @@ namespace DishProjectView
             }
 
         }
-
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
