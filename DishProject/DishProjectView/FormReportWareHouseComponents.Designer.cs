@@ -77,15 +77,15 @@ namespace DishProjectView
             this.Количество.HeaderText = "Количество";
             this.Количество.Name = "Количество";
             // 
-            // FormReportComponentDish
+            // FormReportWareHouseComponents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 450);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ButtonSave);
-            this.Name = "FormReportComponentDish";
-            this.Text = "FormReportComponentDish";
+            this.Name = "FormReportWareHouseComponents";
+            this.Text = "Склады с комонентами";
             this.Load += new System.EventHandler(this.FormReportComponentDish_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

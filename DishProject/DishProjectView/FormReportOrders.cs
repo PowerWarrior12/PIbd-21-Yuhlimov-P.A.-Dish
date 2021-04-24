@@ -22,10 +22,7 @@ namespace DishProjectView
         {
             try
             {
-                var dataSource = logic.GetOrders(new ReportBindingModel
-                {
-                    
-                });
+                var dataSource = logic.GetOrders();
                 ReportDataSource source = new ReportDataSource("DataSetOrders",
                dataSource);
                 reportViewer.LocalReport.DataSources.Clear();
@@ -48,7 +45,7 @@ namespace DishProjectView
                     {
                         logic.SaveOrdersToPdfFile(new ReportBindingModel
                         {
-                            
+                            FileName = dialog.FileName
                         });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);

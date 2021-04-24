@@ -12,13 +12,10 @@ namespace DishProjectBusinessLogic.BusinessLogics
     public class ReportLogic
     {
         private readonly IComponentStorage _componentStorage;
-        private readonly IDishStorage _dishStorage;
         private readonly IOrderStorage _orderStorage;
         private readonly IWareHouseStorage _wareHouseStorage;
-        public ReportLogic(IDishStorage dishStorage, IComponentStorage
-       componentStorage, IOrderStorage orderStorage, IWareHouseStorage wareHouseStorage)
+        public ReportLogic(IComponentStorage componentStorage, IOrderStorage orderStorage, IWareHouseStorage wareHouseStorage)
         {
-            _dishStorage = dishStorage;
             _componentStorage = componentStorage;
             _orderStorage = orderStorage;
             _wareHouseStorage = wareHouseStorage;
@@ -57,7 +54,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
+        public List<ReportOrdersViewModel> GetOrders()
         {
             return _orderStorage.GetFullList().GroupBy(x => x.DateCreate.Date).Select(g => new ReportOrdersViewModel
             {
@@ -65,19 +62,6 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 Count = g.Count(),
                 Sum = g.Sum(e => e.Sum)
             }).ToList();
-        }
-        /// <summary>
-        /// Сохранение изделий в файл-Word
-        /// </summary>
-        /// <param name="model"></param>
-        public void SaveDishesToWordFile(ReportBindingModel model)
-        {
-            SaveToWord.CreateDoc(new WordInfo
-            {
-                FileName = model.FileName,
-                Title = "Список изделий",
-                Dishes = _dishStorage.GetFullList()
-            });
         }
         /// <summary>
         /// Сохранение складов в файл Word
@@ -102,7 +86,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список изделий",
+                Title = "Список складов",
                 ComponentsDish = GetComponentsWareHouse()
             });
         }
@@ -116,9 +100,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
-                DateFrom = model.DateFrom.Value,
-                DateTo = model.DateTo.Value,
-                Orders = GetOrders(model)
+                Orders = GetOrders()
             });
         }
     }

@@ -122,7 +122,7 @@
             this.складыСКомпонентамиToolStripMenuItem.Name = "складыСКомпонентамиToolStripMenuItem";
             this.складыСКомпонентамиToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.складыСКомпонентамиToolStripMenuItem.Text = "Склады с компонентами";
-            this.складыСКомпонентамиToolStripMenuItem.Click += new System.EventHandler(this.изделияСКомпонентамиToolStripMenuItem_Click);
+            this.складыСКомпонентамиToolStripMenuItem.Click += new System.EventHandler(this.складыСКомпонентамиToolStripMenuItem_Click);
             // 
             // списокСкладовToolStripMenuItem
             // 
