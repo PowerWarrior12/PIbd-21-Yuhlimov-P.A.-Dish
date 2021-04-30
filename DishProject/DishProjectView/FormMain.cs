@@ -112,7 +112,6 @@ namespace DishProjectView
             }
 
         }
-
         private void ButtonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -130,7 +129,6 @@ namespace DishProjectView
                 }
             }
         }
-
         private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadData();
@@ -168,6 +166,12 @@ namespace DishProjectView
             var workModeling = Container.Resolve<WorkModeling>();
             workModeling.DoWork();
             MessageBox.Show("Работы запущены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
         }
     }
 }

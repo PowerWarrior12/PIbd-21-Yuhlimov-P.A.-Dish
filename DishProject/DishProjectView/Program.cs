@@ -31,6 +31,7 @@ namespace DishProjectView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IDishStorage, DishStorage>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientStorage, ClientStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IClientStorage, ClientStorage>(new 
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IImplementerStorage, ImplementerStorage>(new
@@ -44,6 +45,8 @@ namespace DishProjectView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<ClientLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ImplementerLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ClientLogic>(new HierarchicalLifetimeManager());
+
             return currentContainer;
         }
     }

@@ -182,7 +182,6 @@
     <Compile Include="Migrations\DishProjectDatabaseModelSnapshot.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderStorage.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
