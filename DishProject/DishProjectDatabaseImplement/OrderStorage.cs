@@ -5,6 +5,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using DishProjectBusinessLogic.Enums;
 
 namespace DishProjectDatabaseImplement
 {
@@ -70,7 +71,8 @@ namespace DishProjectDatabaseImplement
                 rec.DateCreate.Date == model.DateCreate.Date) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
                 >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-                (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId) || (model.FreeOrders.HasValue && model.FreeOrders.Value && rec.Status == OrderStatus.Принят) ||
+                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется))
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -151,7 +153,7 @@ namespace DishProjectDatabaseImplement
                 element.DateCreate = model.DateCreate;
                 element.DateImplement = model.DateImplement;
                 element.ClientId = (int)model.ClientId;
-                element.ImplementerId = (int)model.ImplementerId;
+                element.ImplementerId = model.ImplementerId;
                 CreateModel(model, element, context);
                 context.SaveChanges();
             }
