@@ -13,5 +13,7 @@ namespace DishProjectDatabaseImplement
         public string ComponentName { get; set; }
         [ForeignKey("ComponentId")]
         public virtual List<DishComponent> DishComponents { get; set; }
+        [ForeignKey("ComponentId")]
+        public virtual List<WareHouseComponent> WareHouseComponents { get; set; }
     }
 }

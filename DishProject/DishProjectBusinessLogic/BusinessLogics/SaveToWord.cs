@@ -28,21 +28,56 @@ namespace DishProjectBusinessLogic.BusinessLogics
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-                foreach (var dish in info.Dishes)
+                if (info.Dishes != null)
                 {
-                    docBody.AppendChild(CreateParagraph(new WordParagraph
+                    foreach (var dish in info.Dishes)
                     {
-                        Texts = new List<(string, WordTextProperties)> {
-                            (dish.DishName, new WordTextProperties {Bold = true, Size = "24", }) ,
-                            (" : " + dish.Price.ToString(), new WordTextProperties {Bold = false, Size = "24", })},
-                        TextProperties = new WordTextProperties
+                        docBody.AppendChild(CreateParagraph(new WordParagraph
                         {
-                            Size = "24",
-                            JustificationValues = JustificationValues.Both
-                        }
-                    })); ;
+                            Texts = new List<(string, WordTextProperties)> {
+                                (dish.DishName, new WordTextProperties {Bold = true, Size = "24", }) ,
+                                (" : " + dish.Price.ToString(), new WordTextProperties {Bold = false, Size = "24", })},
+                            TextProperties = new WordTextProperties
+                            {
+                                Size = "24",
+                                JustificationValues = JustificationValues.Both
+                            }
+                        })); ;
+                    }
+                    docBody.AppendChild(CreateSectionProperties());
                 }
-                docBody.AppendChild(CreateSectionProperties());
+                if (info.WareHouses != null)
+                {
+                    Table tbl = new Table();
+
+                    // Set the style and width for the table.
+                    TableProperties tableProp = new TableProperties();
+                    TableStyle tableStyle = new TableStyle() { Val = "TableGrid" };
+
+                    tbl.AppendChild(CreateTableBorders());
+
+                    // Make the table width 100% of the page width.
+                    TableWidth tableWidth = new TableWidth() { Width = "5000", Type = TableWidthUnitValues.Pct };
+
+                    // Apply
+                    tableProp.Append(tableStyle, tableWidth);
+                    tbl.AppendChild(tableProp);
+
+                    // Add 3 columns to the table.
+                    TableGrid tg = new TableGrid(new GridColumn(), new GridColumn(), new GridColumn());
+                    tbl.AppendChild(tg);
+
+                    foreach (var warehouse in info.WareHouses)
+                    {
+                        tbl.AppendChild(CreateTableRow(new List<string>() { 
+                            warehouse.Name,
+                            warehouse.FIO,
+                            warehouse.DateCreate.ToString()
+                        }));
+                    }
+                    docBody.AppendChild(tbl);
+                    docBody.AppendChild(CreateSectionProperties());
+                }
                 wordDocument.MainDocumentPart.Document.Save();
             }
         }
@@ -128,6 +163,71 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 return properties;
             }
             return null;
+        }
+
+        private static TableRow CreateTableRow(List<string> texts)
+        {
+            // Create 1 row to the table.
+            TableRow tr1 = new TableRow();
+
+            // Add a cell to each column in the row.
+            foreach (string text in texts)
+            {
+                TableCell tc1 = new TableCell(CreateParagraph(new WordParagraph
+                {
+                    Texts = new List<(string, WordTextProperties)> {
+                                (text, new WordTextProperties {Bold = true, Size = "24", })},
+                    TextProperties = new WordTextProperties
+                    {
+                        Size = "24",
+                        JustificationValues = JustificationValues.Both
+                    }
+                }));
+                tr1.Append(tc1);
+            }
+            return tr1;
+        }
+
+        private static TableBorders CreateTableBorders()
+        {
+            TableBorders tableBorders = new TableBorders();
+
+            BottomBorder bottomBorder = new BottomBorder();
+            bottomBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+            bottomBorder.Color = "000000";
+
+            tableBorders.AppendChild(bottomBorder);
+
+            TopBorder topBorder = new TopBorder();
+            topBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+            topBorder.Color = "000000";
+
+            tableBorders.AppendChild(topBorder);
+
+            InsideHorizontalBorder insHorBorder = new InsideHorizontalBorder();
+            insHorBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+            insHorBorder.Color = "000000";
+
+            tableBorders.AppendChild(insHorBorder);
+
+            InsideVerticalBorder insVerBorder = new InsideVerticalBorder();
+            insVerBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+            insVerBorder.Color = "000000";
+
+            tableBorders.AppendChild(insVerBorder);
+
+            LeftBorder leftBorder = new LeftBorder();
+            leftBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+            leftBorder.Color = "000000";
+
+            tableBorders.AppendChild(leftBorder);
+
+            RightBorder rightBorder = new RightBorder();
+            rightBorder.Val = new EnumValue<BorderValues>(BorderValues.ThickThinMediumGap);
+            rightBorder.Color = "000000";
+
+            tableBorders.AppendChild(rightBorder);
+            return tableBorders;
         }
     }
 }

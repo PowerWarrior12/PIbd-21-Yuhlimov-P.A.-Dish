@@ -59,6 +59,8 @@
     <Compile Include="Models\DishStorage.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderStorage.cs" />
+    <Compile Include="Models\WareHouse.cs" />
+    <Compile Include="Models\WareHouseStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

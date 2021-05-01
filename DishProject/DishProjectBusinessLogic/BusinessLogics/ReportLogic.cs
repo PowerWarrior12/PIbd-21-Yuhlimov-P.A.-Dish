@@ -12,35 +12,38 @@ namespace DishProjectBusinessLogic.BusinessLogics
     public class ReportLogic
     {
         private readonly IComponentStorage _componentStorage;
-        private readonly IDishStorage _dishStorage;
         private readonly IOrderStorage _orderStorage;
-        public ReportLogic(IDishStorage dishStorage, IComponentStorage
-       componentStorage, IOrderStorage orderStorage)
+        private readonly IWareHouseStorage _wareHouseStorage;
+        public ReportLogic(IComponentStorage componentStorage, IOrderStorage orderStorage, IWareHouseStorage wareHouseStorage)
         {
-            _dishStorage = dishStorage;
             _componentStorage = componentStorage;
             _orderStorage = orderStorage;
+            _wareHouseStorage = wareHouseStorage;
         }
         /// <summary>
-        /// Получение списка изделий с указанием, какие компоненты используются
+        /// Получение списка складов с указанием, какие компоненты используются
         /// </summary>
         /// <returns></returns>
-        public List<ReportDishComponentViewModel> GetComponentsDish()
+        public List<ReportWareHouseComponentViewModel> GetComponentsWareHouse()
         {
-            var dishes = _dishStorage.GetFullList();
-            var list = new List<ReportDishComponentViewModel>();
-            foreach (var dish in dishes)
+            var components = _componentStorage.GetFullList();
+            var wareHouses = _wareHouseStorage.GetFullList();
+            var list = new List<ReportWareHouseComponentViewModel>();
+            foreach (var wareHouse in wareHouses)
             {
-                var record = new ReportDishComponentViewModel
+                var record = new ReportWareHouseComponentViewModel
                 {
-                    DishName = dish.DishName,
+                    WareHouseName = wareHouse.Name,
                     Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var component in dish.DishComponents)
+                foreach (var component in wareHouse.StoreComponents)
                 {
-                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
-                    record.TotalCount += component.Value.Item2;
+                    if (wareHouse.StoreComponents.ContainsKey(component.Key))
+                    {
+                        record.Components.Add(new Tuple<string, int>(component.Value.Item1, wareHouse.StoreComponents[component.Key].Item2));
+                        record.TotalCount += wareHouse.StoreComponents[component.Key].Item2;
+                    }
                 }
                 list.Add(record);
             }
@@ -51,47 +54,40 @@ namespace DishProjectBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
+        public List<ReportOrdersViewModel> GetOrders()
         {
-            return _orderStorage.GetFilteredList(new OrderBindingModel
+            return _orderStorage.GetFullList().GroupBy(x => x.DateCreate.Date).Select(g => new ReportOrdersViewModel
             {
-                DateFrom = model.DateFrom,
-                DateTo = model.DateTo
-            })
-            .Select(x => new ReportOrdersViewModel
-            {
-                DateCreate = x.DateCreate,
-                DishName = x.DishName,
-                Count = x.Count,
-                Sum = x.Sum,
-                Status = x.Status.ToString()
-            })
-           .ToList();
+                DateCreate = g.FirstOrDefault().DateCreate.Date,
+                Count = g.Count(),
+                Sum = g.Sum(e => e.Sum)
+            }).ToList();
         }
         /// <summary>
-        /// Сохранение изделий в файл-Word
+        /// Сохранение складов в файл Word
         /// </summary>
         /// <param name="model"></param>
-        public void SaveDishesToWordFile(ReportBindingModel model)
+        public void SaveWareHousesToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
                 Title = "Список изделий",
-                Dishes = _dishStorage.GetFullList()
-            });
+                WareHouses = _wareHouseStorage.GetFullList()
+            }); ;
         }
+
         /// <summary>
         /// Сохранение изделий с указанием компонент в файл-Excel
         /// </summary>
         /// <param name="model"></param>
-        public void SaveComponentDishToExcelFile(ReportBindingModel model)
+        public void SaveComponentWareHouseToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список изделий",
-                ComponentsDish = GetComponentsDish()
+                Title = "Список складов",
+                ComponentsDish = GetComponentsWareHouse()
             });
         }
         /// <summary>
@@ -104,9 +100,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
-                DateFrom = model.DateFrom.Value,
-                DateTo = model.DateTo.Value,
-                Orders = GetOrders(model)
+                Orders = GetOrders()
             });
         }
     }

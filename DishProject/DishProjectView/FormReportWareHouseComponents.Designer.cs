@@ -1,7 +1,7 @@
 ﻿
 namespace DishProjectView
 {
-    partial class FormReportComponentDish
+    partial class FormReportWareHouseComponents
     {
         /// <summary>
         /// Required designer variable.
@@ -31,8 +31,8 @@ namespace DishProjectView
         {
             this.ButtonSave = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.Склад = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Компонент = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Изделие = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -49,28 +49,27 @@ namespace DishProjectView
             // 
             // dataGridView
             // 
-            this.dataGridView.BackgroundColor = System.Drawing.Color.Honeydew;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Склад,
             this.Компонент,
-            this.Изделие,
             this.Количество});
-            this.dataGridView.Location = new System.Drawing.Point(12, 41);
+            this.dataGridView.Location = new System.Drawing.Point(13, 42);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(515, 396);
-            this.dataGridView.TabIndex = 2;
+            this.dataGridView.Size = new System.Drawing.Size(524, 396);
+            this.dataGridView.TabIndex = 4;
+            // 
+            // Склад
+            // 
+            this.Склад.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Склад.HeaderText = "Склад";
+            this.Склад.Name = "Склад";
             // 
             // Компонент
             // 
             this.Компонент.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Компонент.HeaderText = "Изделие";
+            this.Компонент.HeaderText = "Компонент";
             this.Компонент.Name = "Компонент";
-            // 
-            // Изделие
-            // 
-            this.Изделие.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Изделие.HeaderText = "Компонент";
-            this.Изделие.Name = "Изделие";
             // 
             // Количество
             // 
@@ -78,15 +77,15 @@ namespace DishProjectView
             this.Количество.HeaderText = "Количество";
             this.Количество.Name = "Количество";
             // 
-            // FormReportComponentDish
+            // FormReportWareHouseComponents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 450);
-            this.Controls.Add(this.ButtonSave);
+            this.ClientSize = new System.Drawing.Size(549, 450);
             this.Controls.Add(this.dataGridView);
-            this.Name = "FormReportComponentDish";
-            this.Text = "FormReportComponentDish";
+            this.Controls.Add(this.ButtonSave);
+            this.Name = "FormReportWareHouseComponents";
+            this.Text = "Склады с комонентами";
             this.Load += new System.EventHandler(this.FormReportComponentDish_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -97,8 +96,8 @@ namespace DishProjectView
 
         private System.Windows.Forms.Button ButtonSave;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Склад;
         private System.Windows.Forms.DataGridViewTextBoxColumn Компонент;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Изделие;
         private System.Windows.Forms.DataGridViewTextBoxColumn Количество;
     }
 }

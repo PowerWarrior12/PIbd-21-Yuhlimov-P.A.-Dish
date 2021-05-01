@@ -13,13 +13,13 @@ using DishProjectBusinessLogic.BusinessLogics;
 
 namespace DishProjectView
 {
-    public partial class FormReportComponentDish : Form
+    public partial class FormReportWareHouseComponents : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly ReportLogic logic;
 
-        public FormReportComponentDish(ReportLogic logic)
+        public FormReportWareHouseComponents(ReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -33,7 +33,7 @@ namespace DishProjectView
                 {
                     try
                     {
-                        logic.SaveComponentDishToExcelFile(new ReportBindingModel
+                        logic.SaveComponentWareHouseToExcelFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName
                         });
@@ -51,13 +51,13 @@ namespace DishProjectView
         {
             try
             {
-                var dict = logic.GetComponentsDish();
+                var dict = logic.GetComponentsWareHouse();
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.DishName, "", "" });
+                        dataGridView.Rows.Add(new object[] { elem.WareHouseName, "", "" });
                         foreach (var listElem in elem.Components)
                         {
                             dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });

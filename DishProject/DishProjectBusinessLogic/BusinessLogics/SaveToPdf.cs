@@ -17,7 +17,6 @@ namespace DishProjectBusinessLogic.BusinessLogics
             paragraph.Format.SpaceAfter = "1cm";
             paragraph.Format.Alignment = ParagraphAlignment.Center;
             paragraph.Style = "NormalTitle";
-            paragraph = section.AddParagraph($"с {info.DateFrom.ToShortDateString()} по { info.DateTo.ToShortDateString()} ");
                 paragraph.Format.SpaceAfter = "1cm";
             paragraph.Format.Alignment = ParagraphAlignment.Center;
             paragraph.Style = "Normal";
@@ -31,8 +30,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             CreateRow(new PdfRowParameters
             {
                 Table = table,
-                Texts = new List<string> { "Дата заказа", "Изделие", "Количество",
-"Сумма", "Статус" },
+                Texts = new List<string> { "Дата", "Количество заказов", "Сумма"},
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
@@ -41,8 +39,8 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(),
-order.DishName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString()
+                    Texts = new List<string> { order.DateCreate.ToShortDateString(), 
+                        order.Count.ToString(), order.Sum.ToString()
 },
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left

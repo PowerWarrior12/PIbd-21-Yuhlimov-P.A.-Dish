@@ -40,6 +40,7 @@ namespace DishProjectView
             {
                 dishComponents = new Dictionary<int, (string, int)>();
             }
+            LoadData();
         }
         private void FormDish_Load(object sender, EventArgs e)
         {
@@ -51,10 +52,9 @@ namespace DishProjectView
                     {
                         Id = id.Value
                     })?[0];
-                    textBoxName.Text = view.DishName;
-                    textBoxPrice.Text = view.Price.ToString();
                     dishComponents = view.DishComponents;
-                    LoadData();
+                    textBoxPrice.Text = view.Price.ToString();
+                    textBoxName.Text = view.DishName;
                 }
                 catch (Exception ex)
                 {
@@ -66,6 +66,7 @@ namespace DishProjectView
             {
                 dishComponents = new Dictionary<int, (string, int)>();
             }
+            LoadData();
         }
         private void LoadData()
         {
@@ -131,7 +132,6 @@ namespace DishProjectView
                 {
                     try
                     {
-
                         dishComponents.Remove(Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value));
                     }
                     catch (Exception ex)
@@ -189,7 +189,6 @@ namespace DishProjectView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
