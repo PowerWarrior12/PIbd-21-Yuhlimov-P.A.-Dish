@@ -26,6 +26,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 return new List<ClientViewModel> { _clientStorage.GetElement(model) };
             }
+            var x = _clientStorage.GetFilteredList(model);
             return _clientStorage.GetFilteredList(model);
         }
 
