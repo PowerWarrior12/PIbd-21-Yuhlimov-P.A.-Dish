@@ -21,6 +21,7 @@ namespace DishProjectFileImplement
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Dish> Dishes { get; set; }
+        public List<Client> Clients { get; set; }
         public List<WareHouse> WareHouses { get; set; }
         private FileDataListSingleton()
         {

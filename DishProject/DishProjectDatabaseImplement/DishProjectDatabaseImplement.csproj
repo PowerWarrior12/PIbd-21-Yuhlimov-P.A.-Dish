@@ -173,9 +173,9 @@
     <Compile Include="DishComponent.cs" />
     <Compile Include="DishProjectDatabase.cs" />
     <Compile Include="DishStorage.cs" />
-    <Compile Include="Migrations\20210327082634_InitialCreate.cs" />
-    <Compile Include="Migrations\20210327082634_InitialCreate.designer.cs">
-      <DependentUpon>20210327082634_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20210501120535_InitialCreate.cs" />
+    <Compile Include="Migrations\20210501120535_InitialCreate.designer.cs">
+      <DependentUpon>20210501120535_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DishProjectDatabaseModelSnapshot.cs" />
     <Compile Include="Order.cs" />
