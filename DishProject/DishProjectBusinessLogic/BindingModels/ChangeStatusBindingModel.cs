@@ -12,5 +12,6 @@ namespace DishProjectBusinessLogic.BindingModels
         public int OrderId { get; set; }
         public Dictionary<int, (string, int)> Components { get; set; }
         public int DishCount { get; set; }
+        public int? ImplementerId { get; set; }
     }
 }

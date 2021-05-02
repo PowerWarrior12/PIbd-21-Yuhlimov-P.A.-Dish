@@ -1,4 +1,5 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
+using DishProjectBusinessLogic.Enums;
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
 using DishProjectFileImplement;
@@ -28,7 +29,9 @@ namespace DishProjectFileImplement
                 return null;
             }
             return source.Orders
-            .Where(rec => rec.Id == model.Id && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            .Where(rec => (rec.Id == model.Id && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+(model.FreeOrders.HasValue && model.FreeOrders.Value && rec.Status == OrderStatus.Принят) ||
+(model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется))
            .Select(CreateModel)
             .ToList();
         }
@@ -78,6 +81,7 @@ namespace DishProjectFileImplement
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.DishId = model.DishId;
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -91,6 +95,8 @@ namespace DishProjectFileImplement
             {
                 Id = order.Id,
                 DishId = order.DishId,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = source.Implementers.FirstOrDefault(e => e.Id == order.ImplementerId)?.ImplementerFIO,
                 DishName = source.Dishes.FirstOrDefault(rec => rec.Id == order.DishId).DishName,
                 Count = order.Count,
                 Sum = order.Sum,

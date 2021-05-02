@@ -1,4 +1,5 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
+using DishProjectBusinessLogic.Enums;
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
 using System;
@@ -52,7 +53,9 @@ namespace DishProjectListImplement
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.DishId == model.DishId && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                if ((order.DishId == model.DishId && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo) ||
+                (model.FreeOrders.HasValue && model.FreeOrders.Value && order.Status == OrderStatus.Принят) ||
+                (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -107,6 +110,7 @@ namespace DishProjectListImplement
         {
             order.DishId = model.DishId;
             order.Count = model.Count;
+            order.ImplementerId = model.ImplementerId;
             order.Sum = model.Sum;
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
@@ -124,11 +128,21 @@ namespace DishProjectListImplement
                     break;
                 }
             }
+            string implementerFIO = "";
+            for (int i = 0; i < source.Implementers.Count; ++i)
+            {
+                if (source.Implementers[i].Id == order.ImplementerId)
+                {
+                    implementerFIO = source.Implementers[i].ImplementerFIO;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 DishId = order.DishId,
                 DishName = dishName,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
