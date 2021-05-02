@@ -58,7 +58,7 @@
             this.справочникиToolStripMenuItem,
             this.пополнениеСкладаToolStripMenuItem,
             this.отчётыToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
             this.отчётыToolStripMenuItem,
             this.запускРаботToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);

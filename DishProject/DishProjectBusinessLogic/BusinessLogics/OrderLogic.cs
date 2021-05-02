@@ -46,19 +46,19 @@ namespace DishProjectBusinessLogic.BusinessLogics
         {
             lock (locker)
             {
-            _wareHouseStorage.ChangeComponents(new ChangeComponentBindingModel
-            {
-                Components = model.Components,
-                DishCount = model.DishCount
-            });
+                _wareHouseStorage.ChangeComponents(new ChangeComponentBindingModel
+                {
+                    Components = model.Components,
+                    DishCount = model.DishCount
+                });
                 var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
                 if (order == null)
                 {
                     throw new Exception("Не найден заказ");
                 }
-                if (order.Status != OrderStatus.Принят)
+                if (order.Status != OrderStatus.Принят && order.Status != OrderStatus.ТребуютсяМатериалы)
                 {
-                    throw new Exception("Заказ не в статусе \"Принят\"");
+                    throw new Exception("Заказ не в статусе \"Принят\" или не в статусе \"ТребуютсяМатериалы\"");
                 }
                 if (order.ImplementerId.HasValue)
                 {
@@ -75,6 +75,35 @@ namespace DishProjectBusinessLogic.BusinessLogics
                     DateCreate = order.DateCreate,
                     DateImplement = DateTime.Now,
                     Status = OrderStatus.Выполняется
+                });
+            }
+        }
+        public void TakeOrderInRequiredComponents(ChangeStatusBindingModel model)
+        {
+            lock (locker)
+            {
+                var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+                if (order.Status != OrderStatus.Принят)
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\"");
+                }
+                if (order.Status == OrderStatus.ТребуютсяМатериалы)
+                {
+                    throw new Exception("Заказ уже в статусе \"ТребуютсяМатериалы\"");
+                }
+                _orderStorage.Update(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    DishId = order.DishId,
+                    ClientId = order.ClientId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    Status = OrderStatus.ТребуютсяМатериалы
                 });
             }
         }
