@@ -31,7 +31,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 Name = model.Name
             });
-            if (element != null && element.Name == model.Name)
+            if (element != null && element.Id != model.Id)
             {
                 throw new Exception("Уже есть склад с таким названием");
             }

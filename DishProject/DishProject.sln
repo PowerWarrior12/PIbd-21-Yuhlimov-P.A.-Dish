@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectDatabaseImplemen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DishProjectRestApi", "DishProjectRestApi\DishProjectRestApi.csproj", "{B398B953-B115-4E85-99E3-4F36068897B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectClientApi", "DishProjectClientApi\DishProjectClientApi.csproj", "{8D719777-E890-47BA-B9BB-67056AD0BE3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DishProjectClientApi", "DishProjectClientApi\DishProjectClientApi.csproj", "{8D719777-E890-47BA-B9BB-67056AD0BE3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DishProjectWareHouseApi", "DishProjectWareHouseApi\DishProjectWareHouseApi.csproj", "{46E43E70-2281-4666-AABE-4C08E7B9AAEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{8D719777-E890-47BA-B9BB-67056AD0BE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D719777-E890-47BA-B9BB-67056AD0BE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D719777-E890-47BA-B9BB-67056AD0BE3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46E43E70-2281-4666-AABE-4C08E7B9AAEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46E43E70-2281-4666-AABE-4C08E7B9AAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46E43E70-2281-4666-AABE-4C08E7B9AAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46E43E70-2281-4666-AABE-4C08E7B9AAEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
