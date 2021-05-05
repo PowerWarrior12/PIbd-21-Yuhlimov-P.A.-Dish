@@ -123,8 +123,10 @@ namespace DishProjectBusinessLogic.BusinessLogics
                             var message = client.GetMessage(i);
                             foreach (var mail in message.From.Mailboxes)
                             {
+                                int? x = info.ClientStorage.GetElement(new ClientBindingModel { Email = mail.Address })?.Id;
                                 info.MessageStorage.Insert(new MessageInfoBindingModel
                                 {
+                                    ClientId = info.ClientStorage.GetElement(new ClientBindingModel { Email = mail.Address })?.Id,
                                     DateDelivery = message.Date.DateTime,
                                     MessageId = message.MessageId,
                                     FromMailAddress = mail.Address,
