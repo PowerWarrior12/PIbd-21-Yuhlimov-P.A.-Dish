@@ -13,19 +13,22 @@ namespace DishProjectFileImplement
     class FileDataListSingleton
     {
         private static FileDataListSingleton instance;
-        private readonly string ComponentFileName = "F://Users//PowerWarrior//Desktop//Component.xml";
-        private readonly string OrderFileName = "F://Users//PowerWarrior//Desktop//Order.xml";
-        private readonly string DishFileName = "F://Users//PowerWarrior//Desktop//Dish.xml";
-        private readonly string WareHouseFileName = "F://Users//PowerWarrior//Desktop//WareHouse.xml";
+        private readonly string ComponentFileName = "Component.xml";
+        private readonly string OrderFileName = "Order.xml";
+        private readonly string DishFileName = "Dish.xml";
+        private readonly string ClientFileName = "Client.xml";
+        private readonly string WareHouseFileName = "WareHouse.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Dish> Dishes { get; set; }
+        public List<Client> Clients { get; set; }
         public List<WareHouse> WareHouses { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Dishes = LoadDishes();
+            Clients = LoadClients();
             WareHouses = LoadDWareHouses();
         }
         public static FileDataListSingleton GetInstance()
@@ -142,6 +145,26 @@ namespace DishProjectFileImplement
             }
             return list;
         }
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Email = elem.Element("Email").Value,
+                        Password = elem.Element("Password").Value,
+                    });
+                }
+            }
+            return list;
+        }
         private void SaveWareHouses()
         {
             if (WareHouses != null)
@@ -224,6 +247,24 @@ namespace DishProjectFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(DishFileName);
+            }
+        }
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Email", client.Email),
+                    new XElement("Password", client.Password)
+                    ));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
             }
         }
     }

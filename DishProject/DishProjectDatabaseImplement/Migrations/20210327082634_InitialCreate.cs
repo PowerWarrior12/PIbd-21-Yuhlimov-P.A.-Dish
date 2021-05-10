@@ -8,6 +8,21 @@ namespace DishProjectDatabaseImplement.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientFIO = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Components",
                 columns: table => new
                 {
@@ -32,21 +47,6 @@ namespace DishProjectDatabaseImplement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dishes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WareHouses",
-                columns: table => new
-                {
-                    WareHouseId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    WareHouseName = table.Column<string>(nullable: false),
-                    FIO = table.Column<string>(nullable: false),
-                    DateCreate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WareHouses", x => x.WareHouseId);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,6 +82,7 @@ namespace DishProjectDatabaseImplement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(nullable: false),
                     Count = table.Column<int>(nullable: false),
                     Summ = table.Column<decimal>(nullable: false),
                     DishId = table.Column<int>(nullable: false),
@@ -93,37 +94,16 @@ namespace DishProjectDatabaseImplement.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Orders_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Orders_Dishes_DishId",
                         column: x => x.DishId,
                         principalTable: "Dishes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WareHouseComponents",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    WareHouseId = table.Column<int>(nullable: false),
-                    ComponentId = table.Column<int>(nullable: false),
-                    Count = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WareHouseComponents", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WareHouseComponents_Components_ComponentId",
-                        column: x => x.ComponentId,
-                        principalTable: "Components",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_WareHouseComponents_WareHouses_WareHouseId",
-                        column: x => x.WareHouseId,
-                        principalTable: "WareHouses",
-                        principalColumn: "WareHouseId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -138,19 +118,14 @@ namespace DishProjectDatabaseImplement.Migrations
                 column: "DishId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_ClientId",
+                table: "Orders",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_DishId",
                 table: "Orders",
                 column: "DishId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WareHouseComponents_ComponentId",
-                table: "WareHouseComponents",
-                column: "ComponentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WareHouseComponents_WareHouseId",
-                table: "WareHouseComponents",
-                column: "WareHouseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -162,16 +137,13 @@ namespace DishProjectDatabaseImplement.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "WareHouseComponents");
-
-            migrationBuilder.DropTable(
-                name: "Dishes");
-
-            migrationBuilder.DropTable(
                 name: "Components");
 
             migrationBuilder.DropTable(
-                name: "WareHouses");
+                name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Dishes");
         }
     }
 }

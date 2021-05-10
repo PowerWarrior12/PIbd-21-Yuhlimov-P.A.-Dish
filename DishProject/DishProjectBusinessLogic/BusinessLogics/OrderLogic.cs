@@ -34,6 +34,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             _orderStorage.Insert(new OrderBindingModel
             {
                 DishId = model.DishId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
@@ -63,6 +64,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 DishId = order.DishId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -88,6 +90,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 DishId = order.DishId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -113,6 +116,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 DishId = order.DishId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

@@ -165,15 +165,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientStorage.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="ComponentStorage.cs" />
     <Compile Include="DIsh.cs" />
     <Compile Include="DishComponent.cs" />
     <Compile Include="DishProjectDatabase.cs" />
     <Compile Include="DishStorage.cs" />
-    <Compile Include="Migrations\20210318114755_InitialCreate.cs" />
-    <Compile Include="Migrations\20210318114755_InitialCreate.designer.cs">
-      <DependentUpon>20210318114755_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20210501120535_InitialCreate.cs" />
+    <Compile Include="Migrations\20210501120535_InitialCreate.designer.cs">
+      <DependentUpon>20210501120535_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DishProjectDatabaseModelSnapshot.cs" />
     <Compile Include="Order.cs" />

@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientStorage.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="ComponentStorage.cs" />
     <Compile Include="Dish.cs" />

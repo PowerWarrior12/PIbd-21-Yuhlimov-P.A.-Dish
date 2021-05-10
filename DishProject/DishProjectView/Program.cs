@@ -31,6 +31,7 @@ namespace DishProjectView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IDishStorage, DishStorage>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientStorage, ClientStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWareHouseStorage, WareHouseStorage>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<ComponentLogic>(new
@@ -40,6 +41,7 @@ namespace DishProjectView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ClientLogic>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<WareHouseLogic>(new
            HierarchicalLifetimeManager());
