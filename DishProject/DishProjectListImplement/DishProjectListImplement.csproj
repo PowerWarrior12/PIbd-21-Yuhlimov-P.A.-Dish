@@ -59,6 +59,8 @@
     <Compile Include="Models\DishStorage.cs" />
     <Compile Include="Models\Implementer.cs" />
     <Compile Include="Models\ImplementerStorage.cs" />
+    <Compile Include="Models\MessageInfo.cs" />
+    <Compile Include="Models\MessageInfoStorage.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
