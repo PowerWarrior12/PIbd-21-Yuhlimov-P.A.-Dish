@@ -42,7 +42,8 @@ namespace DishProjectView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].AutoSizeMode =
+                    dataGridView.Columns[2].Visible = false;
+                    dataGridView.Columns[3].AutoSizeMode =
                     DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
@@ -77,18 +78,11 @@ namespace DishProjectView
             if (dataGridView.SelectedRows.Count == 1)
             {
                 int id = dataGridView.CurrentCell.RowIndex + 1;
-                var orders = _orderLogic.Read(new OrderBindingModel
-                {
-                    Id = id
-                });
-                int dishId = orders.Find(rec => rec.Id == id).DishId;
                 try
                 {
                     _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
                     {
-                        OrderId = id,
-                        Components = _dishLogic.Read(null).Find(rec => rec.Id == dishId).DishComponents,
-                        DishCount = _orderLogic.Read(null).Find(rec => rec.Id == id).Count
+                        OrderId = id
                     });
                     LoadData();
                 }
@@ -125,8 +119,7 @@ namespace DishProjectView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                //int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                int id = dataGridView.CurrentCell.RowIndex + 1;
+                int id = (int)dataGridView.CurrentRow.Cells[0].Value;
                 try
                 {
                     _orderLogic.PayOrder(new ChangeStatusBindingModel { OrderId = id });
@@ -175,6 +168,19 @@ namespace DishProjectView
         {
             var form = Container.Resolve<FormReportWareHouseComponents>();
             form.ShowDialog();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<ImplementersForm>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var workModeling = Container.Resolve<WorkModeling>();
+            workModeling.DoWork();
+            MessageBox.Show("Работы запущены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)

@@ -12,6 +12,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
     {
         private readonly IOrderStorage _orderStorage;
         private readonly IWareHouseStorage _wareHouseStorage;
+        private readonly object locker = new object();
         public OrderLogic(IOrderStorage orderStorage, IWareHouseStorage wareHouseStorage)
         {
             _orderStorage = orderStorage;
@@ -43,34 +44,68 @@ namespace DishProjectBusinessLogic.BusinessLogics
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            _wareHouseStorage.ChangeComponents(new ChangeComponentBindingModel
+            lock (locker)
             {
-                Components = model.Components,
-                DishCount = model.DishCount
-            });
-            var order = _orderStorage.GetElement(new OrderBindingModel
-            {
-                Id = model.OrderId
-            });
-            if (order == null)
-            {
-                throw new Exception("Не найден заказ");
+                _wareHouseStorage.ChangeComponents(new ChangeComponentBindingModel
+                {
+                    Components = model.Components,
+                    DishCount = model.DishCount
+                });
+                var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+                if (order.Status != OrderStatus.Принят && order.Status != OrderStatus.ТребуютсяМатериалы)
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\" или не в статусе \"ТребуютсяМатериалы\"");
+                }
+                if (order.ImplementerId.HasValue)
+                {
+                    throw new Exception("У заказа уже есть исполнитель");
+                }
+                _orderStorage.Update(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    DishId = order.DishId,
+                    ImplementerId = model.ImplementerId,
+                    ClientId = order.ClientId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
             }
-            if (order.Status != OrderStatus.Принят)
+        }
+        public void TakeOrderInRequiredComponents(ChangeStatusBindingModel model)
+        {
+            lock (locker)
             {
-                throw new Exception("Заказ не в статусе \"Принят\"");
+                var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+                if (order.Status != OrderStatus.Принят)
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\"");
+                }
+                if (order.Status == OrderStatus.ТребуютсяМатериалы)
+                {
+                    throw new Exception("Заказ уже в статусе \"ТребуютсяМатериалы\"");
+                }
+                _orderStorage.Update(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    DishId = order.DishId,
+                    ClientId = order.ClientId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    Status = OrderStatus.ТребуютсяМатериалы
+                });
             }
-            _orderStorage.Update(new OrderBindingModel
-            {
-                Id = order.Id,
-                DishId = order.DishId,
-                ClientId = order.ClientId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
         {
@@ -91,6 +126,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 Id = order.Id,
                 DishId = order.DishId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -117,6 +153,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 Id = order.Id,
                 DishId = order.DishId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

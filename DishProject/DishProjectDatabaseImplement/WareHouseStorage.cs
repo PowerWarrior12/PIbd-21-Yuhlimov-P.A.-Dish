@@ -1,6 +1,7 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
+using DishProjectBusinessLogic.HelperModels;
 using System;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -211,7 +212,7 @@ namespace DishProjectDatabaseImplement
                                 }
                             }
                             if (needCount > 0)
-                                throw new Exception("На складе нет необходимых компонентов");
+                                throw new LackingComponentsException();
                         }
                         context.SaveChanges();
                         transaction.Commit();
@@ -219,7 +220,7 @@ namespace DishProjectDatabaseImplement
                     catch (Exception)
                     {
                         transaction.Rollback();
-                        throw new Exception("На складе нет необходимых компонентов");
+                        throw new LackingComponentsException();
                     }
                 }
             }

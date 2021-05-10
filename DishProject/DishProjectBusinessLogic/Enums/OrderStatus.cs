@@ -10,8 +10,9 @@ namespace DishProjectBusinessLogic.Enums
     public enum OrderStatus
     {
         Принят = 0,
-        Выполняется = 1,
-        Готов = 2,
-        Оплачен = 3
+        ТребуютсяМатериалы = 1,
+        Выполняется = 2,
+        Готов = 3,
+        Оплачен = 4
     }
 }
