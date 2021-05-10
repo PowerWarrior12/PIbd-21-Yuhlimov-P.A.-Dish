@@ -57,6 +57,8 @@
     <Compile Include="Models\DataListSingleton.cs" />
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\DishStorage.cs" />
+    <Compile Include="Models\Implementer.cs" />
+    <Compile Include="Models\ImplementerStorage.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

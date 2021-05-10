@@ -1,4 +1,5 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
+using DishProjectBusinessLogic.Enums;
 using DishProjectBusinessLogic.Interfaces;
 using DishProjectBusinessLogic.ViewModels;
 using DishProjectFileImplement;
@@ -28,8 +29,12 @@ namespace DishProjectFileImplement
                 return null;
             }
             return source.Orders
-            .Where(rec => rec.Id == model.Id && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-           .Select(CreateModel)
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
+(model.FreeOrders.HasValue && model.FreeOrders.Value && rec.Status == OrderStatus.Принят) ||
+(model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется))
+            .Select(CreateModel)
             .ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -78,6 +83,7 @@ namespace DishProjectFileImplement
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.DishId = model.DishId;
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -91,6 +97,8 @@ namespace DishProjectFileImplement
             {
                 Id = order.Id,
                 DishId = order.DishId,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = source.Implementers.FirstOrDefault(e => e.Id == order.ImplementerId)?.ImplementerFIO,
                 DishName = source.Dishes.FirstOrDefault(rec => rec.Id == order.DishId).DishName,
                 Count = order.Count,
                 Sum = order.Sum,

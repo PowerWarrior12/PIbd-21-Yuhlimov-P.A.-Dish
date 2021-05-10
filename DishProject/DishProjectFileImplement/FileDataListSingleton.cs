@@ -17,15 +17,18 @@ namespace DishProjectFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string DishFileName = "Dish.xml";
         private readonly string ClientFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Dish> Dishes { get; set; }
+        public List<Implementer> Implementers { get; set; }
         public List<Client> Clients { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Dishes = LoadDishes();
+            Implementers = LoadImplementers();
             Clients = LoadClients();
         }
         public static FileDataListSingleton GetInstance()
@@ -112,6 +115,26 @@ namespace DishProjectFileImplement
             }
             return list;
         }
+        private List<Implementer> LoadImplementers ()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                XDocument xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Implementer").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ImplementerFIO = elem.Element("ImplementerFIO").Value,
+                        WorkingTime = Convert.ToInt32(elem.Attribute("WorkingTime").Value),
+                        PauseTime = Convert.ToInt32(elem.Attribute("PauseTime").Value),
+                    });
+                }
+            }
+            return list;
+        }
         private List<Client> LoadClients()
         {
             var list = new List<Client>();
@@ -189,6 +212,24 @@ namespace DishProjectFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(DishFileName);
+            }
+        }
+        private void SaveImplementers()
+        {
+            if (Implementers != null)
+            {
+                var xElement = new XElement("Implementers");
+                foreach (var employee in Implementers)
+                {
+                    xElement.Add(new XElement("Implementer",
+                    new XAttribute("Id", employee.Id),
+                    new XElement("ImplementerFIO", employee.ImplementerFIO),
+                    new XElement("WorkingTime", employee.WorkingTime),
+                    new XElement("PauseTime", employee.PauseTime)
+                    ));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ImplementerFileName);
             }
         }
         private void SaveClients()
