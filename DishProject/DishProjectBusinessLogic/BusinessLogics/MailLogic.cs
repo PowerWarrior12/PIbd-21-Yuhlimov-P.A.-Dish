@@ -111,7 +111,7 @@ namespace DishProjectBusinessLogic.BusinessLogics
             {
                 await Task.Run(() =>
                 {
-                    try
+                try
                     {
                         client.Connect(info.PopHost, info.PopPort,
                        SecureSocketOptions.SslOnConnect);

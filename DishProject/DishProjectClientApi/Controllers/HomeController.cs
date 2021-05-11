@@ -134,6 +134,15 @@ namespace SoftwareInstallingClientApp.Controllers
             });
             Response.Redirect("Index");
         }
+        [HttpGet]
+        public IActionResult Mails()
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetMessages?clientId={Program.Client.Id}"));
+        }
 
         [HttpGet]
         public IActionResult Mails(int page = 1)

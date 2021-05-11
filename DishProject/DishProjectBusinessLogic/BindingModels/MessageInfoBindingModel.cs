@@ -22,4 +22,5 @@ namespace DishProjectBusinessLogic.BindingModels
         [DataMember]
         public DateTime DateDelivery { get; set; }
     }
+
 }
