@@ -175,6 +175,8 @@
     <Compile Include="DishStorage.cs" />
     <Compile Include="Implementer.cs" />
     <Compile Include="ImplementerStorage.cs" />
+    <Compile Include="MessageInfo.cs" />
+    <Compile Include="MessageInfoStorage.cs" />
     <Compile Include="Migrations\20210502062524_InitialCreate.cs" />
     <Compile Include="Migrations\20210502062524_InitialCreate.designer.cs">
       <DependentUpon>20210502062524_InitialCreate.cs</DependentUpon>

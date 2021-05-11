@@ -21,5 +21,6 @@ namespace DishProjectDatabaseImplement
         public virtual DbSet<WareHouseComponent> WareHouseComponents { set; get; }
         public virtual DbSet<Client> Clients { set; get; }
         public virtual DbSet<Implementer> Implementers { set; get; }
+        public virtual DbSet<MessageInfo> MessageInfos { set; get; }
     }
 }
