@@ -135,6 +135,29 @@ namespace SoftwareInstallingClientApp.Controllers
             Response.Redirect("Index");
         }
 
+        [HttpGet]
+        public IActionResult Mails(int page = 1)
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            int pageSize = 3;   // количество элементов на странице
+
+            var messages = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetMessages?clientId={Program.Client.Id}");
+            var count = messages.Count();
+            var items = messages.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                Messages = items
+            };
+
+            return View(viewModel);
+        }
+
         [HttpPost]
         public decimal Calc(decimal count, int dish)
         {
