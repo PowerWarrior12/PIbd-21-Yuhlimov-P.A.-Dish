@@ -56,8 +56,8 @@ namespace DishProjectView
             currentContainer.RegisterType<IClientStorage, ClientStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWareHouseStorage, WareHouseStorage>(new
             HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IClientStorage, ClientStorage>(new 
-           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IMessageInfoStorage, MessageInfoStorage>(new
+HierarchicalLifetimeManager());
             currentContainer.RegisterType<IImplementerStorage, ImplementerStorage>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<ComponentLogic>(new
@@ -73,7 +73,12 @@ namespace DishProjectView
 
             currentContainer.RegisterType<WareHouseLogic>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<MailLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
+        }
+        private static void MailCheck(object obj)
+        {
+            MailLogic.MailCheck((MailCheckInfo)obj);
         }
     }
 }
