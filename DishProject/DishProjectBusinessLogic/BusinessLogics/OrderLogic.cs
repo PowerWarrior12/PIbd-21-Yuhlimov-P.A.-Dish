@@ -15,7 +15,6 @@ namespace DishProjectBusinessLogic.BusinessLogics
         private readonly IOrderStorage _orderStorage;
         private readonly IClientStorage _clientStorage;
         private readonly IWareHouseStorage _wareHouseStorage;
-        private readonly IClientStorage _clientStorage;
         private readonly object locker = new object();
         public OrderLogic(IOrderStorage orderStorage, IWareHouseStorage wareHouseStorage, IClientStorage clientStorage)
         {

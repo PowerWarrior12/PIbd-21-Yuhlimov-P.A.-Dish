@@ -178,9 +178,9 @@
     <Compile Include="ImplementerStorage.cs" />
     <Compile Include="MessageInfo.cs" />
     <Compile Include="MessageInfoStorage.cs" />
-    <Compile Include="Migrations\20210511091210_InitialCreate.cs" />
-    <Compile Include="Migrations\20210511091210_InitialCreate.designer.cs">
-      <DependentUpon>20210511091210_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20210511154439_InitialCreate.cs" />
+    <Compile Include="Migrations\20210511154439_InitialCreate.designer.cs">
+      <DependentUpon>20210511154439_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DishProjectDatabaseModelSnapshot.cs" />
     <Compile Include="Order.cs" />

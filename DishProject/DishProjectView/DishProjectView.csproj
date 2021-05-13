@@ -289,6 +289,18 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportAllOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportAllOrders.Designer.cs">
+      <DependentUpon>FormReportAllOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportComponentDishes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportComponentDishes.Designer.cs">
+      <DependentUpon>FormReportComponentDishes.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportWareHouseComponents.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +367,12 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportAllOrders.resx">
+      <DependentUpon>FormReportAllOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportComponentDishes.resx">
+      <DependentUpon>FormReportComponentDishes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormReportWareHouseComponents.resx">
       <DependentUpon>FormReportWareHouseComponents.cs</DependentUpon>
     </EmbeddedResource>
@@ -380,8 +398,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReportAllOrders.rdlc" />
     <EmbeddedResource Include="Report.rdlc" />
-    <EmbeddedResource Include="ReportWareHouse.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DishProjectBusinessLogic.BindingModels.ChangeStatusBindingModel.datasource" />
     <None Include="Properties\DataSources\DishProjectBusinessLogic.BindingModels.ComponentBindingModel.datasource" />

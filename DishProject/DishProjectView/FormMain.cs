@@ -1,6 +1,7 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
 using DishProjectBusinessLogic.BusinessLogics;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using Unity;
 
@@ -213,6 +214,35 @@ namespace DishProjectView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
+        }
+
+        private void списокЗаказовToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void списокИзделийToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    MethodInfo method = report.GetType().GetMethod("SaveDishesToWordFile");
+                    method.Invoke(report, new object[] {new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    } });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void изделияСКомпонентамиToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportComponentDishes>();
+            form.ShowDialog();
         }
     }
 }

@@ -10,18 +10,16 @@ using System.Windows.Forms;
 using Unity;
 using DishProjectBusinessLogic.BindingModels;
 using DishProjectBusinessLogic.BusinessLogics;
-using System.Reflection;
-using DishProjectBusinessLogic.ViewModels;
 
 namespace DishProjectView
 {
-    public partial class FormReportWareHouseComponents : Form
+    public partial class FormReportComponentDishes : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly ReportLogic logic;
 
-        public FormReportWareHouseComponents(ReportLogic logic)
+        public FormReportComponentDishes(ReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -35,18 +33,15 @@ namespace DishProjectView
                 {
                     try
                     {
-                        MethodInfo method = logic.GetType().GetMethod("SaveComponentWareHouseToExcelFile");
-                        method.Invoke(logic, new object[] { new ReportBindingModel
+                        logic.SaveComponentDishToExcelFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName
-                        } });
-                        MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                        });
+                        MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -56,15 +51,13 @@ namespace DishProjectView
         {
             try
             {
-                MethodInfo method = logic.GetType().GetMethod("GetComponentsWareHouse");
-                List<ReportWareHouseComponentViewModel> dict = (List<ReportWareHouseComponentViewModel>)
-                    method.Invoke(logic, new object[] { });
+                var dict = logic.GetComponentsDish();
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.WareHouseName, "", "" });
+                        dataGridView.Rows.Add(new object[] { elem.DishName, "", "" });
                         foreach (var listElem in elem.Components)
                         {
                             dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });
