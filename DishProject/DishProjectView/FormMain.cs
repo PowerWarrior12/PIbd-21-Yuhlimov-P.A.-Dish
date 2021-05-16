@@ -143,7 +143,7 @@ namespace DishProjectView
         }
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormReportOrders>();
+            var form = Container.Resolve<FormReportAllOrders>();
             form.ShowDialog();
         }   
         private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
@@ -152,8 +152,13 @@ namespace DishProjectView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    report.SaveWareHousesToWordFile(new ReportBindingModel { FileName = dialog.FileName });
-                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MethodInfo method = report.GetType().GetMethod("SaveWareHousesToWordFile");
+                    method.Invoke(report, new object[] {new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    } });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 }
             }
         }

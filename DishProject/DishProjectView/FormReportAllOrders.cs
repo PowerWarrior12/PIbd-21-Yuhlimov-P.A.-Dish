@@ -37,7 +37,7 @@ namespace DishProjectView
             }
         }
 
-        private void buttonSaveToPdf_Click(object sender, EventArgs e)
+        private void ButtonToPdf_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "pdf|*.pdf" })
             {

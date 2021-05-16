@@ -30,10 +30,10 @@ namespace DishProjectView
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ButtonSave = new System.Windows.Forms.Button();
             this.Склад = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Компонент = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ButtonSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,15 +48,6 @@ namespace DishProjectView
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(524, 396);
             this.dataGridView.TabIndex = 6;
-            // 
-            // ButtonSave
-            // 
-            this.ButtonSave.Location = new System.Drawing.Point(12, 12);
-            this.ButtonSave.Name = "ButtonSave";
-            this.ButtonSave.Size = new System.Drawing.Size(141, 23);
-            this.ButtonSave.TabIndex = 5;
-            this.ButtonSave.Text = "Сохранить в Excel";
-            this.ButtonSave.UseVisualStyleBackColor = true;
             // 
             // Склад
             // 
@@ -76,6 +67,16 @@ namespace DishProjectView
             this.Количество.HeaderText = "Количество";
             this.Количество.Name = "Количество";
             // 
+            // ButtonSave
+            // 
+            this.ButtonSave.Location = new System.Drawing.Point(12, 12);
+            this.ButtonSave.Name = "ButtonSave";
+            this.ButtonSave.Size = new System.Drawing.Size(141, 23);
+            this.ButtonSave.TabIndex = 5;
+            this.ButtonSave.Text = "Сохранить в Excel";
+            this.ButtonSave.UseVisualStyleBackColor = true;
+            this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
             // FormReportComponentDishes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -85,6 +86,7 @@ namespace DishProjectView
             this.Controls.Add(this.ButtonSave);
             this.Name = "FormReportComponentDishes";
             this.Text = "Изделия с компонентами";
+            this.Load += new System.EventHandler(this.FormReportComponentDishes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

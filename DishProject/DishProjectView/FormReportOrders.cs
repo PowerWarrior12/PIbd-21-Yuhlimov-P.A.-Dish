@@ -44,6 +44,7 @@ namespace DishProjectView
 
                 ReportDataSource source = new ReportDataSource("DataSetOrders",
                 dataSource);
+                reportViewer.LocalReport.DataSources.Clear();
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
             }

@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Unity;
 using DishProjectBusinessLogic.BindingModels;
 using DishProjectBusinessLogic.BusinessLogics;
+using System.Reflection;
+using DishProjectBusinessLogic.ViewModels;
 
 namespace DishProjectView
 {
@@ -33,25 +35,30 @@ namespace DishProjectView
                 {
                     try
                     {
-                        logic.SaveComponentDishToExcelFile(new ReportBindingModel
+                        MethodInfo method = logic.GetType().GetMethod("SaveComponentDishToExcelFile");
+                        method.Invoke(logic, new object[] { new ReportBindingModel
                         {
                             FileName = dialog.FileName
-                        });
-                        MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }});
+                        MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                     }
                 }
             }
         }
 
-        private void FormReportComponentDish_Load(object sender, EventArgs e)
+        private void FormReportComponentDishes_Load(object sender, EventArgs e)
         {
             try
             {
-                var dict = logic.GetComponentsDish();
+                MethodInfo method = logic.GetType().GetMethod("GetComponentDish");
+                List<ReportDishComponentViewModel> dict = (List<ReportDishComponentViewModel>)
+                    method.Invoke(logic, new object[] { });
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();

@@ -51,6 +51,7 @@ namespace DishProjectView
             this.ButtonToPdf.TabIndex = 8;
             this.ButtonToPdf.Text = "В PDF";
             this.ButtonToPdf.UseVisualStyleBackColor = true;
+            this.ButtonToPdf.Click += new System.EventHandler(this.ButtonToPdf_Click);
             // 
             // ButtonMake
             // 
@@ -60,6 +61,7 @@ namespace DishProjectView
             this.ButtonMake.TabIndex = 7;
             this.ButtonMake.Text = "Сформировать";
             this.ButtonMake.UseVisualStyleBackColor = true;
+            this.ButtonMake.Click += new System.EventHandler(this.buttonMake_Click);
             // 
             // FormReportAllOrders
             // 
