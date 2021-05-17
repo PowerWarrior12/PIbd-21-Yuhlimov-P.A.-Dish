@@ -142,20 +142,9 @@ namespace SoftwareInstallingClientApp.Controllers
             {
                 return Redirect("~/Home/Enter");
             }
-            int pageSize = 3;   // количество элементов на странице
-
-            var messages = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetMessages?clientId={Program.Client.Id}");
-            var count = messages.Count();
-            var items = messages.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel
-            {
-                PageViewModel = pageViewModel,
-                Messages = items
-            };
-
-            return View(viewModel);
+            int pageSize = 2;   // количество элементов на странице            
+            return View(APIClient.GetRequest<PageViewModel>($"api/client/GetPage?pageSize={pageSize}" +
+                $"&page={page}&ClientId={Program.Client.Id}"));
         }
 
         [HttpPost]
