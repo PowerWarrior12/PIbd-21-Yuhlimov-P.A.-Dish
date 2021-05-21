@@ -14,6 +14,7 @@ namespace DishProjectListImplement
         public List<Implementer> Implementers { get; set; }
         public List<Client> Clients { get; set; }
         public List<WareHouse> WareHouses { get; set; }
+        public List<MessageInfo> Messages { get; set; }
         private DataListSingleton()
         {
             Components = new List<Component>();
@@ -22,6 +23,7 @@ namespace DishProjectListImplement
             Implementers = new List<Implementer>();
             Clients = new List<Client>();
             WareHouses = new List<WareHouse>();
+
         }
         public static DataListSingleton GetInstance()
         {
