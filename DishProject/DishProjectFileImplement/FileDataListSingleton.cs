@@ -241,28 +241,6 @@ namespace DishProjectFileImplement
                 xDocument.Save(WareHouseFileName);
             }
         }
-        private List<MessageInfo> LoadMessages()
-        {
-            var list = new List<MessageInfo>();
-            if (File.Exists(MessageFileName))
-            {
-                XDocument xDocument = XDocument.Load(MessageFileName);
-                var xElements = xDocument.Root.Elements("Message").ToList();
-                foreach (var elem in xElements)
-                {
-                    list.Add(new MessageInfo
-                    {
-                        MessageId = elem.Attribute("MessageId").Value,
-                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
-                        SenderName = elem.Element("SenderName").Value,
-                        DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery")?.Value),
-                        Subject = elem.Element("Subject").Value,
-                        Body = elem.Element("Body").Value,
-                    });
-                }
-            }
-            return list;
-        }
         private void SaveComponents()
         {
             if (Components != null)
