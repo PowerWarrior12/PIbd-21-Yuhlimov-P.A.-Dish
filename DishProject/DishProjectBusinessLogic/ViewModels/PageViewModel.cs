@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DishProjectBusinessLogic.ViewModels
 {
@@ -8,10 +9,19 @@ namespace DishProjectBusinessLogic.ViewModels
 
         public int TotalPages { get; private set; }
 
-        public PageViewModel(int count, int pageNumber, int pageSize)
+        public List<MessageInfoViewModel> Messages { get; private set; }
+
+        public int Count { get; private set; }
+
+        public int PageSize { get; private set; }
+
+        public PageViewModel(int count, int pageNumber, int pageSize, List<MessageInfoViewModel> messages)
         {
             PageNumber = pageNumber;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            Count = count;
+            Messages = messages;
+            PageSize = pageSize;
+            TotalPages = (int)Math.Ceiling(Count / (double)pageSize);
         }
 
         public bool HasPreviousPage

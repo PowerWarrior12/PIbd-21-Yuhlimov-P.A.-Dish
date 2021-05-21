@@ -58,7 +58,16 @@ namespace DishProjectRestApi.Controllers
                 throw new Exception($"Пароль длиной от {_passwordMinLength} до  { _passwordMaxLength } должен быть и из цифр, букв и небуквенных символов должен состоять");
             }
         }
-
+        [HttpGet]
+        public PageViewModel GetPage(int pageSize, int page, int ClientId)
+        {
+            return new PageViewModel(_mailLogic.Count(new MessageInfoBindingModel { ClientId = ClientId }), page, pageSize, _mailLogic.GetMessagesForPage(new MessageInfoBindingModel
+            {
+                Page = page,
+                PageSize = pageSize,
+                ClientId = ClientId
+            }));
+        }
     }
 
 }

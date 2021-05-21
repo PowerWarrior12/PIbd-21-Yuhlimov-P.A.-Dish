@@ -9,5 +9,7 @@ namespace DishProjectBusinessLogic.Interfaces
         List<MessageInfoViewModel> GetFullList();
         List<MessageInfoViewModel> GetFilteredList(MessageInfoBindingModel model);
         void Insert(MessageInfoBindingModel model);
+        int Count(MessageInfoBindingModel model);
+        List<MessageInfoViewModel> GetMessagesForPage(MessageInfoBindingModel model);
     }
 }

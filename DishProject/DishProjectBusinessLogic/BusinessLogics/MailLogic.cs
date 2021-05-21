@@ -143,5 +143,17 @@ namespace DishProjectBusinessLogic.BusinessLogics
                 });
             }
         }
+        public int Count(MessageInfoBindingModel model)
+        {
+            return _messageInfoStorage.Count(model);
+        }
+        public List<MessageInfoViewModel> GetMessagesForPage(MessageInfoBindingModel model)
+        {
+            if (model == null || !model.Page.HasValue || !model.PageSize.HasValue)
+            {
+                return null;
+            }
+            return _messageInfoStorage.GetMessagesForPage(model);
+        }
     }
 }

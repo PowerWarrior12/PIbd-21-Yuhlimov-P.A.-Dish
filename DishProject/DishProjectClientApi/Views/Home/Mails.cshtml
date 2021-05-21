@@ -1,7 +1,8 @@
 ﻿@using DishProjectBusinessLogic.ViewModels
-@model IndexViewModel
+@model PageViewModel
 @{
-    ViewData["Title"] = "Mail"; }
+    ViewData["Title"] = "Mails";
+}
 <div class="text-center">
     <h1 class="display-4">Письма</h1>
 </div>
@@ -19,10 +20,10 @@
                         Отправитель
                     </th>
                     <th>
-                        Заголовок
+                        Дата письма
                     </th>
                     <th>
-                        Дата письма
+                        Заголовок
                     </th>
                     <th>
                         Текст
@@ -37,10 +38,10 @@
                             @Html.DisplayFor(modelItem => item.SenderName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Subject)
+                            @Html.DisplayFor(modelItem => item.DateDelivery)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DateDelivery)
+                            @Html.DisplayFor(modelItem => item.Subject)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Body)
@@ -48,22 +49,27 @@
                     </tr>
                 }
             </tbody>
-        </table> }
+        </table>
+    }
 </div>
 
-@if (Model.PageViewModel.HasPreviousPage)
+@if (Model.HasPreviousPage)
 {
-<a asp-action="Mails"
-   asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
-   class="btn btn-outline-dark">
-    <i class="glyphicon glyphicon-chevron-left"></i>
-    Назад
-</a>}
-@if (Model.PageViewModel.HasNextPage)
+    <a asp-action="Mails" asp-route-page="@(Model.PageNumber - 1)" class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+
+@for (int i = Model.PageNumber >= 6 ? Model.PageNumber - 5 : 1; i <= Model.TotalPages && i <= Model.PageNumber + 5; ++i)
 {
-<a asp-action="Mails"
-   asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
-   class="btn btn-outline-dark">
-    Вперед
-    <i class="glyphicon glyphicon-chevron-right"></i>
-</a>}
+    <a asp-action="Mails" asp-route-page="@i">@i </a>
+}
+
+@if (Model.HasNextPage)
+{
+    <a asp-action="Mails" asp-route-page="@(Model.PageNumber + 1)" class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
