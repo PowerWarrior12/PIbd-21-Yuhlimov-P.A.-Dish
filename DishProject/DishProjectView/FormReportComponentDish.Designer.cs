@@ -86,7 +86,7 @@ namespace DishProjectView
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormReportComponentDish";
-            this.Text = "FormReportComponentDish";
+            this.Text = "Отчёт по компонентам изделий";
             this.Load += new System.EventHandler(this.FormReportComponentDish_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
