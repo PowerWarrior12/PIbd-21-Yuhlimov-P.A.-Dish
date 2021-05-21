@@ -27,7 +27,9 @@ namespace DishProjectRestApi
             services.AddTransient<IDishStorage, DishStorage>();
             services.AddTransient<IWareHouseStorage, WareHouseStorage>();
             services.AddTransient<IComponentStorage, ComponentStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<OrderLogic>();
+            services.AddTransient<MailLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<DishLogic>();
             services.AddTransient<WareHouseLogic>();

@@ -135,6 +135,18 @@ namespace SoftwareInstallingClientApp.Controllers
             Response.Redirect("Index");
         }
 
+        [HttpGet]
+        public IActionResult Mails(int page = 1)
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            int pageSize = 2;   // количество элементов на странице            
+            return View(APIClient.GetRequest<PageViewModel>($"api/client/GetPage?pageSize={pageSize}" +
+                $"&page={page}&ClientId={Program.Client.Id}"));
+        }
+
         [HttpPost]
         public decimal Calc(decimal count, int dish)
         {
