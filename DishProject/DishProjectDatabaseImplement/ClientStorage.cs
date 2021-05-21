@@ -56,8 +56,7 @@ namespace DishProjectDatabaseImplement
             using (var context = new DishProjectDatabase())
             {
                 var client = context.Clients
-                .FirstOrDefault(rec => rec.Email == model.Email ||
-                rec.Id == model.Id);
+                .FirstOrDefault(rec => rec.Email.Equals(model.Email) || rec.Id == model.Id);
                 return client != null ?
                 new ClientViewModel
                 {

@@ -51,8 +51,8 @@ namespace DishProjectFileImplement
             SaveOrders();
             SaveDishes();
             SaveWareHouses();
-            SaveImplementers();
             SaveClients();
+            SaveImplementers();
             SaveMessages();
         }
         private List<Component> LoadComponents()

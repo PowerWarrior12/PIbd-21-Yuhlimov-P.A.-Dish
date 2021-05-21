@@ -165,6 +165,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackUpLogiс.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientStorage.cs" />
     <Compile Include="Component.cs" />
@@ -177,9 +178,9 @@
     <Compile Include="ImplementerStorage.cs" />
     <Compile Include="MessageInfo.cs" />
     <Compile Include="MessageInfoStorage.cs" />
-    <Compile Include="Migrations\20210516124144_InitialCreate.cs" />
-    <Compile Include="Migrations\20210516124144_InitialCreate.designer.cs">
-      <DependentUpon>20210516124144_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20210521171847_InitialCreate.cs" />
+    <Compile Include="Migrations\20210521171847_InitialCreate.designer.cs">
+      <DependentUpon>20210521171847_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DishProjectDatabaseModelSnapshot.cs" />
     <Compile Include="Order.cs" />

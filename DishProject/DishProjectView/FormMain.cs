@@ -1,6 +1,7 @@
 ﻿using DishProjectBusinessLogic.BindingModels;
 using DishProjectBusinessLogic.BusinessLogics;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using Unity;
 
@@ -14,12 +15,14 @@ namespace DishProjectView
         private readonly OrderLogic _orderLogic;
         private readonly DishLogic _dishLogic;
         private readonly ReportLogic report;
-        public FormMain(OrderLogic orderLogic, ReportLogic report, DishLogic dishLogic)
+        private readonly BackUpAbstractLogic _backUpAbstractLogic;
+        public FormMain(OrderLogic orderLogic, ReportLogic report,BackUpAbstractLogic backUpAbstractLogic, DishLogic dishLogic)
         {
             InitializeComponent();
             this._orderLogic = orderLogic;
             this.report = report;
             this._dishLogic = dishLogic;
+            this._backUpAbstractLogic = backUpAbstractLogic;
         }
 
         public FormMain()
@@ -36,21 +39,11 @@ namespace DishProjectView
         {
             try
             {
-                var list = _orderLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(_orderLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -150,7 +143,7 @@ namespace DishProjectView
         }
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormReportOrders>();
+            var form = Container.Resolve<FormReportAllOrders>();
             form.ShowDialog();
         }   
         private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,8 +152,13 @@ namespace DishProjectView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    report.SaveWareHousesToWordFile(new ReportBindingModel { FileName = dialog.FileName });
-                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MethodInfo method = report.GetType().GetMethod("SaveWareHousesToWordFile");
+                    method.Invoke(report, new object[] {new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    } });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 }
             }
         }
@@ -189,9 +187,66 @@ namespace DishProjectView
             form.ShowDialog();
         }
 
+        private void письмаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormLetters>();
+            form.ShowDialog();
+        }
+
         private void ПисьмаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormLetters>();
+            form.ShowDialog();
+        }
+
+        private void создатьБекапToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_backUpAbstractLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        _backUpAbstractLogic.CreateArchive(fbd.SelectedPath);
+                        MessageBox.Show("Бекап создан", "Сообщение",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+            }
+        }
+
+        private void списокЗаказовToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void списокИзделийToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    MethodInfo method = report.GetType().GetMethod("SaveDishesToWordFile");
+                    method.Invoke(report, new object[] {new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    } });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void изделияСКомпонентамиToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportComponentDishes>();
             form.ShowDialog();
         }
     }

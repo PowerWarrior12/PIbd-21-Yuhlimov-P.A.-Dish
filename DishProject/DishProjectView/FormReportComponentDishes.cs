@@ -15,13 +15,13 @@ using DishProjectBusinessLogic.ViewModels;
 
 namespace DishProjectView
 {
-    public partial class FormReportWareHouseComponents : Form
+    public partial class FormReportComponentDishes : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly ReportLogic logic;
 
-        public FormReportWareHouseComponents(ReportLogic logic)
+        public FormReportComponentDishes(ReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -35,11 +35,11 @@ namespace DishProjectView
                 {
                     try
                     {
-                        MethodInfo method = logic.GetType().GetMethod("SaveComponentWareHouseToExcelFile");
+                        MethodInfo method = logic.GetType().GetMethod("SaveComponentDishToExcelFile");
                         method.Invoke(logic, new object[] { new ReportBindingModel
                         {
                             FileName = dialog.FileName
-                        } });
+                        }});
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                     }
@@ -52,19 +52,19 @@ namespace DishProjectView
             }
         }
 
-        private void FormReportComponentDish_Load(object sender, EventArgs e)
+        private void FormReportComponentDishes_Load(object sender, EventArgs e)
         {
             try
             {
-                MethodInfo method = logic.GetType().GetMethod("GetComponentsWareHouse");
-                List<ReportWareHouseComponentViewModel> dict = (List<ReportWareHouseComponentViewModel>)
+                MethodInfo method = logic.GetType().GetMethod("GetComponentDish");
+                List<ReportDishComponentViewModel> dict = (List<ReportDishComponentViewModel>)
                     method.Invoke(logic, new object[] { });
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.WareHouseName, "", "" });
+                        dataGridView.Rows.Add(new object[] { elem.DishName, "", "" });
                         foreach (var listElem in elem.Components)
                         {
                             dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });

@@ -26,4 +26,5 @@ namespace DishProjectBusinessLogic.BindingModels
         [DataMember]
         public int? Page { get; set; }
     }
+
 }

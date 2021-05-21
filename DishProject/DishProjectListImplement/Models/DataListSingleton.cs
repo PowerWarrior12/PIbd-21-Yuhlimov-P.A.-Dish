@@ -23,7 +23,7 @@ namespace DishProjectListImplement
             Implementers = new List<Implementer>();
             Clients = new List<Client>();
             WareHouses = new List<WareHouse>();
-
+            Messages = new List<MessageInfo>();
         }
         public static DataListSingleton GetInstance()
         {
