@@ -112,7 +112,7 @@ namespace DishProjectView
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePickerFrom);
             this.Name = "FormReportOrders";
-            this.Text = "FormReportOrders";
+            this.Text = "Отчёт по заказам";
             this.Load += new System.EventHandler(this.FormReportOrders_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
