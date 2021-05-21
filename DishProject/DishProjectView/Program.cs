@@ -119,6 +119,10 @@ HierarchicalLifetimeManager());
                                 (DataGridViewAutoSizeColumnMode)Enum.Parse(typeof(DataGridViewAutoSizeColumnMode),
                                 columnAttr.GridViewAutoSize.ToString());
                             }
+                            if (columnAttr.DateFormat != null)
+                            {
+                                column.DefaultCellStyle.Format = columnAttr.DateFormat;
+                            }
                             grid.Columns.Add(column);
                         }
                     }

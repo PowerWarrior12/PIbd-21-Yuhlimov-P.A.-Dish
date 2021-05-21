@@ -45,7 +45,7 @@ namespace DishProjectBusinessLogic.ViewModels
         public OrderStatus Status { get; set; }
         [DataMember]
         [DisplayName("Дата создания")]
-        [Column(title: "Дата создания", width: 100)]
+        [Column(title: "Дата создания", width: 100 , format:FormatsEnum.SecondFormat)]
         public DateTime DateCreate { get; set; }
         [DisplayName("Дата выполнения")]
         [DataMember]
